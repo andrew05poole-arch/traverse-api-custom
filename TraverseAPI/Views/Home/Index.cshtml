@@ -1,0 +1,50 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model OSI.TraverseApi.Business.ApiUser
+
+@using (Html.BeginForm())
+{
+    <h2 class="title">Home</h2>
+
+    @Html.ValidationSummary(true)
+    
+    <fieldset>
+        <div class="form-group">
+            @Html.Label("Name")
+            <div>
+                @Html.TextBoxFor(model => model.Name, new { @style = "width:100%;", @readonly = "readonly", htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Email Address")
+            <div>
+                @Html.TextBoxFor(model => model.EmailAddress, new { @style = "width:100%;", @readonly = "readonly", htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Client ID")
+            <div>
+                @Html.TextBoxFor(model => model.ClientId, new { @style = "width:100%;", @readonly = "readonly", htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Client Token")
+            <div>
+                @Html.TextBoxFor(model => model.ClientSecret, new { @style = "width:100%;", @readonly = "readonly", htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Access Expiration")
+            <div>
+                @Html.TextBoxFor(model => model.ExpirationDate, "{0:d}", new { @style = "width:100%;", @readonly = "readonly", htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+    </fieldset>
+}

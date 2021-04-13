@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="col-md-8 offset-md-2 align-content-center" style="height: 100%">
+    <header id="portalHeader" style="height: 15%; min-height: 95px;">
+        <div class="content-wrapper">
+            <img alt="Logo" src="~/Content/Logo.png" class="img-responsive" height="95" width="313" />
+        </div>
+    </header>
+
+    <div id="body" class="body-content">
+        <div class="container-fluid" style="height: 100%">
+            <nav class="navbar navbar-expand-lg sticky-top bg-white">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">@Html.ActionLink("Home", "Index", null, new { @class = "nav-link" })</li>
+                        <li class="nav-item">
+                            @{
+                                if (Request.IsAuthenticated && ViewBag.UserStatus == "Active")
+                                {
+                                    @Html.ActionLink("Documentation", "Document", null, new { @class = "nav-link" })
+                                }
+                            }
+                        </li>
+                        <li class="nav-item dropdown">
+                            @{
+                                if (Request.IsAuthenticated)
+                                {
+                                    <a class="dropdown-toggle nav-link" href="#" id="dropDownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage Account</a>
+                                    <div class="dropdown-menu" aria-labelledby="dropDownMenuLink">
+                                        <a class="dropdown-item" href="~/Home/ChangePwd" role="button">Change Password</a>
+
+                                        @if (ViewBag.UserStatus == "Active")
+                                        {
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="~/Home/Register" role="button">Regenerate Client Secret</a>
+                                        }
+                                    </div>
+                                }
+                            }
+                        </li>
+                        <li class="ml-auto">
+                            @{
+                                if (Request.IsAuthenticated)
+                                {
+                                    @Html.ActionLink("Logout", "Logout", null, new { @class = "nav-link" })
+                                }
+                            }
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        @RenderBody()
+    </div>
+        
+    <footer id="portalFooter" class="fixed-bottom bg-white">
+        <p class="text-center" style="font-size:xx-small">&copy; @DateTime.UtcNow.Year <a href="http://www.osas.com" title="Open Systems, Inc">Open Systems, Inc</a> Traverse API</p>
+    </footer>
+    
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

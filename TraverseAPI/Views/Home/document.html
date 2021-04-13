@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>%(DocumentTitle)</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./swagger-ui-css">%(CssTheme)
+    <link rel="stylesheet" type="text/css" href="../../Content/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../Content/bootstrap-grid.css">
+    <link rel="stylesheet" type="text/css" href="../../Content/bootstrap-grid.min.css">
+    <link rel="stylesheet" type="text/css" href="../../Content/bootstrap-reboot.css">
+    <link rel="stylesheet" type="text/css" href="../../Content/bootstrap-reboot.min.css">
+    <link rel="stylesheet" type="text/css" href="../../Content/site.css">
+    <link rel="icon" type="image/png" href="../../Content/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="../../Content/favicon-16x16.png" sizes="16x16" />
+
+    <style>
+        html {
+            box-sizing: border-box;
+            overflow: -moz-scrollbars-vertical;
+            overflow-y: scroll;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        body {
+            padding-top: 50px;
+            padding-bottom: 20px;
+            font-family: "Source Sans Pro",sans-serif;
+            font-size: 15px;
+            line-height: 1.4285;
+            color: #333333;
+        }
+
+        .topbar {
+            visibility: hidden;
+            backface-visibility: hidden;
+            height: 0;
+        }
+    </style>
+    %(StylesheetIncludes)
+</head>
+<body class="col-md-8 offset-md-2 align-content-center" style="height: 100%">
+    <header id="portalHeader" style="height: 15%; min-height: 95px;">
+        <div class="content-wrapper">
+            <img alt="Logo" src="../../Content/Logo.png" class="img-responsive" height="95" width="313" />
+        </div>
+    </header>
+
+    <footer id="portalFooter" class="fixed-bottom bg-white">
+        <p class="text-center" style="font-size:xx-small">&copy; <script type="text/javascript">document.write(new Date().getUTCFullYear());</script> <a href="http://www.osas.com" title="Open Systems, Inc">Open Systems, Inc</a> Traverse API</p>
+    </footer>
+
+    <div id="body" class="body-content">
+        <div class="container-fluid" style="height: 100%">
+            <nav class="navbar navbar-expand-lg sticky-top bg-white">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="../../">Home</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../Home/Document">Documentation</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="dropdown-toggle nav-link" href="#" id="dropDownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage Account</a>
+                            <div class="dropdown-menu" aria-labelledby="dropDownMenuLink">
+                                <a class="dropdown-item" href="../../Home/ChangePwd" role="button">Change Password</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="../../Home/Register" role="button">Regenerate Client Secret</a>
+                            </div>
+
+                        </li>
+                        <li class="ml-auto">
+                            <a class="nav-link" href="../../Home/Logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <div id="swagger-ui"></div>
+    </div>
+
+    <script src="../../Scripts/swagger-ui-bundle.js"></script>
+    <script src="../../Scripts/swagger-ui-standalone-preset.js"></script>
+    <script>
+        // Get Swagger-Net config into JavaScript
+        function arrayFrom(configString) {
+            return (configString !== "") ? configString.split('|') : [];
+        }
+
+        function stringOrNullFrom(configString) {
+            return (configString !== "null") ? configString : null;
+        }
+
+        function getScript(source) {
+            var script = document.createElement('script');
+            var prior = document.getElementsByTagName('script')[0];
+            script.async = 1;
+
+            script.onload = script.onreadystatechange = function (_, isAbort) {
+                if (isAbort || !script.readyState || /loaded|complete/.test(script.readyState)) {
+                    script.onload = script.onreadystatechange = null;
+                    script = undefined;
+                }
+            };
+
+            script.src = source;
+            prior.parentNode.insertBefore(script, prior);
+        }
+
+        window.swaggerNetConfig = {
+            rootUrl: '%(RootUrl)',
+            discoveryPaths: arrayFrom('%(DiscoveryPaths)'),
+            booleanValues: arrayFrom('%(BooleanValues)'),
+            validatorUrl: stringOrNullFrom('%(ValidatorUrl)'),
+            customScripts: arrayFrom('%(CustomScripts)'),
+            docExpansion: '%(DocExpansion)',
+            defaultModelRendering: '%(DefaultModelRendering)',
+            defaultModelExpandDepth: %(DefaultModelExpandDepth),
+            defaultModelsExpandDepth: %(DefaultModelsExpandDepth),
+            maxDisplayedTags: %(UImaxDisplayedTags),
+            filter: %(UIfilter),
+            showExtensions: ('%(ShowExtensions)' == 'true'),
+            showCommonExtensions: ('%(ShowCommonExtensions)' == 'true'),
+            supportedSubmitMethods: arrayFrom('%(SupportedSubmitMethods)'),
+            discoveryUrlSelector: ('%(DiscoveryUrlSelector)' == 'true'),
+            oAuth2Enabled: ('%(OAuth2Enabled)' == 'true'),
+            oAuth2ClientId: '%(OAuth2ClientId)',
+            oAuth2ClientSecret: '%(OAuth2ClientSecret)',
+            oAuth2Realm: '%(OAuth2Realm)',
+            oAuth2AppName: '%(OAuth2AppName)',
+            OAuth2ScopeSeparator: '%(OAuth2ScopeSeparator)',
+            oAuth2AdditionalQueryStringParams: JSON.parse('%(OAuth2AdditionalQueryStringParams)')
+        };
+    </script>
+    <script>
+        var multiUrls = null;
+        var rootUrl = swaggerNetConfig.rootUrl
+        if (swaggerNetConfig.discoveryPaths.length > 1) {
+            multiUrls = [];
+            swaggerNetConfig.discoveryPaths.forEach(function (path) {
+                multiUrls.push({
+                    name: path,
+                    url: swaggerNetConfig.rootUrl + "/" + path
+                });
+            });
+        }
+        if (swaggerNetConfig.discoveryPaths[0]) {
+            rootUrl += "/" + swaggerNetConfig.discoveryPaths[0];
+        }
+        window.onload = function () {
+            // Build a system
+            const ui = SwaggerUIBundle({
+                url: rootUrl,
+                urls: multiUrls,
+                deepLinking: true,
+                dom_id: '#swagger-ui',
+                presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset],
+                plugins: [SwaggerUIBundle.plugins.DownloadUrl],
+                layout: "StandaloneLayout",
+                docExpansion: swaggerNetConfig.docExpansion,
+                defaultModelRendering: swaggerNetConfig.defaultModelRendering,
+                defaultModelExpandDepth: swaggerNetConfig.defaultModelExpandDepth,
+                defaultModelsExpandDepth: swaggerNetConfig.defaultModelsExpandDepth,
+                maxDisplayedTags: swaggerNetConfig.maxDisplayedTags,
+                filter: swaggerNetConfig.filter,
+                showExtensions: swaggerNetConfig.showExtensions,
+                showCommonExtensions: swaggerNetConfig.showCommonExtensions,
+                supportedSubmitMethods: swaggerNetConfig.supportedSubmitMethods,
+                validatorUrl: swaggerNetConfig.validatorUrl,
+                oauth2RedirectUrl: (window.location.origin + window.location.pathname).replace('/index', '/oauth2-redirect-html'),
+                onComplete: function () {
+                    swaggerNetConfig.customScripts.forEach(function (script) {
+                        getScript(script);
+                    });
+                }
+            })
+            window.ui = ui;
+
+            if (swaggerNetConfig.oAuth2Enabled) {
+                ui.initOAuth({
+                    clientId: swaggerNetConfig.oAuth2ClientId,
+                    clientSecret: swaggerNetConfig.oAuth2ClientSecret,
+                    realm: swaggerNetConfig.oAuth2Realm,
+                    appName: swaggerNetConfig.oAuth2AppName,
+                    scopeSeparator: swaggerNetConfig.OAuth2ScopeSeparator,
+                    additionalQueryStringParams: swaggerNetConfig.oAuth2AdditionalQueryStringParams
+                })
+            }
+        }
+    </script>
+</body>
+</html>
