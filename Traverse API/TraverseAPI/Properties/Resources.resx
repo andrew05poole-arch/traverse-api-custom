@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ApiAssemblyCount" xml:space="preserve">
+    <value>Num of Loaded Assemblies</value>
+  </data>
+  <data name="ApiAssemblyVersion" xml:space="preserve">
+    <value>API Build Number</value>
+  </data>
+  <data name="ApiAuthClientId" xml:space="preserve">
+    <value>api:ClientId</value>
+  </data>
+  <data name="ApiBodyContent" xml:space="preserve">
+    <value>ApiBodyContent</value>
+  </data>
+  <data name="ApiBrokenRuleMsg" xml:space="preserve">
+    <value>Message -</value>
+  </data>
+  <data name="ApiChildObjectError" xml:space="preserve">
+    <value>Unable to load child object for {0}. Either the object does not exist or you do not have permission to it. If you feel this is in error, have your account administrator review your setup in the desktop application, System Manager --&gt; Api Configuration --&gt; User Accounts.</value>
+  </data>
+  <data name="ApiClientFolder" xml:space="preserve">
+    <value>ApiClient</value>
+  </data>
+  <data name="ApiClientIdHeader" xml:space="preserve">
+    <value>X-Auth-Client</value>
+  </data>
+  <data name="ApiCompanyRequired" xml:space="preserve">
+    <value>A company id is required.</value>
+  </data>
+  <data name="ApiDocumentCompanyParam" xml:space="preserve">
+    <value>Enter the Traverse company to use when executing this request.</value>
+  </data>
+  <data name="ApiEntityListName" xml:space="preserve">
+    <value>EntityList</value>
+  </data>
+  <data name="ApiEntityName" xml:space="preserve">
+    <value>EntityItem</value>
+  </data>
+  <data name="ApiEntityValidationError" xml:space="preserve">
+    <value>One or more entries do not meet the validation criteria on your account. If you feel this is in error, have your account administrator review your setup in the desktop application, System Manager --&gt; Api Configuration --&gt; User Accounts.</value>
+  </data>
+  <data name="ApiFunctionDataToken" xml:space="preserve">
+    <value>ApiFunctionId</value>
+  </data>
+  <data name="ApiIgnoreUserAccessValidation" xml:space="preserve">
+    <value>api:IgnoreUserAccess</value>
+  </data>
+  <data name="ApiInvalidCredential" xml:space="preserve">
+    <value>The provided credentials are invalid</value>
+  </data>
+  <data name="ApiInvalidEnumValue" xml:space="preserve">
+    <value>The value '{0}' is not valid for the field '{1}'</value>
+  </data>
+  <data name="ApiInvalidFieldName" xml:space="preserve">
+    <value>The field '{0}' does not exist or you do not have permission to access it</value>
+  </data>
+  <data name="ApiInvalidFunction" xml:space="preserve">
+    <value>The function {0} either does not exist or permission to the function is denied.</value>
+  </data>
+  <data name="ApiInvalidGrant" xml:space="preserve">
+    <value>invalid_grant</value>
+  </data>
+  <data name="ApiInvalidMessage" xml:space="preserve">
+    <value>The request has failed the message security validation.</value>
+  </data>
+  <data name="ApiInvalidRefresh" xml:space="preserve">
+    <value>invalid_refresh</value>
+  </data>
+  <data name="ApiInvalidSelectStmt" xml:space="preserve">
+    <value>The provided SELECT statement is invalid.</value>
+  </data>
+  <data name="ApiInvalidStatus" xml:space="preserve">
+    <value>Account is not active</value>
+  </data>
+  <data name="ApiLoginFailed" xml:space="preserve">
+    <value>Client ID or Client Token are invalid or OAuth requirement date has been exceeded. The OAuth requirement date is {0}</value>
+  </data>
+  <data name="ApiMissingRequiredField" xml:space="preserve">
+    <value>The field {0} is required in order to process this {1} request.</value>
+  </data>
+  <data name="ApiMsgSecClientId" xml:space="preserve">
+    <value>Your key is your Client ID.</value>
+  </data>
+  <data name="ApiMsgSecContact" xml:space="preserve">
+    <value>Contact the API administrator for your key.</value>
+  </data>
+  <data name="ApiOAuthReqDate" xml:space="preserve">
+    <value>OAuth 2.0 security will be required beginning {0}</value>
+  </data>
+  <data name="ApiOperationSchemaIncomplete" xml:space="preserve">
+    <value>An error occurred generating documentation for this request. Please have a system administrator review the logs for more error details.</value>
+  </data>
+  <data name="ApiOriginMsg" xml:space="preserve">
+    <value>Access-Control-Allow-Origin</value>
+  </data>
+  <data name="ApiPluginFolder" xml:space="preserve">
+    <value>ApiPlugins</value>
+  </data>
+  <data name="ApiProcessingDetail" xml:space="preserve">
+    <value>X-Response-Detail</value>
+  </data>
+  <data name="ApiRequestCompany" xml:space="preserve">
+    <value>companyid</value>
+  </data>
+  <data name="ApiRequestPage" xml:space="preserve">
+    <value>page</value>
+  </data>
+  <data name="ApiRequestPageSize" xml:space="preserve">
+    <value>page_size</value>
+  </data>
+  <data name="ApiRequestQuery" xml:space="preserve">
+    <value>query</value>
+  </data>
+  <data name="ApiResponseRecordAvail" xml:space="preserve">
+    <value>X-Num-Records-Available</value>
+  </data>
+  <data name="ApiResponseRecordCount" xml:space="preserve">
+    <value>X-Num-Records-Returned</value>
+  </data>
+  <data name="ApiSecurityNoticeSetting" xml:space="preserve">
+    <value>api:DisplaySecurityNotice</value>
+  </data>
+  <data name="ApiSelectBlank" xml:space="preserve">
+    <value>A SELECT statement must be provided in order to perform this method.</value>
+  </data>
+  <data name="ApiSignatureHeaderKey" xml:space="preserve">
+    <value>ApiMsgSignature</value>
+  </data>
+  <data name="ApiStorageCompany" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="ApiStoragePage" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="ApiStoragePageSize" xml:space="preserve">
+    <value>PageSize</value>
+  </data>
+  <data name="ApiStorageQuery" xml:space="preserve">
+    <value>Query</value>
+  </data>
+  <data name="ApiSwaggerMsgSecurity" xml:space="preserve">
+    <value>This header parameter is an encrypted version of the request. Concatenate the full URL, the request body and the key. Compute the hash using the {0} provider. Convert the hash to Base64 string and set this value. {1}</value>
+  </data>
+  <data name="ApiTemplateFormat" xml:space="preserve">
+    <value>api{0}{1}/{2}</value>
+  </data>
+  <data name="ApiTokenHeader" xml:space="preserve">
+    <value>X-Auth-Token</value>
+  </data>
+  <data name="ApiUserInfoStorage" xml:space="preserve">
+    <value>api:UserInfo</value>
+  </data>
+  <data name="ApiUserRequestActionStorage" xml:space="preserve">
+    <value>api:UserFunctionComp</value>
+  </data>
+  <data name="ApiVersionTableAssemblyDate" xml:space="preserve">
+    <value>Assembly Date</value>
+  </data>
+  <data name="ApiVersionTableAssemblyName" xml:space="preserve">
+    <value>Assembly Name</value>
+  </data>
+  <data name="ApiVersionTableAssemblyVersion" xml:space="preserve">
+    <value>Assembly Version</value>
+  </data>
+  <data name="ApiVersionTableEvenRowColor" xml:space="preserve">
+    <value>LightGray</value>
+  </data>
+  <data name="ApiVersionTableOddRowColor" xml:space="preserve">
+    <value>White</value>
+  </data>
+</root>

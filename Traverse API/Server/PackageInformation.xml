@@ -1,0 +1,285 @@
+<?xml version="1.0" standalone="yes"?>
+<PackageInformation>
+  <xs:schema id="PackageInformation" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="PackageInformation" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="BuildInfo">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Version" type="xs:string" minOccurs="0" />
+                <xs:element name="PreviousVersion" type="xs:string" minOccurs="0" />
+                <xs:element name="Notes" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="FileList">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Id" type="xs:int" />
+                <xs:element name="DBID" type="xs:int" minOccurs="0" />
+                <xs:element name="Type" type="xs:int" minOccurs="0" />
+                <xs:element name="MergeData" type="xs:boolean" minOccurs="0" />
+                <xs:element name="Skip" type="xs:boolean" minOccurs="0" />
+                <xs:element name="DepOrder" type="xs:int" minOccurs="0" />
+                <xs:element name="FileName" type="xs:string" minOccurs="0" />
+                <xs:element name="Notes" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+      <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//FileList" />
+        <xs:field xpath="Id" />
+      </xs:unique>
+    </xs:element>
+  </xs:schema>
+  <BuildInfo>
+    <Version>11.2.20031</Version>
+    <PreviousVersion>11.2.20031</PreviousVersion>
+    <Notes>Traverse Api Update</Notes>
+  </BuildInfo>
+  <FileList>
+    <Id>10</Id>
+    <DBID>0</DBID>
+    <Type>-8</Type>
+    <MergeData>false</MergeData>
+    <Skip>false</Skip>
+    <DepOrder>9</DepOrder>
+    <FileName>.\Comp\DBConfigSettings.sql</FileName>
+    <Notes>Preprocess to establish config settings</Notes>
+  </FileList>
+  <FileList>
+    <Id>11</Id>
+    <DBID>0</DBID>
+    <Type>-8</Type>
+    <MergeData>false</MergeData>
+    <Skip>false</Skip>
+    <DepOrder>9</DepOrder>
+    <FileName>.\CompanyTriggers.sql</FileName>
+    <Notes></Notes>
+  </FileList>
+  <FileList>
+    <Id>12</Id>
+    <DBID>0</DBID>
+    <Type>-8</Type>
+    <MergeData>false</MergeData>
+    <Skip>false</Skip>
+    <DepOrder>8</DepOrder>
+    <FileName>.\DatabaseChangeScripts.sql</FileName>
+    <Notes></Notes>
+  </FileList>
+  <FileList>
+    <Id>18</Id>
+    <DBID>0</DBID>
+    <Type>-9</Type>
+    <MergeData>false</MergeData>
+    <Skip>false</Skip>
+    <DepOrder>1</DepOrder>
+    <FileName>.\Comp\DBChange_ConvertUserFields.sql</FileName>
+    <Notes>Covnert data for CF based views</Notes>
+  </FileList>
+  <FileList>
+    <Id>19</Id>
+    <DBID>0</DBID>
+    <Type>-9</Type>
+    <MergeData>false</MergeData>
+    <Skip>false</Skip>
+    <DepOrder>0</DepOrder>
+    <FileName>.\Comp\*.sql</FileName>
+    <Notes>non-ordered tasks</Notes>
+  </FileList>
+  <FileList>
+    <Id>20</Id>
+    <DBID>0</DBID>
+    <Type>-8</Type>
+    <MergeData>false</MergeData>
+    <Skip>false</Skip>
+    <DepOrder>0</DepOrder>
+    <FileName>.\Comp\PreProcess\*.sql</FileName>
+    <Notes>non-ordered tasks</Notes>
+  </FileList>
+  <FileList>
+    <Id>40</Id>
+    <DBID>0</DBID>
+    <Type>8</Type>
+    <MergeData>false</MergeData>
+    <Skip>false</Skip>
+    <DepOrder>0</DepOrder>
+    <FileName>.\Comp\Tables\*.sql</FileName>
+    <Notes></Notes>
+  </FileList>
+  <FileList>
+    <Id>50</Id>
+    <DBID>0</DBID>
+    <Type>4</Type>
+    <MergeData>false</MergeData>
+    <Skip>false</Skip>
+    <DepOrder>0</DepOrder>
+    <FileName>.\Comp\Views\*.sql</FileName>
+    <Notes></Notes>
+  </FileList>
+  <FileList>
+    <Id>60</Id>
+    <DBID>0</DBID>
+    <Type>16</Type>
+    <MergeData>false</MergeData>
+    <Skip>false</Skip>
+    <DepOrder>0</DepOrder>
+    <FileName>.\Comp\SP\*.sql</FileName>
+    <Notes></Notes>
+  </FileList>
+  <FileList>
+    <Id>70</Id>
+    <DBID>0</DBID>
+    <Type>-9</Type>
+    <MergeData>false</MergeData>
+    <Skip>false</Skip>
+    <DepOrder>0</DepOrder>
+    <FileName>.\Comp\PostProcess\*.sql</FileName>
+    <Notes></Notes>
+  </FileList>
+
+  <FileList>
+    <Id>1020</Id>
+    <DBID>1</DBID>
+    <Type>-9</Type>
+    <MergeData>false</MergeData>
+    <Skip>false</Skip>
+    <DepOrder>0</DepOrder>
+    <FileName>.\Payroll\*.sql</FileName>
+    <Notes></Notes>
+  </FileList>
+  <FileList>
+    <Id>1050</Id>
+    <DBID>1</DBID>
+    <Type>8</Type>
+    <MergeData>false</MergeData>
+    <Skip>false</Skip>
+    <DepOrder>0</DepOrder>
+    <FileName>.\Payroll\Tables\*.sql</FileName>
+    <Notes></Notes>
+  </FileList>
+  <FileList>
+    <Id>1060</Id>
+    <DBID>1</DBID>
+    <Type>4</Type>
+    <MergeData>false</MergeData>
+    <Skip>false</Skip>
+    <DepOrder>0</DepOrder>
+    <FileName>.\Payroll\Views\*.sql</FileName>
+    <Notes></Notes>
+  </FileList>
+  <FileList>
+    <Id>1070</Id>
+    <DBID>1</DBID>
+    <Type>16</Type>
+    <MergeData>false</MergeData>
+    <Skip>false</Skip>
+    <DepOrder>0</DepOrder>
+    <FileName>.\Payroll\SP\*.sql</FileName>
+    <Notes></Notes>
+  </FileList>
+
+  <FileList>
+    <Id>2010</Id>
+    <DBID>2</DBID>
+    <Type>88</Type>
+    <MergeData>true</MergeData>
+    <Skip>false</Skip>
+    <DepOrder>-100</DepOrder>
+    <FileName>.\Metadata\System\Data\*.xml</FileName>
+    <Notes>System Metadata</Notes>
+  </FileList>
+  <FileList>
+    <Id>2011</Id>
+    <DBID>2</DBID>
+    <Type>-8</Type>
+    <MergeData>false</MergeData>
+    <Skip>false</Skip>
+    <DepOrder>9</DepOrder>
+    <FileName>.\SYSTriggers.sql</FileName>
+    <Notes></Notes>
+  </FileList>
+  <FileList>
+    <Id>2012</Id>
+    <DBID>2</DBID>
+    <Type>-8</Type>
+    <MergeData>false</MergeData>
+    <Skip>false</Skip>
+    <DepOrder>8</DepOrder>
+    <FileName>.\SysChangeScripts.sql</FileName>
+    <Notes></Notes>
+  </FileList>
+  <FileList>
+    <Id>2020</Id>
+    <DBID>2</DBID>
+    <Type>-9</Type>
+    <MergeData>false</MergeData>
+    <Skip>false</Skip>
+    <DepOrder>0</DepOrder>
+    <FileName>.\Sys\*.sql</FileName>
+    <Notes></Notes>
+  </FileList>
+  <FileList>
+    <Id>2030</Id>
+    <DBID>2</DBID>
+    <Type>1</Type>
+    <MergeData>false</MergeData>
+    <Skip>false</Skip>
+    <DepOrder>0</DepOrder>
+    <FileName>.\Sys\UDDT\*.sql</FileName>
+    <Notes></Notes>
+  </FileList>
+  <FileList>
+    <Id>2040</Id>
+    <DBID>2</DBID>
+    <Type>-8</Type>
+    <MergeData>false</MergeData>
+    <Skip>false</Skip>
+    <DepOrder>0</DepOrder>
+    <FileName>.\Sys\Messages\*.sql</FileName>
+    <Notes></Notes>
+  </FileList>
+  <FileList>
+    <Id>2050</Id>
+    <DBID>2</DBID>
+    <Type>8</Type>
+    <MergeData>false</MergeData>
+    <Skip>false</Skip>
+    <DepOrder>0</DepOrder>
+    <FileName>.\Sys\Tables\*.sql</FileName>
+    <Notes></Notes>
+  </FileList>
+  <FileList>
+    <Id>2060</Id>
+    <DBID>2</DBID>
+    <Type>4</Type>
+    <MergeData>false</MergeData>
+    <Skip>false</Skip>
+    <DepOrder>0</DepOrder>
+    <FileName>.\Sys\Views\*.sql</FileName>
+    <Notes></Notes>
+  </FileList>
+  <FileList>
+    <Id>2070</Id>
+    <DBID>2</DBID>
+    <Type>16</Type>
+    <MergeData>false</MergeData>
+    <Skip>false</Skip>
+    <DepOrder>0</DepOrder>
+    <FileName>.\Sys\SP\*.sql</FileName>
+    <Notes></Notes>
+  </FileList>
+  <FileList>
+    <Id>2075</Id>
+    <DBID>2</DBID>
+    <Type>-9</Type>
+    <MergeData>false</MergeData>
+    <Skip>false</Skip>
+    <DepOrder>0</DepOrder>
+    <FileName>.\Sys\PostProcess\*.sql</FileName>
+    <Notes></Notes>
+  </FileList>  
+</PackageInformation>
