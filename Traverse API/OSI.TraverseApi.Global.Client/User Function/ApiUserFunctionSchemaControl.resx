@@ -1,0 +1,436 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <metadata name="bindUserSchema.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>166, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="dgvUserSchema.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="colApiFieldName.Caption" xml:space="preserve">
+    <value>Display Name</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="colApiFieldName.Visible" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="colApiFieldName.VisibleIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="cboFieldType.AutoHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <assembly alias="DevExpress.Utils" name="DevExpress.Utils, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9" />
+  <data name="cboFieldType.Buttons" type="DevExpress.XtraEditors.Controls.ButtonPredefines, DevExpress.Utils">
+    <value>Combo</value>
+  </data>
+  <data name="cboFieldType.Columns" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="cboFieldType.Columns1" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="cboFieldType.DataSource" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAE5TeXN0ZW0uRGF0YSwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJl
+        PW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAABVTeXN0ZW0uRGF0YS5E
+        YXRhVGFibGUDAAAAGURhdGFUYWJsZS5SZW1vdGluZ1ZlcnNpb24JWG1sU2NoZW1hC1htbERpZmZHcmFt
+        AwEBDlN5c3RlbS5WZXJzaW9uAgAAAAkDAAAABgQAAADlBTw/eG1sIHZlcnNpb249IjEuMCIgZW5jb2Rp
+        bmc9InV0Zi0xNiI/Pg0KPHhzOnNjaGVtYSB4bWxucz0iIiB4bWxuczp4cz0iaHR0cDovL3d3dy53My5v
+        cmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zOm1zZGF0YT0idXJuOnNjaGVtYXMtbWljcm9zb2Z0LWNvbTp4
+        bWwtbXNkYXRhIj4NCiAgPHhzOmVsZW1lbnQgbmFtZT0iVGFibGUxIj4NCiAgICA8eHM6Y29tcGxleFR5
+        cGU+DQogICAgICA8eHM6c2VxdWVuY2U+DQogICAgICAgIDx4czplbGVtZW50IG5hbWU9IklkIiB0eXBl
+        PSJ4czp1bnNpZ25lZEJ5dGUiIG1zZGF0YTp0YXJnZXROYW1lc3BhY2U9IiIgbWluT2NjdXJzPSIwIiAv
+        Pg0KICAgICAgICA8eHM6ZWxlbWVudCBuYW1lPSJEZXNjcmlwdGlvbiIgdHlwZT0ieHM6c3RyaW5nIiBt
+        c2RhdGE6dGFyZ2V0TmFtZXNwYWNlPSIiIG1pbk9jY3Vycz0iMCIgLz4NCiAgICAgIDwveHM6c2VxdWVu
+        Y2U+DQogICAgPC94czpjb21wbGV4VHlwZT4NCiAgPC94czplbGVtZW50Pg0KICA8eHM6ZWxlbWVudCBu
+        YW1lPSJ0bXBEYXRhU2V0IiBtc2RhdGE6SXNEYXRhU2V0PSJ0cnVlIiBtc2RhdGE6TWFpbkRhdGFUYWJs
+        ZT0iVGFibGUxIiBtc2RhdGE6VXNlQ3VycmVudExvY2FsZT0idHJ1ZSI+DQogICAgPHhzOmNvbXBsZXhU
+        eXBlPg0KICAgICAgPHhzOmNob2ljZSBtaW5PY2N1cnM9IjAiIG1heE9jY3Vycz0idW5ib3VuZGVkIiAv
+        Pg0KICAgIDwveHM6Y29tcGxleFR5cGU+DQogIDwveHM6ZWxlbWVudD4NCjwveHM6c2NoZW1hPgYFAAAA
+        +QM8ZGlmZmdyOmRpZmZncmFtIHhtbG5zOm1zZGF0YT0idXJuOnNjaGVtYXMtbWljcm9zb2Z0LWNvbTp4
+        bWwtbXNkYXRhIiB4bWxuczpkaWZmZ3I9InVybjpzY2hlbWFzLW1pY3Jvc29mdC1jb206eG1sLWRpZmZn
+        cmFtLXYxIj4NCiAgPHRtcERhdGFTZXQ+DQogICAgPFRhYmxlMSBkaWZmZ3I6aWQ9IlRhYmxlMTEiIG1z
+        ZGF0YTpyb3dPcmRlcj0iMCIgZGlmZmdyOmhhc0NoYW5nZXM9Imluc2VydGVkIj4NCiAgICAgIDxJZD4w
+        PC9JZD4NCiAgICAgIDxEZXNjcmlwdGlvbj5FbnRpdHkgRmllbGQ8L0Rlc2NyaXB0aW9uPg0KICAgIDwv
+        VGFibGUxPg0KICAgIDxUYWJsZTEgZGlmZmdyOmlkPSJUYWJsZTEyIiBtc2RhdGE6cm93T3JkZXI9IjEi
+        IGRpZmZncjpoYXNDaGFuZ2VzPSJpbnNlcnRlZCI+DQogICAgICA8SWQ+MTwvSWQ+DQogICAgICA8RGVz
+        Y3JpcHRpb24+Q3VzdG9tIEZpZWxkPC9EZXNjcmlwdGlvbj4NCiAgICA8L1RhYmxlMT4NCiAgPC90bXBE
+        YXRhU2V0Pg0KPC9kaWZmZ3I6ZGlmZmdyYW0+BAMAAAAOU3lzdGVtLlZlcnNpb24EAAAABl9NYWpvcgZf
+        TWlub3IGX0J1aWxkCV9SZXZpc2lvbgAAAAAICAgIAgAAAAAAAAD//////////ws=
+</value>
+  </data>
+  <data name="cboFieldType.NullText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="colFieldType.Visible" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="colFieldType.VisibleIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="colFunctionSchemaId.Caption" xml:space="preserve">
+    <value>API Field</value>
+  </data>
+  <data name="cboFunctionSchemaId.AutoHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="cboFunctionSchemaId.Buttons" type="DevExpress.XtraEditors.Controls.ButtonPredefines, DevExpress.Utils">
+    <value>Combo</value>
+  </data>
+  <data name="cboFunctionSchemaId.NullText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="colFunctionSchemaId.Visible" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="colFunctionSchemaId.VisibleIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="colCustomFieldName.Visible" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="colCustomFieldName.VisibleIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="chkHidden.AutoHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="chkHidden.Caption" xml:space="preserve">
+    <value>TravCheckBox</value>
+  </data>
+  <data name="colHidden.Visible" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="colHidden.VisibleIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="colDefaultValue.Visible" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="colDefaultValue.VisibleIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="txtNotes.AutoHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="txtNotes.Buttons" type="DevExpress.XtraEditors.Controls.ButtonPredefines, DevExpress.Utils">
+    <value>Combo</value>
+  </data>
+  <data name="colNotes.Visible" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="colNotes.VisibleIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dgvUserSchema.Size" type="System.Drawing.Size, System.Drawing">
+    <value>794, 594</value>
+  </data>
+  <data name="dgvUserSchema.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;dgvUserSchema.Name" xml:space="preserve">
+    <value>dgvUserSchema</value>
+  </data>
+  <data name="&gt;&gt;dgvUserSchema.Type" xml:space="preserve">
+    <value>TRAVERSE.Controls.TravDataGridViewControl, TRAVERSE.Controls, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f3f24a3fbab7a33a</value>
+  </data>
+  <data name="&gt;&gt;dgvUserSchema.Parent" xml:space="preserve">
+    <value>layoutMain</value>
+  </data>
+  <data name="&gt;&gt;dgvUserSchema.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="layoutMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="layoutMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="layoutMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>800, 600</value>
+  </data>
+  <data name="layoutMain.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="layoutMain.Text" xml:space="preserve">
+    <value>travLayoutControl1</value>
+  </data>
+  <data name="&gt;&gt;layoutMain.Name" xml:space="preserve">
+    <value>layoutMain</value>
+  </data>
+  <data name="&gt;&gt;layoutMain.Type" xml:space="preserve">
+    <value>TRAVERSE.Controls.TravLayoutControl, TRAVERSE.Controls, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f3f24a3fbab7a33a</value>
+  </data>
+  <data name="&gt;&gt;layoutMain.Parent" xml:space="preserve">
+    <value>splitContainerBase.Panel1</value>
+  </data>
+  <data name="&gt;&gt;layoutMain.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;splitContainerBase.Panel1.Name" xml:space="preserve">
+    <value>splitContainerBase.Panel1</value>
+  </data>
+  <data name="&gt;&gt;splitContainerBase.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainerBase.Panel1.Parent" xml:space="preserve">
+    <value>splitContainerBase</value>
+  </data>
+  <data name="&gt;&gt;splitContainerBase.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;splitContainerBase.Panel2.Name" xml:space="preserve">
+    <value>splitContainerBase.Panel2</value>
+  </data>
+  <data name="&gt;&gt;splitContainerBase.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainerBase.Panel2.Parent" xml:space="preserve">
+    <value>splitContainerBase</value>
+  </data>
+  <data name="&gt;&gt;splitContainerBase.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;splitContainerBase.Name" xml:space="preserve">
+    <value>splitContainerBase</value>
+  </data>
+  <data name="&gt;&gt;splitContainerBase.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainerBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;splitContainerBase.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="errorProviderBase.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="&gt;&gt;errorProviderBase.Name" xml:space="preserve">
+    <value>errorProviderBase</value>
+  </data>
+  <data name="&gt;&gt;errorProviderBase.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bindUserSchema.Name" xml:space="preserve">
+    <value>bindUserSchema</value>
+  </data>
+  <data name="&gt;&gt;bindUserSchema.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gvUserSchema.Name" xml:space="preserve">
+    <value>gvUserSchema</value>
+  </data>
+  <data name="&gt;&gt;gvUserSchema.Type" xml:space="preserve">
+    <value>DevExpress.XtraGrid.Views.Grid.GridView, DevExpress.XtraGrid, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;colApiFieldName.Name" xml:space="preserve">
+    <value>colApiFieldName</value>
+  </data>
+  <data name="&gt;&gt;colApiFieldName.Type" xml:space="preserve">
+    <value>DevExpress.XtraGrid.Columns.GridColumn, DevExpress.XtraGrid, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;colFieldType.Name" xml:space="preserve">
+    <value>colFieldType</value>
+  </data>
+  <data name="&gt;&gt;colFieldType.Type" xml:space="preserve">
+    <value>DevExpress.XtraGrid.Columns.GridColumn, DevExpress.XtraGrid, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;cboFieldType.Name" xml:space="preserve">
+    <value>cboFieldType</value>
+  </data>
+  <data name="&gt;&gt;cboFieldType.Type" xml:space="preserve">
+    <value>TRAVERSE.Controls.RepositoryItemTravEnumListControl, TRAVERSE.Controls, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f3f24a3fbab7a33a</value>
+  </data>
+  <data name="&gt;&gt;colFunctionSchemaId.Name" xml:space="preserve">
+    <value>colFunctionSchemaId</value>
+  </data>
+  <data name="&gt;&gt;colFunctionSchemaId.Type" xml:space="preserve">
+    <value>DevExpress.XtraGrid.Columns.GridColumn, DevExpress.XtraGrid, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;cboFunctionSchemaId.Name" xml:space="preserve">
+    <value>cboFunctionSchemaId</value>
+  </data>
+  <data name="&gt;&gt;cboFunctionSchemaId.Type" xml:space="preserve">
+    <value>TRAVERSE.Controls.RepositoryItemTravComboBoxAdv, TRAVERSE.Controls, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f3f24a3fbab7a33a</value>
+  </data>
+  <data name="&gt;&gt;colCustomFieldName.Name" xml:space="preserve">
+    <value>colCustomFieldName</value>
+  </data>
+  <data name="&gt;&gt;colCustomFieldName.Type" xml:space="preserve">
+    <value>DevExpress.XtraGrid.Columns.GridColumn, DevExpress.XtraGrid, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;colHidden.Name" xml:space="preserve">
+    <value>colHidden</value>
+  </data>
+  <data name="&gt;&gt;colHidden.Type" xml:space="preserve">
+    <value>DevExpress.XtraGrid.Columns.GridColumn, DevExpress.XtraGrid, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;chkHidden.Name" xml:space="preserve">
+    <value>chkHidden</value>
+  </data>
+  <data name="&gt;&gt;chkHidden.Type" xml:space="preserve">
+    <value>TRAVERSE.Controls.RepositoryItemTravCheckBox, TRAVERSE.Controls, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f3f24a3fbab7a33a</value>
+  </data>
+  <data name="&gt;&gt;colDefaultValue.Name" xml:space="preserve">
+    <value>colDefaultValue</value>
+  </data>
+  <data name="&gt;&gt;colDefaultValue.Type" xml:space="preserve">
+    <value>DevExpress.XtraGrid.Columns.GridColumn, DevExpress.XtraGrid, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;colNotes.Name" xml:space="preserve">
+    <value>colNotes</value>
+  </data>
+  <data name="&gt;&gt;colNotes.Type" xml:space="preserve">
+    <value>DevExpress.XtraGrid.Columns.GridColumn, DevExpress.XtraGrid, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;txtNotes.Name" xml:space="preserve">
+    <value>txtNotes</value>
+  </data>
+  <data name="&gt;&gt;txtNotes.Type" xml:space="preserve">
+    <value>TRAVERSE.Controls.RepositoryItemTravMemoEditControl, TRAVERSE.Controls, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f3f24a3fbab7a33a</value>
+  </data>
+  <data name="&gt;&gt;grpRoot.Name" xml:space="preserve">
+    <value>grpRoot</value>
+  </data>
+  <data name="&gt;&gt;grpRoot.Type" xml:space="preserve">
+    <value>DevExpress.XtraLayout.LayoutControlGroup, DevExpress.XtraLayout, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;itemUserSchema.Name" xml:space="preserve">
+    <value>itemUserSchema</value>
+  </data>
+  <data name="&gt;&gt;itemUserSchema.Type" xml:space="preserve">
+    <value>DevExpress.XtraLayout.LayoutControlItem, DevExpress.XtraLayout, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>ApiUserFunctionSchemaControl</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>TRAVERSE.Client.PluginControlBase, TRAVERSE.Controls, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f3f24a3fbab7a33a</value>
+  </data>
+</root>

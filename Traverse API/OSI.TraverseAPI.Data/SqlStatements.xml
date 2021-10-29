@@ -1,0 +1,1954 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<database includeDrop="false">TraverseApi</database>
+<procedures>
+    
+    <procedure owner="dbo" name="trav_ApiFunctionHeader_GetList" grant="">
+    <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Tuesday, December 8, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Gets all records from the ApiFunctionHeader table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+        <parameters>
+				<parameter name="@Id" type="uniqueidentifier" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+            <parameter name="@ALL" type="bit" direction="Input" size="1" precision="0" scale="0" param="" nulldefault=""/>
+        </parameters>
+        <body><![CDATA[
+                SELECT
+                    [ID],
+                    [Name],
+                    [AppId],
+                    [Type],
+                    [Notes],
+                    [Scope],
+                    [OverrideID],
+                    [QueryTableName],
+                    [ts]
+                FROM
+                    dbo.[ApiFunctionHeader]
+                WHERE @ALL=1 OR (
+                [ID] = @Id
+                )
+        ORDER BY
+        [ID] 
+                    
+        ]]></body>
+    </procedure>
+        
+        <procedure owner="dbo" name="trav_ApiFunctionHeader_Insert" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Tuesday, December 8, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Inserts a record into the ApiFunctionHeader table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+				<parameter name="@Id" type="uniqueidentifier" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@Name" type="nvarchar" direction="Input" size="50" precision="0" scale="0" param="(50)" nulldefault=""/>
+				<parameter name="@AppId" type="nvarchar" direction="Input" size="4" precision="0" scale="0" param="(4)" nulldefault=""/>
+				<parameter name="@Type" type="tinyint" direction="Input" size="0" precision="3" scale="0" param="" nulldefault=""/>
+				<parameter name="@Notes" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+				<parameter name="@Scope" type="tinyint" direction="Input" size="0" precision="3" scale="0" param="" nulldefault=""/>
+				<parameter name="@OverrideId" type="uniqueidentifier" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@QueryTableName" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+				<parameter name="@Ts" type="timestamp" direction="Output" size="0" precision="0" scale="0" param="" nulldefault=""/>
+            </parameters>
+            <body><![CDATA[
+                    
+                INSERT INTO dbo.[ApiFunctionHeader]
+                    (
+                    [ID]
+                    ,[Name]
+                    ,[AppId]
+                    ,[Type]
+                    ,[Notes]
+                    ,[Scope]
+                    ,[OverrideID]
+                    ,[QueryTableName]
+                    )
+                VALUES
+                    (
+                    @Id
+                    ,@Name
+                    ,@AppId
+                    ,@Type
+                    ,@Notes
+                    ,@Scope
+                    ,@OverrideId
+                    ,@QueryTableName
+                    )
+                
+                                    
+                -- Select computed columns into output parameters
+                SELECT
+ @Ts = [ts]
+                FROM
+                    dbo.[ApiFunctionHeader]
+                WHERE
+[ID] = @Id 
+                            
+            ]]></body>
+        </procedure>
+
+        <procedure owner="dbo" name="trav_ApiFunctionHeader_Update" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Tuesday, December 8, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Updates a record in the ApiFunctionHeader table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+				<parameter name="@Id" type="uniqueidentifier" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@OriginalId" type="uniqueidentifier" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@Name" type="nvarchar" direction="Input" size="50" precision="0" scale="0" param="(50)" nulldefault=""/>
+				<parameter name="@AppId" type="nvarchar" direction="Input" size="4" precision="0" scale="0" param="(4)" nulldefault=""/>
+				<parameter name="@Type" type="tinyint" direction="Input" size="0" precision="3" scale="0" param="" nulldefault=""/>
+				<parameter name="@Notes" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+				<parameter name="@Scope" type="tinyint" direction="Input" size="0" precision="3" scale="0" param="" nulldefault=""/>
+				<parameter name="@OverrideId" type="uniqueidentifier" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@QueryTableName" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+				<parameter name="@Ts" type="timestamp" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@ReturnedTs" type="timestamp" direction="Output" size="0" precision="0" scale="0" param="" nulldefault=""/>
+            </parameters>
+            <body><![CDATA[
+                
+                
+                -- Modify the updatable columns
+                UPDATE
+                    dbo.[ApiFunctionHeader]
+                SET
+                    [Name] = @Name
+                    ,[AppId] = @AppId
+                    ,[Type] = @Type
+                    ,[Notes] = @Notes
+                    ,[Scope] = @Scope
+                    ,[OverrideID] = @OverrideId
+                    ,[QueryTableName] = @QueryTableName
+                WHERE
+[ID] = @OriginalId 
+AND [ts] = @Ts                
+                
+                -- Select computed columns into output parameters
+                SELECT
+ @ReturnedTs = [ts]
+                FROM
+                    dbo.[ApiFunctionHeader]
+                WHERE
+[ID] = @Id 
+            ]]></body>
+        </procedure>
+
+        <procedure owner="dbo" name="trav_ApiFunctionHeader_Delete" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Tuesday, December 8, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Deletes a record in the ApiFunctionHeader table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+				<parameter name="@Id" type="uniqueidentifier" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@Ts" type="timestamp" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+            </parameters>
+            <body><![CDATA[
+                DELETE FROM dbo.[ApiFunctionHeader] WITH (ROWLOCK) 
+                WHERE
+                    [ID] = @Id
+	AND [ts] = @Ts                    
+            ]]></body>
+        </procedure>
+
+        
+        <procedure owner="dbo" name="trav_ApiFunctionHeader_GetPaged" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Tuesday, December 8, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Gets records from the ApiFunctionHeader table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+                <parameter name="@WhereClause" type="nvarchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)" />
+                <parameter name="@OrderBy" type="nvarchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)"/>
+                <parameter name="@PageIndex" type="int" direction="Input" size="0" precision="10" scale="0" />
+                <parameter name="@PageSize" type="int" direction="Input" size="0" precision="10" scale="0" /> 
+            </parameters>
+            <body><![CDATA[
+                
+				declare @SQL as nvarchar(MAX)
+				SET @SQL = 'SELECT 
+				[ID],
+				[Name],
+				[AppId],
+				[Type],
+				[Notes],
+				[Scope],
+				[OverrideID],
+				[QueryTableName],
+				[ts]
+				FROM dbo.[ApiFunctionHeader]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				exec sp_executesql @SQL
+            ]]></body>
+        </procedure>
+        
+    
+    <procedure owner="dbo" name="trav_ApiFunctionSchema_GetList" grant="">
+    <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Wednesday, January 29, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Gets all records from the ApiFunctionSchema table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+        <parameters>
+				<parameter name="@Id" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+            <parameter name="@ALL" type="bit" direction="Input" size="1" precision="0" scale="0" param="" nulldefault=""/>
+        </parameters>
+        <body><![CDATA[
+                SELECT
+                    [ID],
+                    [SeqNum],
+                    [FunctionID],
+                    [TravFieldName],
+                    [ApiFieldName],
+                    [ValueTranslation],
+                    [Notes],
+                    [FieldSetting],
+                    [ChildFunctionID],
+                    [QueryColumnName],
+                    [ts]
+                FROM
+                    dbo.[ApiFunctionSchema]
+                WHERE @ALL=1 OR (
+                [ID] = @Id
+                )
+        ORDER BY
+        [ID] 
+                    
+        ]]></body>
+    </procedure>
+        
+        <procedure owner="dbo" name="trav_ApiFunctionSchema_Insert" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Wednesday, January 29, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Inserts a record into the ApiFunctionSchema table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+				<parameter name="@Id" type="bigint" direction="Output" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@SeqNum" type="int" direction="Input" size="0" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@FunctionId" type="uniqueidentifier" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@TravFieldName" type="nvarchar" direction="Input" size="128" precision="0" scale="0" param="(128)" nulldefault=""/>
+				<parameter name="@ApiFieldName" type="nvarchar" direction="Input" size="128" precision="0" scale="0" param="(128)" nulldefault=""/>
+				<parameter name="@ValueTranslation" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+				<parameter name="@Notes" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+				<parameter name="@FieldSetting" type="tinyint" direction="Input" size="0" precision="3" scale="0" param="" nulldefault=""/>
+				<parameter name="@ChildFunctionId" type="uniqueidentifier" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@QueryColumnName" type="nvarchar" direction="Input" size="128" precision="0" scale="0" param="(128)" nulldefault=""/>
+				<parameter name="@Ts" type="timestamp" direction="Output" size="0" precision="0" scale="0" param="" nulldefault=""/>
+            </parameters>
+            <body><![CDATA[
+                    
+                INSERT INTO dbo.[ApiFunctionSchema]
+                    (
+                    [SeqNum]
+                    ,[FunctionID]
+                    ,[TravFieldName]
+                    ,[ApiFieldName]
+                    ,[ValueTranslation]
+                    ,[Notes]
+                    ,[FieldSetting]
+                    ,[ChildFunctionID]
+                    ,[QueryColumnName]
+                    )
+                VALUES
+                    (
+                    @SeqNum
+                    ,@FunctionId
+                    ,@TravFieldName
+                    ,@ApiFieldName
+                    ,@ValueTranslation
+                    ,@Notes
+                    ,@FieldSetting
+                    ,@ChildFunctionId
+                    ,@QueryColumnName
+                    )
+                
+                -- Get the identity value
+                SET @Id = SCOPE_IDENTITY()
+                                    
+                -- Select computed columns into output parameters
+                SELECT
+ @Ts = [ts]
+                FROM
+                    dbo.[ApiFunctionSchema]
+                WHERE
+[ID] = @Id 
+                            
+            ]]></body>
+        </procedure>
+
+        <procedure owner="dbo" name="trav_ApiFunctionSchema_Update" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Wednesday, January 29, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Updates a record in the ApiFunctionSchema table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+				<parameter name="@Id" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@SeqNum" type="int" direction="Input" size="0" precision="10" scale="0" param="" nulldefault=""/>
+				<parameter name="@FunctionId" type="uniqueidentifier" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@TravFieldName" type="nvarchar" direction="Input" size="128" precision="0" scale="0" param="(128)" nulldefault=""/>
+				<parameter name="@ApiFieldName" type="nvarchar" direction="Input" size="128" precision="0" scale="0" param="(128)" nulldefault=""/>
+				<parameter name="@ValueTranslation" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+				<parameter name="@Notes" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+				<parameter name="@FieldSetting" type="tinyint" direction="Input" size="0" precision="3" scale="0" param="" nulldefault=""/>
+				<parameter name="@ChildFunctionId" type="uniqueidentifier" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@QueryColumnName" type="nvarchar" direction="Input" size="128" precision="0" scale="0" param="(128)" nulldefault=""/>
+				<parameter name="@Ts" type="timestamp" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@ReturnedTs" type="timestamp" direction="Output" size="0" precision="0" scale="0" param="" nulldefault=""/>
+            </parameters>
+            <body><![CDATA[
+                
+                
+                -- Modify the updatable columns
+                UPDATE
+                    dbo.[ApiFunctionSchema]
+                SET
+                    [SeqNum] = @SeqNum
+                    ,[FunctionID] = @FunctionId
+                    ,[TravFieldName] = @TravFieldName
+                    ,[ApiFieldName] = @ApiFieldName
+                    ,[ValueTranslation] = @ValueTranslation
+                    ,[Notes] = @Notes
+                    ,[FieldSetting] = @FieldSetting
+                    ,[ChildFunctionID] = @ChildFunctionId
+                    ,[QueryColumnName] = @QueryColumnName
+                WHERE
+[ID] = @Id 
+AND [ts] = @Ts                
+                
+                -- Select computed columns into output parameters
+                SELECT
+ @ReturnedTs = [ts]
+                FROM
+                    dbo.[ApiFunctionSchema]
+                WHERE
+[ID] = @Id 
+            ]]></body>
+        </procedure>
+
+        <procedure owner="dbo" name="trav_ApiFunctionSchema_Delete" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Wednesday, January 29, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Deletes a record in the ApiFunctionSchema table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+				<parameter name="@Id" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@Ts" type="timestamp" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+            </parameters>
+            <body><![CDATA[
+                DELETE FROM dbo.[ApiFunctionSchema] WITH (ROWLOCK) 
+                WHERE
+                    [ID] = @Id
+	AND [ts] = @Ts                    
+            ]]></body>
+        </procedure>
+
+        
+        <procedure owner="dbo" name="trav_ApiFunctionSchema_GetPaged" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Wednesday, January 29, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Gets records from the ApiFunctionSchema table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+                <parameter name="@WhereClause" type="nvarchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)" />
+                <parameter name="@OrderBy" type="nvarchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)"/>
+                <parameter name="@PageIndex" type="int" direction="Input" size="0" precision="10" scale="0" />
+                <parameter name="@PageSize" type="int" direction="Input" size="0" precision="10" scale="0" /> 
+            </parameters>
+            <body><![CDATA[
+                
+				declare @SQL as nvarchar(MAX)
+				SET @SQL = 'SELECT 
+				[ID],
+				[SeqNum],
+				[FunctionID],
+				[TravFieldName],
+				[ApiFieldName],
+				[ValueTranslation],
+				[Notes],
+				[FieldSetting],
+				[ChildFunctionID],
+				[QueryColumnName],
+				[ts]
+				FROM dbo.[ApiFunctionSchema]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				exec sp_executesql @SQL
+            ]]></body>
+        </procedure>
+
+  <procedure owner="dbo" name="trav_ApiInfo_GetList" grant="">
+    <comment>
+      <![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Thursday, February 20, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Gets all records from the ApiInfo table
+----------------------------------------------------------------------------------------------------
+*/
+]]>
+    </comment>
+    <parameters>
+      <parameter name="@Id" type="int" direction="Input" size="0" precision="10" scale="0" param="" nulldefault=""/>
+      <parameter name="@ALL" type="bit" direction="Input" size="1" precision="0" scale="0" param="" nulldefault=""/>
+    </parameters>
+    <body>
+      <![CDATA[
+                SELECT
+                    [ID],
+                    [SysDb],
+                    [Version],
+                    [AuthorizeTimeout],
+                    [AccessExpireHours],
+                    [RefreshExpireDays],
+                    [IsDebugLocalEnv],
+                    [IgnoreInvalidField],
+                    [UseMsgSecurity],
+                    [MsgSharedKey],
+                    [MsgEncryption],
+                    [ts]
+                FROM
+                    dbo.[ApiInfo]
+                WHERE @ALL=1 OR (
+                [ID] = @Id
+                )
+        ORDER BY
+        [ID] 
+                    
+        ]]>
+    </body>
+  </procedure>
+
+  <procedure owner="dbo" name="trav_ApiInfo_Insert" grant="">
+    <comment>
+      <![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Thursday, February 20, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Inserts a record into the ApiInfo table
+----------------------------------------------------------------------------------------------------
+*/
+]]>
+    </comment>
+    <parameters>
+      <parameter name="@Id" type="int" direction="Input" size="0" precision="10" scale="0" param="" nulldefault=""/>
+      <parameter name="@SysDb" type="nvarchar" direction="Input" size="128" precision="0" scale="0" param="(128)" nulldefault=""/>
+      <parameter name="@Version" type="nvarchar" direction="Input" size="20" precision="0" scale="0" param="(20)" nulldefault=""/>
+      <parameter name="@AuthorizeTimeout" type="int" direction="Input" size="0" precision="10" scale="0" param="" nulldefault=""/>
+      <parameter name="@AccessExpireHours" type="int" direction="Input" size="0" precision="10" scale="0" param="" nulldefault=""/>
+      <parameter name="@RefreshExpireDays" type="int" direction="Input" size="0" precision="10" scale="0" param="" nulldefault=""/>
+      <parameter name="@IsDebugLocalEnv" type="bit" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+      <parameter name="@IgnoreInvalidField" type="bit" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+      <parameter name="@UseMsgSecurity" type="bit" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+      <parameter name="@MsgSharedKey" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+      <parameter name="@MsgEncryption" type="tinyint" direction="Input" size="0" precision="3" scale="0" param="" nulldefault=""/>
+      <parameter name="@Ts" type="timestamp" direction="Output" size="0" precision="0" scale="0" param="" nulldefault=""/>
+    </parameters>
+    <body>
+      <![CDATA[
+                    
+                INSERT INTO dbo.[ApiInfo]
+                    (
+                    [ID]
+                    ,[SysDb]
+                    ,[Version]
+                    ,[AuthorizeTimeout]
+                    ,[AccessExpireHours]
+                    ,[RefreshExpireDays]
+                    ,[IsDebugLocalEnv]
+                    ,[IgnoreInvalidField]
+                    ,[UseMsgSecurity]
+                    ,[MsgSharedKey]
+                    ,[MsgEncryption]
+                    )
+                VALUES
+                    (
+                    @Id
+                    ,@SysDb
+                    ,@Version
+                    ,@AuthorizeTimeout
+                    ,@AccessExpireHours
+                    ,@RefreshExpireDays
+                    ,@IsDebugLocalEnv
+                    ,@IgnoreInvalidField
+                    ,@UseMsgSecurity
+                    ,@MsgSharedKey
+                    ,@MsgEncryption
+                    )
+                
+                                    
+                -- Select computed columns into output parameters
+                SELECT
+ @Ts = [ts]
+                FROM
+                    dbo.[ApiInfo]
+                WHERE
+[ID] = @Id 
+                            
+            ]]>
+    </body>
+  </procedure>
+
+  <procedure owner="dbo" name="trav_ApiInfo_Update" grant="">
+    <comment>
+      <![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Thursday, February 20, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Updates a record in the ApiInfo table
+----------------------------------------------------------------------------------------------------
+*/
+]]>
+    </comment>
+    <parameters>
+      <parameter name="@Id" type="int" direction="Input" size="0" precision="10" scale="0" param="" nulldefault=""/>
+      <parameter name="@OriginalId" type="int" direction="Input" size="0" precision="10" scale="0" param="" nulldefault=""/>
+      <parameter name="@SysDb" type="nvarchar" direction="Input" size="128" precision="0" scale="0" param="(128)" nulldefault=""/>
+      <parameter name="@Version" type="nvarchar" direction="Input" size="20" precision="0" scale="0" param="(20)" nulldefault=""/>
+      <parameter name="@AuthorizeTimeout" type="int" direction="Input" size="0" precision="10" scale="0" param="" nulldefault=""/>
+      <parameter name="@AccessExpireHours" type="int" direction="Input" size="0" precision="10" scale="0" param="" nulldefault=""/>
+      <parameter name="@RefreshExpireDays" type="int" direction="Input" size="0" precision="10" scale="0" param="" nulldefault=""/>
+      <parameter name="@IsDebugLocalEnv" type="bit" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+      <parameter name="@IgnoreInvalidField" type="bit" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+      <parameter name="@UseMsgSecurity" type="bit" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+      <parameter name="@MsgSharedKey" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+      <parameter name="@MsgEncryption" type="tinyint" direction="Input" size="0" precision="3" scale="0" param="" nulldefault=""/>
+      <parameter name="@Ts" type="timestamp" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+      <parameter name="@ReturnedTs" type="timestamp" direction="Output" size="0" precision="0" scale="0" param="" nulldefault=""/>
+    </parameters>
+    <body>
+      <![CDATA[
+                
+                
+                -- Modify the updatable columns
+                UPDATE
+                    dbo.[ApiInfo]
+                SET
+                    [SysDb] = @SysDb
+                    ,[Version] = @Version
+                    ,[AuthorizeTimeout] = @AuthorizeTimeout
+                    ,[AccessExpireHours] = @AccessExpireHours
+                    ,[RefreshExpireDays] = @RefreshExpireDays
+                    ,[IsDebugLocalEnv] = @IsDebugLocalEnv
+                    ,[IgnoreInvalidField] = @IgnoreInvalidField
+                    ,[UseMsgSecurity] = @UseMsgSecurity
+                    ,[MsgSharedKey] = @MsgSharedKey
+                    ,[MsgEncryption] = @MsgEncryption
+                WHERE
+[ID] = @OriginalId 
+AND [ts] = @Ts                
+                
+                -- Select computed columns into output parameters
+                SELECT
+ @ReturnedTs = [ts]
+                FROM
+                    dbo.[ApiInfo]
+                WHERE
+[ID] = @Id 
+            ]]>
+    </body>
+  </procedure>
+
+  <procedure owner="dbo" name="trav_ApiInfo_Delete" grant="">
+    <comment>
+      <![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Thursday, February 20, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Deletes a record in the ApiInfo table
+----------------------------------------------------------------------------------------------------
+*/
+]]>
+    </comment>
+    <parameters>
+      <parameter name="@Id" type="int" direction="Input" size="0" precision="10" scale="0" param="" nulldefault=""/>
+      <parameter name="@Ts" type="timestamp" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+    </parameters>
+    <body>
+      <![CDATA[
+                DELETE FROM dbo.[ApiInfo] WITH (ROWLOCK) 
+                WHERE
+                    [ID] = @Id
+	AND [ts] = @Ts                    
+            ]]>
+    </body>
+  </procedure>
+
+
+  <procedure owner="dbo" name="trav_ApiInfo_GetPaged" grant="">
+    <comment>
+      <![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Thursday, February 20, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Gets records from the ApiInfo table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]>
+    </comment>
+    <parameters>
+      <parameter name="@WhereClause" type="nvarchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)" />
+      <parameter name="@OrderBy" type="nvarchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)"/>
+      <parameter name="@PageIndex" type="int" direction="Input" size="0" precision="10" scale="0" />
+      <parameter name="@PageSize" type="int" direction="Input" size="0" precision="10" scale="0" />
+    </parameters>
+    <body>
+      <![CDATA[
+                
+				declare @SQL as nvarchar(MAX)
+				SET @SQL = 'SELECT 
+				[ID],
+				[SysDb],
+				[Version],
+				[AuthorizeTimeout],
+				[AccessExpireHours],
+				[RefreshExpireDays],
+				[IsDebugLocalEnv],
+				[IgnoreInvalidField],
+				[UseMsgSecurity],
+				[MsgSharedKey],
+				[MsgEncryption],
+				[ts]
+				FROM dbo.[ApiInfo]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				exec sp_executesql @SQL
+            ]]>
+    </body>
+  </procedure>
+        
+    
+    <procedure owner="dbo" name="trav_ApiUser_GetList" grant="">
+    <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Thursday, July 4, 2019
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Gets all records from the ApiUser table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+        <parameters>
+				<parameter name="@Id" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+            <parameter name="@ALL" type="bit" direction="Input" size="1" precision="0" scale="0" param="" nulldefault=""/>
+        </parameters>
+        <body><![CDATA[
+                SELECT
+                    [ID],
+                    [EmailAddress],
+                    [Password],
+                    [Name],
+                    [Role],
+                    [Status],
+                    [ResetPassword],
+                    [AdditionalInfo],
+                    [ExpirationDate],
+                    [ClientID],
+                    [ClientSecret],
+                    [DateCreated],
+                    [DateModified],
+                    [ModifiedBy],
+                    [ts]
+                FROM
+                    dbo.[ApiUser]
+                WHERE @ALL=1 OR (
+                [ID] = @Id
+                )
+        ORDER BY
+        [ID] 
+                    
+        ]]></body>
+    </procedure>
+        
+        <procedure owner="dbo" name="trav_ApiUser_Insert" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Thursday, July 4, 2019
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Inserts a record into the ApiUser table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+				<parameter name="@Id" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@EmailAddress" type="nvarchar" direction="Input" size="256" precision="0" scale="0" param="(256)" nulldefault=""/>
+				<parameter name="@Password" type="nvarchar" direction="Input" size="256" precision="0" scale="0" param="(256)" nulldefault=""/>
+				<parameter name="@Name" type="nvarchar" direction="Input" size="200" precision="0" scale="0" param="(200)" nulldefault=""/>
+				<parameter name="@Role" type="tinyint" direction="Input" size="0" precision="3" scale="0" param="" nulldefault=""/>
+				<parameter name="@Status" type="tinyint" direction="Input" size="0" precision="3" scale="0" param="" nulldefault=""/>
+				<parameter name="@ResetPassword" type="bit" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@AdditionalInfo" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+				<parameter name="@ExpirationDate" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@ClientId" type="uniqueidentifier" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@ClientSecret" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+				<parameter name="@DateCreated" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@DateModified" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@ModifiedBy" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+				<parameter name="@Ts" type="timestamp" direction="Output" size="0" precision="0" scale="0" param="" nulldefault=""/>
+            </parameters>
+            <body><![CDATA[
+                    
+                INSERT INTO dbo.[ApiUser]
+                    (
+                    [ID]
+                    ,[EmailAddress]
+                    ,[Password]
+                    ,[Name]
+                    ,[Role]
+                    ,[Status]
+                    ,[ResetPassword]
+                    ,[AdditionalInfo]
+                    ,[ExpirationDate]
+                    ,[ClientID]
+                    ,[ClientSecret]
+                    ,[DateCreated]
+                    ,[DateModified]
+                    ,[ModifiedBy]
+                    )
+                VALUES
+                    (
+                    @Id
+                    ,@EmailAddress
+                    ,@Password
+                    ,@Name
+                    ,@Role
+                    ,@Status
+                    ,@ResetPassword
+                    ,@AdditionalInfo
+                    ,@ExpirationDate
+                    ,@ClientId
+                    ,@ClientSecret
+                    ,@DateCreated
+                    ,@DateModified
+                    ,@ModifiedBy
+                    )
+                
+                                    
+                -- Select computed columns into output parameters
+                SELECT
+ @Ts = [ts]
+                FROM
+                    dbo.[ApiUser]
+                WHERE
+[ID] = @Id 
+                            
+            ]]></body>
+        </procedure>
+
+        <procedure owner="dbo" name="trav_ApiUser_Update" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Thursday, July 4, 2019
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Updates a record in the ApiUser table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+				<parameter name="@Id" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@OriginalId" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@EmailAddress" type="nvarchar" direction="Input" size="256" precision="0" scale="0" param="(256)" nulldefault=""/>
+				<parameter name="@Password" type="nvarchar" direction="Input" size="256" precision="0" scale="0" param="(256)" nulldefault=""/>
+				<parameter name="@Name" type="nvarchar" direction="Input" size="200" precision="0" scale="0" param="(200)" nulldefault=""/>
+				<parameter name="@Role" type="tinyint" direction="Input" size="0" precision="3" scale="0" param="" nulldefault=""/>
+				<parameter name="@Status" type="tinyint" direction="Input" size="0" precision="3" scale="0" param="" nulldefault=""/>
+				<parameter name="@ResetPassword" type="bit" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@AdditionalInfo" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+				<parameter name="@ExpirationDate" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@ClientId" type="uniqueidentifier" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@ClientSecret" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+				<parameter name="@DateCreated" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@DateModified" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@ModifiedBy" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+				<parameter name="@Ts" type="timestamp" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@ReturnedTs" type="timestamp" direction="Output" size="0" precision="0" scale="0" param="" nulldefault=""/>
+            </parameters>
+            <body><![CDATA[
+                
+                
+                -- Modify the updatable columns
+                UPDATE
+                    dbo.[ApiUser]
+                SET
+                    [EmailAddress] = @EmailAddress
+                    ,[Password] = @Password
+                    ,[Name] = @Name
+                    ,[Role] = @Role
+                    ,[Status] = @Status
+                    ,[ResetPassword] = @ResetPassword
+                    ,[AdditionalInfo] = @AdditionalInfo
+                    ,[ExpirationDate] = @ExpirationDate
+                    ,[ClientID] = @ClientId
+                    ,[ClientSecret] = @ClientSecret
+                    ,[DateCreated] = @DateCreated
+                    ,[DateModified] = @DateModified
+                    ,[ModifiedBy] = @ModifiedBy
+                WHERE
+[ID] = @OriginalId 
+AND [ts] = @Ts                
+                
+                -- Select computed columns into output parameters
+                SELECT
+ @ReturnedTs = [ts]
+                FROM
+                    dbo.[ApiUser]
+                WHERE
+[ID] = @Id 
+            ]]></body>
+        </procedure>
+
+        <procedure owner="dbo" name="trav_ApiUser_Delete" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Thursday, July 4, 2019
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Deletes a record in the ApiUser table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+				<parameter name="@Id" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@Ts" type="timestamp" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+            </parameters>
+            <body><![CDATA[
+                DELETE FROM dbo.[ApiUser] WITH (ROWLOCK) 
+                WHERE
+                    [ID] = @Id
+	AND [ts] = @Ts                    
+            ]]></body>
+        </procedure>
+
+        
+        <procedure owner="dbo" name="trav_ApiUser_GetPaged" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Thursday, July 4, 2019
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Gets records from the ApiUser table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+                <parameter name="@WhereClause" type="nvarchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)" />
+                <parameter name="@OrderBy" type="nvarchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)"/>
+                <parameter name="@PageIndex" type="int" direction="Input" size="0" precision="10" scale="0" />
+                <parameter name="@PageSize" type="int" direction="Input" size="0" precision="10" scale="0" /> 
+            </parameters>
+            <body><![CDATA[
+                
+				declare @SQL as nvarchar(MAX)
+				SET @SQL = 'SELECT 
+				[ID],
+				[EmailAddress],
+				[Password],
+				[Name],
+				[Role],
+				[Status],
+				[ResetPassword],
+				[AdditionalInfo],
+				[ExpirationDate],
+				[ClientID],
+				[ClientSecret],
+				[DateCreated],
+				[DateModified],
+				[ModifiedBy],
+				[ts]
+				FROM dbo.[ApiUser]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				exec sp_executesql @SQL
+            ]]></body>
+        </procedure>
+        
+    
+    <procedure owner="dbo" name="trav_ApiUserToken_GetList" grant="">
+    <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Thursday, July 4, 2019
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Gets all records from the ApiUserToken table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+        <parameters>
+				<parameter name="@UserId" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+            <parameter name="@ALL" type="bit" direction="Input" size="1" precision="0" scale="0" param="" nulldefault=""/>
+        </parameters>
+        <body><![CDATA[
+                SELECT
+                    [UserID],
+                    [RefreshToken],
+                    [IssueTime],
+                    [ExpireTime]
+                FROM
+                    dbo.[ApiUserToken]
+                WHERE @ALL=1 OR (
+                [UserID] = @UserId
+                )
+        ORDER BY
+        [UserID] 
+                    
+        ]]></body>
+    </procedure>
+        
+        <procedure owner="dbo" name="trav_ApiUserToken_Insert" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Thursday, July 4, 2019
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Inserts a record into the ApiUserToken table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+				<parameter name="@UserId" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@RefreshToken" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+				<parameter name="@IssueTime" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@ExpireTime" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+            </parameters>
+            <body><![CDATA[
+                    
+                INSERT INTO dbo.[ApiUserToken]
+                    (
+                    [UserID]
+                    ,[RefreshToken]
+                    ,[IssueTime]
+                    ,[ExpireTime]
+                    )
+                VALUES
+                    (
+                    @UserId
+                    ,@RefreshToken
+                    ,@IssueTime
+                    ,@ExpireTime
+                    )
+                
+                                    
+                            
+            ]]></body>
+        </procedure>
+
+        <procedure owner="dbo" name="trav_ApiUserToken_Update" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Thursday, July 4, 2019
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Updates a record in the ApiUserToken table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+				<parameter name="@UserId" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@OriginalUserId" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@RefreshToken" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+				<parameter name="@IssueTime" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@ExpireTime" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+            </parameters>
+            <body><![CDATA[
+                
+                
+                -- Modify the updatable columns
+                UPDATE
+                    dbo.[ApiUserToken]
+                SET
+                    [RefreshToken] = @RefreshToken
+                    ,[IssueTime] = @IssueTime
+                    ,[ExpireTime] = @ExpireTime
+                WHERE
+[UserID] = @OriginalUserId 
+                
+            ]]></body>
+        </procedure>
+
+        <procedure owner="dbo" name="trav_ApiUserToken_Delete" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Thursday, July 4, 2019
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Deletes a record in the ApiUserToken table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+				<parameter name="@UserId" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+            </parameters>
+            <body><![CDATA[
+                DELETE FROM dbo.[ApiUserToken] WITH (ROWLOCK) 
+                WHERE
+                    [UserID] = @UserId
+                    
+            ]]></body>
+        </procedure>
+
+        
+        <procedure owner="dbo" name="trav_ApiUserToken_GetPaged" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Thursday, July 4, 2019
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Gets records from the ApiUserToken table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+                <parameter name="@WhereClause" type="nvarchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)" />
+                <parameter name="@OrderBy" type="nvarchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)"/>
+                <parameter name="@PageIndex" type="int" direction="Input" size="0" precision="10" scale="0" />
+                <parameter name="@PageSize" type="int" direction="Input" size="0" precision="10" scale="0" /> 
+            </parameters>
+            <body><![CDATA[
+                
+				declare @SQL as nvarchar(MAX)
+				SET @SQL = 'SELECT 
+				[UserID],
+				[RefreshToken],
+				[IssueTime],
+				[ExpireTime]
+				FROM dbo.[ApiUserToken]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				exec sp_executesql @SQL
+            ]]></body>
+        </procedure>
+    
+    <procedure owner="dbo" name="trav_ApiUserFunction_GetList" grant="">
+    <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Monday, January 20, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Gets all records from the ApiUserFunction table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+        <parameters>
+				<parameter name="@Id" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+            <parameter name="@ALL" type="bit" direction="Input" size="1" precision="0" scale="0" param="" nulldefault=""/>
+        </parameters>
+        <body><![CDATA[
+                SELECT
+                    [ID],
+                    [UserID],
+                    [FunctionID],
+                    [AccessExpireDate],
+                    [DateCreated],
+                    [DateModified],
+                    [ts],
+                    [ModifiedBy]
+                FROM
+                    dbo.[ApiUserFunction]
+                WHERE @ALL=1 OR (
+                [ID] = @Id
+                )
+        ORDER BY
+        [ID] 
+                    
+        ]]></body>
+    </procedure>
+        
+        <procedure owner="dbo" name="trav_ApiUserFunction_Insert" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Monday, January 20, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Inserts a record into the ApiUserFunction table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+				<parameter name="@Id" type="bigint" direction="Output" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@UserId" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@FunctionId" type="uniqueidentifier" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@AccessExpireDate" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@DateCreated" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@DateModified" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@Ts" type="timestamp" direction="Output" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@ModifiedBy" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+            </parameters>
+            <body><![CDATA[
+                    
+                INSERT INTO dbo.[ApiUserFunction]
+                    (
+                    [UserID]
+                    ,[FunctionID]
+                    ,[AccessExpireDate]
+                    ,[DateCreated]
+                    ,[DateModified]
+                    ,[ModifiedBy]
+                    )
+                VALUES
+                    (
+                    @UserId
+                    ,@FunctionId
+                    ,@AccessExpireDate
+                    ,@DateCreated
+                    ,@DateModified
+                    ,@ModifiedBy
+                    )
+                
+                -- Get the identity value
+                SET @Id = SCOPE_IDENTITY()
+                                    
+                -- Select computed columns into output parameters
+                SELECT
+ @Ts = [ts]
+                FROM
+                    dbo.[ApiUserFunction]
+                WHERE
+[ID] = @Id 
+                            
+            ]]></body>
+        </procedure>
+
+        <procedure owner="dbo" name="trav_ApiUserFunction_Update" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Monday, January 20, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Updates a record in the ApiUserFunction table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+				<parameter name="@Id" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@UserId" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@FunctionId" type="uniqueidentifier" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@AccessExpireDate" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@DateCreated" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@DateModified" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@Ts" type="timestamp" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@ModifiedBy" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+				<parameter name="@ReturnedTs" type="timestamp" direction="Output" size="0" precision="0" scale="0" param="" nulldefault=""/>
+            </parameters>
+            <body><![CDATA[
+                
+                
+                -- Modify the updatable columns
+                UPDATE
+                    dbo.[ApiUserFunction]
+                SET
+                    [UserID] = @UserId
+                    ,[FunctionID] = @FunctionId
+                    ,[AccessExpireDate] = @AccessExpireDate
+                    ,[DateCreated] = @DateCreated
+                    ,[DateModified] = @DateModified
+                    ,[ModifiedBy] = @ModifiedBy
+                WHERE
+[ID] = @Id 
+AND [ts] = @Ts                
+                
+                -- Select computed columns into output parameters
+                SELECT
+ @ReturnedTs = [ts]
+                FROM
+                    dbo.[ApiUserFunction]
+                WHERE
+[ID] = @Id 
+            ]]></body>
+        </procedure>
+
+        <procedure owner="dbo" name="trav_ApiUserFunction_Delete" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Monday, January 20, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Deletes a record in the ApiUserFunction table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+				<parameter name="@Id" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@Ts" type="timestamp" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+            </parameters>
+            <body><![CDATA[
+                DELETE FROM dbo.[ApiUserFunction] WITH (ROWLOCK) 
+                WHERE
+                    [ID] = @Id
+	AND [ts] = @Ts                    
+            ]]></body>
+        </procedure>
+
+        
+        <procedure owner="dbo" name="trav_ApiUserFunction_GetPaged" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Monday, January 20, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Gets records from the ApiUserFunction table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+                <parameter name="@WhereClause" type="nvarchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)" />
+                <parameter name="@OrderBy" type="nvarchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)"/>
+                <parameter name="@PageIndex" type="int" direction="Input" size="0" precision="10" scale="0" />
+                <parameter name="@PageSize" type="int" direction="Input" size="0" precision="10" scale="0" /> 
+            </parameters>
+            <body><![CDATA[
+                
+				declare @SQL as nvarchar(MAX)
+				SET @SQL = 'SELECT 
+				[ID],
+				[UserID],
+				[FunctionID],
+				[AccessExpireDate],
+				[DateCreated],
+				[DateModified],
+				[ts],
+				[ModifiedBy]
+				FROM dbo.[ApiUserFunction]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				exec sp_executesql @SQL
+            ]]></body>
+        </procedure>
+        
+    
+    <procedure owner="dbo" name="trav_ApiUserFunctionComp_GetList" grant="">
+    <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Monday, January 20, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Gets all records from the ApiUserFunctionComp table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+        <parameters>
+				<parameter name="@Id" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+            <parameter name="@ALL" type="bit" direction="Input" size="1" precision="0" scale="0" param="" nulldefault=""/>
+        </parameters>
+        <body><![CDATA[
+                SELECT
+                    [ID],
+                    [UserFunctionID],
+                    [CompID],
+                    [Scope],
+                    [Filter],
+                    [DisplayFilter],
+                    [DateCreated],
+                    [DateModified],
+                    [ts],
+                    [ModifiedBy]
+                FROM
+                    dbo.[ApiUserFunctionComp]
+                WHERE @ALL=1 OR (
+                [ID] = @Id
+                )
+        ORDER BY
+        [ID] 
+                    
+        ]]></body>
+    </procedure>
+        
+        <procedure owner="dbo" name="trav_ApiUserFunctionComp_Insert" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Monday, January 20, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Inserts a record into the ApiUserFunctionComp table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+				<parameter name="@Id" type="bigint" direction="Output" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@UserFunctionId" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@CompanyId" type="nvarchar" direction="Input" size="3" precision="0" scale="0" param="(3)" nulldefault=""/>
+				<parameter name="@Scope" type="tinyint" direction="Input" size="0" precision="3" scale="0" param="" nulldefault=""/>
+				<parameter name="@Filter" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+				<parameter name="@DisplayFilter" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+				<parameter name="@DateCreated" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@DateModified" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@Ts" type="timestamp" direction="Output" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@ModifiedBy" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+            </parameters>
+            <body><![CDATA[
+                    
+                INSERT INTO dbo.[ApiUserFunctionComp]
+                    (
+                    [UserFunctionID]
+                    ,[CompID]
+                    ,[Scope]
+                    ,[Filter]
+                    ,[DisplayFilter]
+                    ,[DateCreated]
+                    ,[DateModified]
+                    ,[ModifiedBy]
+                    )
+                VALUES
+                    (
+                    @UserFunctionId
+                    ,@CompanyId
+                    ,@Scope
+                    ,@Filter
+                    ,@DisplayFilter
+                    ,@DateCreated
+                    ,@DateModified
+                    ,@ModifiedBy
+                    )
+                
+                -- Get the identity value
+                SET @Id = SCOPE_IDENTITY()
+                                    
+                -- Select computed columns into output parameters
+                SELECT
+ @Ts = [ts]
+                FROM
+                    dbo.[ApiUserFunctionComp]
+                WHERE
+[ID] = @Id 
+                            
+            ]]></body>
+        </procedure>
+
+        <procedure owner="dbo" name="trav_ApiUserFunctionComp_Update" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Monday, January 20, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Updates a record in the ApiUserFunctionComp table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+				<parameter name="@Id" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@UserFunctionId" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@CompanyId" type="nvarchar" direction="Input" size="3" precision="0" scale="0" param="(3)" nulldefault=""/>
+				<parameter name="@Scope" type="tinyint" direction="Input" size="0" precision="3" scale="0" param="" nulldefault=""/>
+				<parameter name="@Filter" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+				<parameter name="@DisplayFilter" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+				<parameter name="@DateCreated" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@DateModified" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@Ts" type="timestamp" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@ModifiedBy" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+				<parameter name="@ReturnedTs" type="timestamp" direction="Output" size="0" precision="0" scale="0" param="" nulldefault=""/>
+            </parameters>
+            <body><![CDATA[
+                
+                
+                -- Modify the updatable columns
+                UPDATE
+                    dbo.[ApiUserFunctionComp]
+                SET
+                    [UserFunctionID] = @UserFunctionId
+                    ,[CompID] = @CompanyId
+                    ,[Scope] = @Scope
+                    ,[Filter] = @Filter
+                    ,[DisplayFilter] = @DisplayFilter
+                    ,[DateCreated] = @DateCreated
+                    ,[DateModified] = @DateModified
+                    ,[ModifiedBy] = @ModifiedBy
+                WHERE
+[ID] = @Id 
+AND [ts] = @Ts                
+                
+                -- Select computed columns into output parameters
+                SELECT
+ @ReturnedTs = [ts]
+                FROM
+                    dbo.[ApiUserFunctionComp]
+                WHERE
+[ID] = @Id 
+            ]]></body>
+        </procedure>
+
+        <procedure owner="dbo" name="trav_ApiUserFunctionComp_Delete" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Monday, January 20, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Deletes a record in the ApiUserFunctionComp table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+				<parameter name="@Id" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@Ts" type="timestamp" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+            </parameters>
+            <body><![CDATA[
+                DELETE FROM dbo.[ApiUserFunctionComp] WITH (ROWLOCK) 
+                WHERE
+                    [ID] = @Id
+	AND [ts] = @Ts                    
+            ]]></body>
+        </procedure>
+
+        
+        <procedure owner="dbo" name="trav_ApiUserFunctionComp_GetPaged" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Monday, January 20, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Gets records from the ApiUserFunctionComp table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+                <parameter name="@WhereClause" type="nvarchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)" />
+                <parameter name="@OrderBy" type="nvarchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)"/>
+                <parameter name="@PageIndex" type="int" direction="Input" size="0" precision="10" scale="0" />
+                <parameter name="@PageSize" type="int" direction="Input" size="0" precision="10" scale="0" /> 
+            </parameters>
+            <body><![CDATA[
+                
+				declare @SQL as nvarchar(MAX)
+				SET @SQL = 'SELECT 
+				[ID],
+				[UserFunctionID],
+				[CompID],
+				[Scope],
+				[Filter],
+				[DisplayFilter],
+				[DateCreated],
+				[DateModified],
+				[ts],
+				[ModifiedBy]
+				FROM dbo.[ApiUserFunctionComp]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				exec sp_executesql @SQL
+            ]]></body>
+        </procedure>
+        
+    
+    <procedure owner="dbo" name="trav_ApiUserFunctionSchema_GetList" grant="">
+    <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Monday, January 20, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Gets all records from the ApiUserFunctionSchema table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+        <parameters>
+				<parameter name="@Id" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+            <parameter name="@ALL" type="bit" direction="Input" size="1" precision="0" scale="0" param="" nulldefault=""/>
+        </parameters>
+        <body><![CDATA[
+                SELECT
+                    [ID],
+                    [UserFunctionID],
+                    [FieldType],
+                    [Notes],
+                    [FunctionSchemaID],
+                    [CustomFieldName],
+                    [ApiFieldName],
+                    [Hidden],
+                    [DefaultValue],
+                    [DateCreated],
+                    [DateModified],
+                    [ts],
+                    [ModifiedBy]
+                FROM
+                    dbo.[ApiUserFunctionSchema]
+                WHERE @ALL=1 OR (
+                [ID] = @Id
+                )
+        ORDER BY
+        [ID] 
+                    
+        ]]></body>
+    </procedure>
+        
+        <procedure owner="dbo" name="trav_ApiUserFunctionSchema_Insert" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Monday, January 20, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Inserts a record into the ApiUserFunctionSchema table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+				<parameter name="@Id" type="bigint" direction="Output" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@UserFunctionId" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@FieldType" type="tinyint" direction="Input" size="0" precision="3" scale="0" param="" nulldefault=""/>
+				<parameter name="@Notes" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+				<parameter name="@FunctionSchemaId" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@CustomFieldName" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+				<parameter name="@ApiFieldName" type="nvarchar" direction="Input" size="128" precision="0" scale="0" param="(128)" nulldefault=""/>
+				<parameter name="@Hidden" type="bit" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@DefaultValue" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+				<parameter name="@DateCreated" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@DateModified" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@Ts" type="timestamp" direction="Output" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@ModifiedBy" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+            </parameters>
+            <body><![CDATA[
+                    
+                INSERT INTO dbo.[ApiUserFunctionSchema]
+                    (
+                    [UserFunctionID]
+                    ,[FieldType]
+                    ,[Notes]
+                    ,[FunctionSchemaID]
+                    ,[CustomFieldName]
+                    ,[ApiFieldName]
+                    ,[Hidden]
+                    ,[DefaultValue]
+                    ,[DateCreated]
+                    ,[DateModified]
+                    ,[ModifiedBy]
+                    )
+                VALUES
+                    (
+                    @UserFunctionId
+                    ,@FieldType
+                    ,@Notes
+                    ,@FunctionSchemaId
+                    ,@CustomFieldName
+                    ,@ApiFieldName
+                    ,@Hidden
+                    ,@DefaultValue
+                    ,@DateCreated
+                    ,@DateModified
+                    ,@ModifiedBy
+                    )
+                
+                -- Get the identity value
+                SET @Id = SCOPE_IDENTITY()
+                                    
+                -- Select computed columns into output parameters
+                SELECT
+ @Ts = [ts]
+                FROM
+                    dbo.[ApiUserFunctionSchema]
+                WHERE
+[ID] = @Id 
+                            
+            ]]></body>
+        </procedure>
+
+        <procedure owner="dbo" name="trav_ApiUserFunctionSchema_Update" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Monday, January 20, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Updates a record in the ApiUserFunctionSchema table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+				<parameter name="@Id" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@UserFunctionId" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@FieldType" type="tinyint" direction="Input" size="0" precision="3" scale="0" param="" nulldefault=""/>
+				<parameter name="@Notes" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+				<parameter name="@FunctionSchemaId" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@CustomFieldName" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+				<parameter name="@ApiFieldName" type="nvarchar" direction="Input" size="128" precision="0" scale="0" param="(128)" nulldefault=""/>
+				<parameter name="@Hidden" type="bit" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@DefaultValue" type="nvarchar" direction="Input" size="-1" precision="0" scale="0" param="(MAX)" nulldefault=""/>
+				<parameter name="@DateCreated" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@DateModified" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@Ts" type="timestamp" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@ModifiedBy" type="nvarchar" direction="Input" size="100" precision="0" scale="0" param="(100)" nulldefault=""/>
+				<parameter name="@ReturnedTs" type="timestamp" direction="Output" size="0" precision="0" scale="0" param="" nulldefault=""/>
+            </parameters>
+            <body><![CDATA[
+                
+                
+                -- Modify the updatable columns
+                UPDATE
+                    dbo.[ApiUserFunctionSchema]
+                SET
+                    [UserFunctionID] = @UserFunctionId
+                    ,[FieldType] = @FieldType
+                    ,[Notes] = @Notes
+                    ,[FunctionSchemaID] = @FunctionSchemaId
+                    ,[CustomFieldName] = @CustomFieldName
+                    ,[ApiFieldName] = @ApiFieldName
+                    ,[Hidden] = @Hidden
+                    ,[DefaultValue] = @DefaultValue
+                    ,[DateCreated] = @DateCreated
+                    ,[DateModified] = @DateModified
+                    ,[ModifiedBy] = @ModifiedBy
+                WHERE
+[ID] = @Id 
+AND [ts] = @Ts                
+                
+                -- Select computed columns into output parameters
+                SELECT
+ @ReturnedTs = [ts]
+                FROM
+                    dbo.[ApiUserFunctionSchema]
+                WHERE
+[ID] = @Id 
+            ]]></body>
+        </procedure>
+
+        <procedure owner="dbo" name="trav_ApiUserFunctionSchema_Delete" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Monday, January 20, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Deletes a record in the ApiUserFunctionSchema table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+				<parameter name="@Id" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@Ts" type="timestamp" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+            </parameters>
+            <body><![CDATA[
+                DELETE FROM dbo.[ApiUserFunctionSchema] WITH (ROWLOCK) 
+                WHERE
+                    [ID] = @Id
+	AND [ts] = @Ts                    
+            ]]></body>
+        </procedure>
+
+        
+        <procedure owner="dbo" name="trav_ApiUserFunctionSchema_GetPaged" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Monday, January 20, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Gets records from the ApiUserFunctionSchema table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+                <parameter name="@WhereClause" type="nvarchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)" />
+                <parameter name="@OrderBy" type="nvarchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)"/>
+                <parameter name="@PageIndex" type="int" direction="Input" size="0" precision="10" scale="0" />
+                <parameter name="@PageSize" type="int" direction="Input" size="0" precision="10" scale="0" /> 
+            </parameters>
+            <body><![CDATA[
+                
+				declare @SQL as nvarchar(MAX)
+				SET @SQL = 'SELECT 
+				[ID],
+				[UserFunctionID],
+				[FieldType],
+				[Notes],
+				[FunctionSchemaID],
+				[CustomFieldName],
+				[ApiFieldName],
+				[Hidden],
+				[DefaultValue],
+				[DateCreated],
+				[DateModified],
+				[ts],
+				[ModifiedBy]
+				FROM dbo.[ApiUserFunctionSchema]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				exec sp_executesql @SQL
+            ]]></body>
+        </procedure>
+    
+    <procedure owner="dbo" name="trav_ApiUserFunctionAccess_GetList" grant="">
+    <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Friday, January 24, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Gets all records from the ApiUserFunctionAccess table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+        <parameters>
+				<parameter name="@UserFunctionId" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+            <parameter name="@ALL" type="bit" direction="Input" size="1" precision="0" scale="0" param="" nulldefault=""/>
+        </parameters>
+        <body><![CDATA[
+                SELECT
+                    [UserFunctionID],
+                    [AccessCount],
+                    [FirstAccessTime],
+                    [LastAccessTime],
+                    [LastAccessMethod],
+                    [ts]
+                FROM
+                    dbo.[ApiUserFunctionAccess]
+                WHERE @ALL=1 OR (
+                [UserFunctionID] = @UserFunctionId
+                )
+        ORDER BY
+        [UserFunctionID] 
+                    
+        ]]></body>
+    </procedure>
+        
+        <procedure owner="dbo" name="trav_ApiUserFunctionAccess_Insert" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Friday, January 24, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Inserts a record into the ApiUserFunctionAccess table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+				<parameter name="@UserFunctionId" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@AccessCount" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@FirstAccessTime" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@LastAccessTime" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@LastAccessMethod" type="tinyint" direction="Input" size="0" precision="3" scale="0" param="" nulldefault=""/>
+				<parameter name="@Ts" type="timestamp" direction="Output" size="0" precision="0" scale="0" param="" nulldefault=""/>
+            </parameters>
+            <body><![CDATA[
+                    
+                INSERT INTO dbo.[ApiUserFunctionAccess]
+                    (
+                    [UserFunctionID]
+                    ,[AccessCount]
+                    ,[FirstAccessTime]
+                    ,[LastAccessTime]
+                    ,[LastAccessMethod]
+                    )
+                VALUES
+                    (
+                    @UserFunctionId
+                    ,@AccessCount
+                    ,@FirstAccessTime
+                    ,@LastAccessTime
+                    ,@LastAccessMethod
+                    )
+                
+                                    
+                -- Select computed columns into output parameters
+                SELECT
+ @Ts = [ts]
+                FROM
+                    dbo.[ApiUserFunctionAccess]
+                WHERE
+[UserFunctionID] = @UserFunctionId 
+                            
+            ]]></body>
+        </procedure>
+
+        <procedure owner="dbo" name="trav_ApiUserFunctionAccess_Update" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Friday, January 24, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Updates a record in the ApiUserFunctionAccess table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+				<parameter name="@UserFunctionId" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@OriginalUserFunctionId" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@AccessCount" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@FirstAccessTime" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@LastAccessTime" type="datetime" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@LastAccessMethod" type="tinyint" direction="Input" size="0" precision="3" scale="0" param="" nulldefault=""/>
+				<parameter name="@Ts" type="timestamp" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+				<parameter name="@ReturnedTs" type="timestamp" direction="Output" size="0" precision="0" scale="0" param="" nulldefault=""/>
+            </parameters>
+            <body><![CDATA[
+                
+                
+                -- Modify the updatable columns
+                UPDATE
+                    dbo.[ApiUserFunctionAccess]
+                SET
+                    [AccessCount] = @AccessCount
+                    ,[FirstAccessTime] = @FirstAccessTime
+                    ,[LastAccessTime] = @LastAccessTime
+                    ,[LastAccessMethod] = @LastAccessMethod
+                WHERE
+[UserFunctionID] = @OriginalUserFunctionId 
+AND [ts] = @Ts                
+                
+                -- Select computed columns into output parameters
+                SELECT
+ @ReturnedTs = [ts]
+                FROM
+                    dbo.[ApiUserFunctionAccess]
+                WHERE
+[UserFunctionID] = @UserFunctionId 
+            ]]></body>
+        </procedure>
+
+        <procedure owner="dbo" name="trav_ApiUserFunctionAccess_Delete" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Friday, January 24, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Deletes a record in the ApiUserFunctionAccess table
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+				<parameter name="@UserFunctionId" type="bigint" direction="Input" size="0" precision="19" scale="0" param="" nulldefault=""/>
+				<parameter name="@Ts" type="timestamp" direction="Input" size="0" precision="0" scale="0" param="" nulldefault=""/>
+            </parameters>
+            <body><![CDATA[
+                DELETE FROM dbo.[ApiUserFunctionAccess] WITH (ROWLOCK) 
+                WHERE
+                    [UserFunctionID] = @UserFunctionId
+	AND [ts] = @Ts                    
+            ]]></body>
+        </procedure>
+
+        
+        <procedure owner="dbo" name="trav_ApiUserFunctionAccess_GetPaged" grant="">
+            <comment><![CDATA[/*
+----------------------------------------------------------------------------------------------------
+-- Date Created: Friday, January 24, 2020
+
+-- Author: Open Systems, Inc. (http://www.osas.com)
+-- Purpose: Gets records from the ApiUserFunctionAccess table passing page index and page count parameters
+----------------------------------------------------------------------------------------------------
+*/
+]]></comment>
+            <parameters>
+                <parameter name="@WhereClause" type="nvarchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)" />
+                <parameter name="@OrderBy" type="nvarchar" direction="Input" size="2000" precision="0" scale="0" param="(2000)"/>
+                <parameter name="@PageIndex" type="int" direction="Input" size="0" precision="10" scale="0" />
+                <parameter name="@PageSize" type="int" direction="Input" size="0" precision="10" scale="0" /> 
+            </parameters>
+            <body><![CDATA[
+                
+				declare @SQL as nvarchar(MAX)
+				SET @SQL = 'SELECT 
+				[UserFunctionID],
+				[AccessCount],
+				[FirstAccessTime],
+				[LastAccessTime],
+				[LastAccessMethod],
+				[ts]
+				FROM dbo.[ApiUserFunctionAccess]'
+				IF LEN(@WhereClause) > 0
+				BEGIN
+					SET @SQL = @SQL + ' WHERE ' + @WhereClause
+				END
+				IF LEN(@OrderBy) > 0
+				BEGIN
+					SET @SQL = @SQL + ' ORDER BY ' + @OrderBy
+				END
+				exec sp_executesql @SQL
+            ]]></body>
+        </procedure>
+        
+</procedures>
+</root>
+

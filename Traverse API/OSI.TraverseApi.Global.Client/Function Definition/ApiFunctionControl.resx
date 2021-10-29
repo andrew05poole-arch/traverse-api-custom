@@ -1,0 +1,739 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="splitFunction.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="splitFunction.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 25</value>
+  </data>
+  <metadata name="bindFunction.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>166, 17</value>
+  </metadata>
+  <data name="txtID.Location" type="System.Drawing.Point, System.Drawing">
+    <value>79, 226</value>
+  </data>
+  <data name="txtID.Size" type="System.Drawing.Size, System.Drawing">
+    <value>458, 20</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="txtID.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;txtID.Name" xml:space="preserve">
+    <value>txtID</value>
+  </data>
+  <data name="&gt;&gt;txtID.Type" xml:space="preserve">
+    <value>TRAVERSE.Controls.TravTextBox, TRAVERSE.Controls, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f3f24a3fbab7a33a</value>
+  </data>
+  <data name="&gt;&gt;txtID.Parent" xml:space="preserve">
+    <value>layoutMain</value>
+  </data>
+  <data name="&gt;&gt;txtID.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="txtTableName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>79, 202</value>
+  </data>
+  <data name="txtTableName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>458, 20</value>
+  </data>
+  <data name="txtTableName.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;txtTableName.Name" xml:space="preserve">
+    <value>txtTableName</value>
+  </data>
+  <data name="&gt;&gt;txtTableName.Type" xml:space="preserve">
+    <value>TRAVERSE.Controls.TravTextBox, TRAVERSE.Controls, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f3f24a3fbab7a33a</value>
+  </data>
+  <data name="&gt;&gt;txtTableName.Parent" xml:space="preserve">
+    <value>layoutMain</value>
+  </data>
+  <data name="&gt;&gt;txtTableName.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="chkEdit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>203, 53</value>
+  </data>
+  <data name="chkEdit.Properties.Caption" xml:space="preserve">
+    <value>Allow Edit</value>
+  </data>
+  <data name="chkEdit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 19</value>
+  </data>
+  <data name="chkEdit.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;chkEdit.Name" xml:space="preserve">
+    <value>chkEdit</value>
+  </data>
+  <data name="&gt;&gt;chkEdit.Type" xml:space="preserve">
+    <value>TRAVERSE.Controls.TravCheckBox, TRAVERSE.Controls, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f3f24a3fbab7a33a</value>
+  </data>
+  <data name="&gt;&gt;chkEdit.Parent" xml:space="preserve">
+    <value>layoutMain</value>
+  </data>
+  <data name="&gt;&gt;chkEdit.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="chkDelete.Location" type="System.Drawing.Point, System.Drawing">
+    <value>600, 53</value>
+  </data>
+  <data name="chkDelete.Properties.Caption" xml:space="preserve">
+    <value>Allow Delete</value>
+  </data>
+  <data name="chkDelete.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 19</value>
+  </data>
+  <data name="chkDelete.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;chkDelete.Name" xml:space="preserve">
+    <value>chkDelete</value>
+  </data>
+  <data name="&gt;&gt;chkDelete.Type" xml:space="preserve">
+    <value>TRAVERSE.Controls.TravCheckBox, TRAVERSE.Controls, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f3f24a3fbab7a33a</value>
+  </data>
+  <data name="&gt;&gt;chkDelete.Parent" xml:space="preserve">
+    <value>layoutMain</value>
+  </data>
+  <data name="&gt;&gt;chkDelete.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="chkAllowNew.Location" type="System.Drawing.Point, System.Drawing">
+    <value>402, 53</value>
+  </data>
+  <data name="chkAllowNew.Properties.Caption" xml:space="preserve">
+    <value>Allow New</value>
+  </data>
+  <data name="chkAllowNew.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 19</value>
+  </data>
+  <data name="chkAllowNew.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;chkAllowNew.Name" xml:space="preserve">
+    <value>chkAllowNew</value>
+  </data>
+  <data name="&gt;&gt;chkAllowNew.Type" xml:space="preserve">
+    <value>TRAVERSE.Controls.TravCheckBox, TRAVERSE.Controls, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f3f24a3fbab7a33a</value>
+  </data>
+  <data name="&gt;&gt;chkAllowNew.Parent" xml:space="preserve">
+    <value>layoutMain</value>
+  </data>
+  <data name="&gt;&gt;chkAllowNew.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="chkAllowRead.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 53</value>
+  </data>
+  <data name="chkAllowRead.Properties.Caption" xml:space="preserve">
+    <value>Allow Read</value>
+  </data>
+  <data name="chkAllowRead.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 19</value>
+  </data>
+  <data name="chkAllowRead.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;chkAllowRead.Name" xml:space="preserve">
+    <value>chkAllowRead</value>
+  </data>
+  <data name="&gt;&gt;chkAllowRead.Type" xml:space="preserve">
+    <value>TRAVERSE.Controls.TravCheckBox, TRAVERSE.Controls, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f3f24a3fbab7a33a</value>
+  </data>
+  <data name="&gt;&gt;chkAllowRead.Parent" xml:space="preserve">
+    <value>layoutMain</value>
+  </data>
+  <data name="&gt;&gt;chkAllowRead.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="lkpOverride.Location" type="System.Drawing.Point, System.Drawing">
+    <value>547, 5</value>
+  </data>
+  <data name="lkpOverride.Properties.NullText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lkpOverride.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 20</value>
+  </data>
+  <data name="lkpOverride.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;lkpOverride.Name" xml:space="preserve">
+    <value>lkpOverride</value>
+  </data>
+  <data name="&gt;&gt;lkpOverride.Type" xml:space="preserve">
+    <value>TRAVERSE.Controls.TravLookupControl, TRAVERSE.Controls, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f3f24a3fbab7a33a</value>
+  </data>
+  <data name="&gt;&gt;lkpOverride.Parent" xml:space="preserve">
+    <value>layoutMain</value>
+  </data>
+  <data name="&gt;&gt;lkpOverride.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>79, 76</value>
+  </data>
+  <data name="txtNotes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>458, 122</value>
+  </data>
+  <data name="txtNotes.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;txtNotes.Name" xml:space="preserve">
+    <value>txtNotes</value>
+  </data>
+  <data name="&gt;&gt;txtNotes.Type" xml:space="preserve">
+    <value>TRAVERSE.Controls.TravMemoControl, TRAVERSE.Controls, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f3f24a3fbab7a33a</value>
+  </data>
+  <data name="&gt;&gt;txtNotes.Parent" xml:space="preserve">
+    <value>layoutMain</value>
+  </data>
+  <data name="&gt;&gt;txtNotes.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="cboType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>294, 29</value>
+  </data>
+  <assembly alias="DevExpress.Utils" name="DevExpress.Utils, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9" />
+  <data name="cboType.Properties.Buttons" type="DevExpress.XtraEditors.Controls.ButtonPredefines, DevExpress.Utils">
+    <value>Combo</value>
+  </data>
+  <data name="cboType.Properties.Columns" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="cboType.Properties.Columns1" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="cboType.Properties.DataSource" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAE5TeXN0ZW0uRGF0YSwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJl
+        PW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAABVTeXN0ZW0uRGF0YS5E
+        YXRhVGFibGUDAAAAGURhdGFUYWJsZS5SZW1vdGluZ1ZlcnNpb24JWG1sU2NoZW1hC1htbERpZmZHcmFt
+        AwEBDlN5c3RlbS5WZXJzaW9uAgAAAAkDAAAABgQAAADlBTw/eG1sIHZlcnNpb249IjEuMCIgZW5jb2Rp
+        bmc9InV0Zi0xNiI/Pg0KPHhzOnNjaGVtYSB4bWxucz0iIiB4bWxuczp4cz0iaHR0cDovL3d3dy53My5v
+        cmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zOm1zZGF0YT0idXJuOnNjaGVtYXMtbWljcm9zb2Z0LWNvbTp4
+        bWwtbXNkYXRhIj4NCiAgPHhzOmVsZW1lbnQgbmFtZT0iVGFibGUxIj4NCiAgICA8eHM6Y29tcGxleFR5
+        cGU+DQogICAgICA8eHM6c2VxdWVuY2U+DQogICAgICAgIDx4czplbGVtZW50IG5hbWU9IklkIiB0eXBl
+        PSJ4czp1bnNpZ25lZEJ5dGUiIG1zZGF0YTp0YXJnZXROYW1lc3BhY2U9IiIgbWluT2NjdXJzPSIwIiAv
+        Pg0KICAgICAgICA8eHM6ZWxlbWVudCBuYW1lPSJEZXNjcmlwdGlvbiIgdHlwZT0ieHM6c3RyaW5nIiBt
+        c2RhdGE6dGFyZ2V0TmFtZXNwYWNlPSIiIG1pbk9jY3Vycz0iMCIgLz4NCiAgICAgIDwveHM6c2VxdWVu
+        Y2U+DQogICAgPC94czpjb21wbGV4VHlwZT4NCiAgPC94czplbGVtZW50Pg0KICA8eHM6ZWxlbWVudCBu
+        YW1lPSJ0bXBEYXRhU2V0IiBtc2RhdGE6SXNEYXRhU2V0PSJ0cnVlIiBtc2RhdGE6TWFpbkRhdGFUYWJs
+        ZT0iVGFibGUxIiBtc2RhdGE6VXNlQ3VycmVudExvY2FsZT0idHJ1ZSI+DQogICAgPHhzOmNvbXBsZXhU
+        eXBlPg0KICAgICAgPHhzOmNob2ljZSBtaW5PY2N1cnM9IjAiIG1heE9jY3Vycz0idW5ib3VuZGVkIiAv
+        Pg0KICAgIDwveHM6Y29tcGxleFR5cGU+DQogIDwveHM6ZWxlbWVudD4NCjwveHM6c2NoZW1hPgYFAAAA
+        nQU8ZGlmZmdyOmRpZmZncmFtIHhtbG5zOm1zZGF0YT0idXJuOnNjaGVtYXMtbWljcm9zb2Z0LWNvbTp4
+        bWwtbXNkYXRhIiB4bWxuczpkaWZmZ3I9InVybjpzY2hlbWFzLW1pY3Jvc29mdC1jb206eG1sLWRpZmZn
+        cmFtLXYxIj4NCiAgPHRtcERhdGFTZXQ+DQogICAgPFRhYmxlMSBkaWZmZ3I6aWQ9IlRhYmxlMTEiIG1z
+        ZGF0YTpyb3dPcmRlcj0iMCIgZGlmZmdyOmhhc0NoYW5nZXM9Imluc2VydGVkIj4NCiAgICAgIDxJZD4x
+        PC9JZD4NCiAgICAgIDxEZXNjcmlwdGlvbj5TZXR1cCBhbmQgTWFpbnRlbmFuY2U8L0Rlc2NyaXB0aW9u
+        Pg0KICAgIDwvVGFibGUxPg0KICAgIDxUYWJsZTEgZGlmZmdyOmlkPSJUYWJsZTEyIiBtc2RhdGE6cm93
+        T3JkZXI9IjEiIGRpZmZncjpoYXNDaGFuZ2VzPSJpbnNlcnRlZCI+DQogICAgICA8SWQ+MjwvSWQ+DQog
+        ICAgICA8RGVzY3JpcHRpb24+VHJhbnNhY3Rpb248L0Rlc2NyaXB0aW9uPg0KICAgIDwvVGFibGUxPg0K
+        ICAgIDxUYWJsZTEgZGlmZmdyOmlkPSJUYWJsZTEzIiBtc2RhdGE6cm93T3JkZXI9IjIiIGRpZmZncjpo
+        YXNDaGFuZ2VzPSJpbnNlcnRlZCI+DQogICAgICA8SWQ+MzwvSWQ+DQogICAgICA8RGVzY3JpcHRpb24+
+        T3RoZXI8L0Rlc2NyaXB0aW9uPg0KICAgIDwvVGFibGUxPg0KICA8L3RtcERhdGFTZXQ+DQo8L2RpZmZn
+        cjpkaWZmZ3JhbT4EAwAAAA5TeXN0ZW0uVmVyc2lvbgQAAAAGX01ham9yBl9NaW5vcgZfQnVpbGQJX1Jl
+        dmlzaW9uAAAAAAgICAgCAAAAAAAAAP//////////Cw==
+</value>
+  </data>
+  <data name="cboType.Properties.NullText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cboType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 20</value>
+  </data>
+  <data name="cboType.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;cboType.Name" xml:space="preserve">
+    <value>cboType</value>
+  </data>
+  <data name="&gt;&gt;cboType.Type" xml:space="preserve">
+    <value>TRAVERSE.Controls.TravEnumListControl, TRAVERSE.Controls, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f3f24a3fbab7a33a</value>
+  </data>
+  <data name="&gt;&gt;cboType.Parent" xml:space="preserve">
+    <value>layoutMain</value>
+  </data>
+  <data name="&gt;&gt;cboType.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="txtAppId.Location" type="System.Drawing.Point, System.Drawing">
+    <value>79, 29</value>
+  </data>
+  <data name="txtAppId.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 20</value>
+  </data>
+  <data name="txtAppId.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;txtAppId.Name" xml:space="preserve">
+    <value>txtAppId</value>
+  </data>
+  <data name="&gt;&gt;txtAppId.Type" xml:space="preserve">
+    <value>TRAVERSE.Controls.TravTextBox, TRAVERSE.Controls, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f3f24a3fbab7a33a</value>
+  </data>
+  <data name="&gt;&gt;txtAppId.Parent" xml:space="preserve">
+    <value>layoutMain</value>
+  </data>
+  <data name="&gt;&gt;txtAppId.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="lkpName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>79, 5</value>
+  </data>
+  <data name="lkpName.Properties.NullText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lkpName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 20</value>
+  </data>
+  <data name="lkpName.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;lkpName.Name" xml:space="preserve">
+    <value>lkpName</value>
+  </data>
+  <data name="&gt;&gt;lkpName.Type" xml:space="preserve">
+    <value>TRAVERSE.Controls.TravLookupControl, TRAVERSE.Controls, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f3f24a3fbab7a33a</value>
+  </data>
+  <data name="&gt;&gt;lkpName.Parent" xml:space="preserve">
+    <value>layoutMain</value>
+  </data>
+  <data name="&gt;&gt;lkpName.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="layoutMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="layoutMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="itemAppId.Text" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="itemType.Text" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="itemName.Text" xml:space="preserve">
+    <value>Function Name</value>
+  </data>
+  <data name="itemOverride.Text" xml:space="preserve">
+    <value>Override</value>
+  </data>
+  <data name="itemNotes.Text" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="resource.ToolTip" xml:space="preserve">
+    <value>Enter table/view name or a simple select query for user to query function. All read-enabled function fields must be included</value>
+  </data>
+  <data name="itemTableName.Text" xml:space="preserve">
+    <value>Data Query</value>
+  </data>
+  <data name="itemID.Text" xml:space="preserve">
+    <value>Function ID</value>
+  </data>
+  <data name="layoutMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>800, 251</value>
+  </data>
+  <data name="layoutMain.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="layoutMain.Text" xml:space="preserve">
+    <value>travLayoutControl1</value>
+  </data>
+  <data name="&gt;&gt;layoutMain.Name" xml:space="preserve">
+    <value>layoutMain</value>
+  </data>
+  <data name="&gt;&gt;layoutMain.Type" xml:space="preserve">
+    <value>TRAVERSE.Controls.TravLayoutControl, TRAVERSE.Controls, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f3f24a3fbab7a33a</value>
+  </data>
+  <data name="&gt;&gt;layoutMain.Parent" xml:space="preserve">
+    <value>splitFunction.Panel1</value>
+  </data>
+  <data name="&gt;&gt;layoutMain.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="splitFunction.Panel1.Text" xml:space="preserve">
+    <value>Panel1</value>
+  </data>
+  <data name="splitFunction.Panel2.Text" xml:space="preserve">
+    <value>Panel2</value>
+  </data>
+  <data name="splitFunction.Size" type="System.Drawing.Size, System.Drawing">
+    <value>800, 575</value>
+  </data>
+  <data name="splitFunction.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="splitFunction.Text" xml:space="preserve">
+    <value>splitContainerControl1</value>
+  </data>
+  <data name="&gt;&gt;splitFunction.Name" xml:space="preserve">
+    <value>splitFunction</value>
+  </data>
+  <data name="&gt;&gt;splitFunction.Type" xml:space="preserve">
+    <value>DevExpress.XtraEditors.SplitContainerControl, DevExpress.Utils, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;splitFunction.Parent" xml:space="preserve">
+    <value>splitContainerBase.Panel1</value>
+  </data>
+  <data name="&gt;&gt;splitFunction.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="navMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>289, 17</value>
+  </metadata>
+  <data name="navMain.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial Unicode MS, 9pt</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
+  </data>
+  <data name="btnServerUpdate.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIDSURBVDhPpZLrS5NhGMb3j4SWh0oRQVExD4gonkDpg4hG
+        YKxG6WBogkMZKgPNCEVJFBGdGETEvgwyO9DJE5syZw3PIlPEE9pgBCLZ5XvdMB8Ew8gXbl54nuf63dd9
+        0OGSnwCahxbPRNPAPMw9Xpg6ZmF46kZZ0xSKzJPIrhpDWsVnpBhGkKx3nAX8Pv7z1zg8OoY/cITdn4fw
+        bf/C0kYAN3Ma/w3gWfZL5kzTKBxjWyK2DftwI9tyMYCZKXbNHaD91bLYJrDXsYbrWfUKwJrPE9M2M1Oc
+        VzOOpHI7Jr376Hi9ogHqFIANO0/MmmmbmSmm9a8ze+I4MrNWAdjtoJgWcx+PSzg166yZZ8xM8XvXDix9
+        c4jIqFYAjoriBV9AhEPv1mH/sonogha0afbZMMZz+yreTGyhpusHwtNNCsA5U1zS4BLxzJIfg299qO32
+        Ir7UJtZfftyATqeT+8o2D8JSjQrAJblrncYL7ZJ2+bfaFnC/1S1NjL3diRat7qrO7wLRP3HjWsojBeCo
+        mDEo5mNjuweFGvjWg2EBhCbpkW78htSHHwRyNdmgAFzPEee2iFkzayy2OLXzT4gr6UdUnlXrullsxxQ+
+        kx0g8BTA3aZlButjSTyjODq/WcQcW/B/Je4OQhLvKQDnzN1mp0nnkvAhR8VuMzNrpm1mpjgkoVwB/v8D
+        TgDQASA1MVpwzwAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="btnServerUpdate.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="btnServerUpdate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 22</value>
+  </data>
+  <data name="btnServerUpdate.Text" xml:space="preserve">
+    <value>Generate Scripts</value>
+  </data>
+  <data name="navMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="navMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>800, 25</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="&gt;&gt;errorProviderBase.Name" xml:space="preserve">
+    <value>errorProviderBase</value>
+  </data>
+  <data name="&gt;&gt;errorProviderBase.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bindFunction.Name" xml:space="preserve">
+    <value>bindFunction</value>
+  </data>
+  <data name="&gt;&gt;bindFunction.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gridView1.Name" xml:space="preserve">
+    <value>gridView1</value>
+  </data>
+  <data name="&gt;&gt;gridView1.Type" xml:space="preserve">
+    <value>DevExpress.XtraGrid.Views.Grid.GridView, DevExpress.XtraGrid, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;travLookupControl1View.Name" xml:space="preserve">
+    <value>travLookupControl1View</value>
+  </data>
+  <data name="&gt;&gt;travLookupControl1View.Type" xml:space="preserve">
+    <value>DevExpress.XtraGrid.Views.Grid.GridView, DevExpress.XtraGrid, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;grpRoot.Name" xml:space="preserve">
+    <value>grpRoot</value>
+  </data>
+  <data name="&gt;&gt;grpRoot.Type" xml:space="preserve">
+    <value>DevExpress.XtraLayout.LayoutControlGroup, DevExpress.XtraLayout, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;itemAppId.Name" xml:space="preserve">
+    <value>itemAppId</value>
+  </data>
+  <data name="&gt;&gt;itemAppId.Type" xml:space="preserve">
+    <value>DevExpress.XtraLayout.LayoutControlItem, DevExpress.XtraLayout, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;itemType.Name" xml:space="preserve">
+    <value>itemType</value>
+  </data>
+  <data name="&gt;&gt;itemType.Type" xml:space="preserve">
+    <value>DevExpress.XtraLayout.LayoutControlItem, DevExpress.XtraLayout, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;itemRead.Name" xml:space="preserve">
+    <value>itemRead</value>
+  </data>
+  <data name="&gt;&gt;itemRead.Type" xml:space="preserve">
+    <value>DevExpress.XtraLayout.LayoutControlItem, DevExpress.XtraLayout, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;itemNew.Name" xml:space="preserve">
+    <value>itemNew</value>
+  </data>
+  <data name="&gt;&gt;itemNew.Type" xml:space="preserve">
+    <value>DevExpress.XtraLayout.LayoutControlItem, DevExpress.XtraLayout, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;itemDelete.Name" xml:space="preserve">
+    <value>itemDelete</value>
+  </data>
+  <data name="&gt;&gt;itemDelete.Type" xml:space="preserve">
+    <value>DevExpress.XtraLayout.LayoutControlItem, DevExpress.XtraLayout, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;itemEdit.Name" xml:space="preserve">
+    <value>itemEdit</value>
+  </data>
+  <data name="&gt;&gt;itemEdit.Type" xml:space="preserve">
+    <value>DevExpress.XtraLayout.LayoutControlItem, DevExpress.XtraLayout, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;itemName.Name" xml:space="preserve">
+    <value>itemName</value>
+  </data>
+  <data name="&gt;&gt;itemName.Type" xml:space="preserve">
+    <value>DevExpress.XtraLayout.LayoutControlItem, DevExpress.XtraLayout, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;itemOverride.Name" xml:space="preserve">
+    <value>itemOverride</value>
+  </data>
+  <data name="&gt;&gt;itemOverride.Type" xml:space="preserve">
+    <value>DevExpress.XtraLayout.LayoutControlItem, DevExpress.XtraLayout, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;emptySpaceItem2.Name" xml:space="preserve">
+    <value>emptySpaceItem2</value>
+  </data>
+  <data name="&gt;&gt;emptySpaceItem2.Type" xml:space="preserve">
+    <value>DevExpress.XtraLayout.EmptySpaceItem, DevExpress.XtraLayout, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;emptySpaceItem3.Name" xml:space="preserve">
+    <value>emptySpaceItem3</value>
+  </data>
+  <data name="&gt;&gt;emptySpaceItem3.Type" xml:space="preserve">
+    <value>DevExpress.XtraLayout.EmptySpaceItem, DevExpress.XtraLayout, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;emptySpaceItem4.Name" xml:space="preserve">
+    <value>emptySpaceItem4</value>
+  </data>
+  <data name="&gt;&gt;emptySpaceItem4.Type" xml:space="preserve">
+    <value>DevExpress.XtraLayout.EmptySpaceItem, DevExpress.XtraLayout, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;itemNotes.Name" xml:space="preserve">
+    <value>itemNotes</value>
+  </data>
+  <data name="&gt;&gt;itemNotes.Type" xml:space="preserve">
+    <value>DevExpress.XtraLayout.LayoutControlItem, DevExpress.XtraLayout, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;itemTableName.Name" xml:space="preserve">
+    <value>itemTableName</value>
+  </data>
+  <data name="&gt;&gt;itemTableName.Type" xml:space="preserve">
+    <value>DevExpress.XtraLayout.LayoutControlItem, DevExpress.XtraLayout, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;itemID.Name" xml:space="preserve">
+    <value>itemID</value>
+  </data>
+  <data name="&gt;&gt;itemID.Type" xml:space="preserve">
+    <value>DevExpress.XtraLayout.LayoutControlItem, DevExpress.XtraLayout, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
+    <value>toolStripSeparator1</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnServerUpdate.Name" xml:space="preserve">
+    <value>btnServerUpdate</value>
+  </data>
+  <data name="&gt;&gt;btnServerUpdate.Type" xml:space="preserve">
+    <value>TRAVERSE.Controls.TravNavItem, TRAVERSE.Client, Version=2.0.0.0, Culture=neutral, PublicKeyToken=65ed39acbe64cb1a</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>ApiFunctionControl</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>TRAVERSE.Client.PluginControlBase, TRAVERSE.Controls, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f3f24a3fbab7a33a</value>
+  </data>
+  <data name="navMain.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="navMain.Text" xml:space="preserve">
+    <value>travNavigator1</value>
+  </data>
+  <data name="&gt;&gt;navMain.Name" xml:space="preserve">
+    <value>navMain</value>
+  </data>
+  <data name="&gt;&gt;navMain.Type" xml:space="preserve">
+    <value>TRAVERSE.Controls.TravNavigator, TRAVERSE.Controls, Version=2.0.0.0, Culture=neutral, PublicKeyToken=f3f24a3fbab7a33a</value>
+  </data>
+  <data name="&gt;&gt;navMain.Parent" xml:space="preserve">
+    <value>splitContainerBase.Panel1</value>
+  </data>
+  <data name="&gt;&gt;navMain.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;splitContainerBase.Panel1.Name" xml:space="preserve">
+    <value>splitContainerBase.Panel1</value>
+  </data>
+  <data name="&gt;&gt;splitContainerBase.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainerBase.Panel1.Parent" xml:space="preserve">
+    <value>splitContainerBase</value>
+  </data>
+  <data name="&gt;&gt;splitContainerBase.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;splitContainerBase.Panel2.Name" xml:space="preserve">
+    <value>splitContainerBase.Panel2</value>
+  </data>
+  <data name="&gt;&gt;splitContainerBase.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainerBase.Panel2.Parent" xml:space="preserve">
+    <value>splitContainerBase</value>
+  </data>
+  <data name="&gt;&gt;splitContainerBase.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;splitContainerBase.Name" xml:space="preserve">
+    <value>splitContainerBase</value>
+  </data>
+  <data name="&gt;&gt;splitContainerBase.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainerBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;splitContainerBase.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="errorProviderBase.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+</root>
