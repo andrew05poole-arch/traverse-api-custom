@@ -97,11 +97,11 @@ namespace OSI.TraverseApi.Business.Properties {
         ///BEGIN
         ///	CREATE TABLE [dbo].[ApiInfo] (
         ///		[ID] [int] NOT NULL,                --Only 1
-        ///		[SysDb] [nvarchar](128) NULL,		--System Database from Installer
+        ///		[SysDb] [sysname] NULL,		--System Database from Installer
         ///		[Version] [nvarchar](20) NULL,		--Version Information from installer
         ///		[AuthorizeTimeout] [int] NULL,		--Default to 15 minutes; user set in installer
         ///		[AccessExpireHours] [int] NULL,		--Default to 12 hours; user set in installer
-        ///		[RefreshExpire [rest of string was truncated]&quot;;.
+        ///		[RefreshExpireDays]  [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ApiCreateInfoTable {
             get {
@@ -110,9 +110,9 @@ namespace OSI.TraverseApi.Business.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DECLARE @dbName as nvarchar(128), @sql nvarchar(max)
+        ///   Looks up a localized string similar to DECLARE @dbName as sysname, @sql nvarchar(max)
         ///
-        ///CREATE TABLE #DatabaseList (DbName nvarchar(128))
+        ///CREATE TABLE #DatabaseList (DbName sysname)
         ///
         ///DECLARE dbSearch CURSOR FOR
         ///SELECT [name]
@@ -131,7 +131,7 @@ namespace OSI.TraverseApi.Business.Properties {
         ///IF EXISTS (SELECT * FROM [&apos; + @dbName + &apos;].sys.tables WHERE [name] = &apos;&apos;ApiInfo&apos;&apos; AND [type] = &apos;&apos;U&apos;&apos;)
         ///BEGIN
         ///	SET @innerSql = &apos;&apos;
-        ///	INSERT INTO #DatabaseLi [rest of string was truncated]&quot;;.
+        ///	INSERT INTO #DatabaseList (DbName)        /// [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ApiFunctionHeaderTable {
             get {
@@ -140,9 +140,9 @@ namespace OSI.TraverseApi.Business.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DECLARE @dbName as nvarchar(128), @sql nvarchar(max)
+        ///   Looks up a localized string similar to DECLARE @dbName as sysname, @sql nvarchar(max)
         ///
-        ///CREATE TABLE #DatabaseList (DbName nvarchar(128))
+        ///CREATE TABLE #DatabaseList (DbName sysname)
         ///
         ///DECLARE dbSearch CURSOR FOR
         ///SELECT [name]
@@ -161,7 +161,7 @@ namespace OSI.TraverseApi.Business.Properties {
         ///IF EXISTS (SELECT * FROM [&apos; + @dbName + &apos;].sys.tables WHERE [name] = &apos;&apos;ApiInfo&apos;&apos; AND [type] = &apos;&apos;U&apos;&apos;)
         ///BEGIN
         ///	SET @innerSql = &apos;&apos;
-        ///	INSERT INTO #DatabaseLi [rest of string was truncated]&quot;;.
+        ///	INSERT INTO #DatabaseList (DbName)        /// [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ApiFunctionSchemaTable {
             get {
@@ -270,9 +270,9 @@ namespace OSI.TraverseApi.Business.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DECLARE @dbName as nvarchar(128), @sql nvarchar(max)
+        ///   Looks up a localized string similar to DECLARE @dbName as sysname, @sql nvarchar(max)
         ///
-        ///CREATE TABLE #DatabaseList (DbName nvarchar(128))
+        ///CREATE TABLE #DatabaseList (DbName sysname)
         ///
         ///DECLARE dbSearch CURSOR FOR
         ///SELECT [name]
@@ -291,7 +291,7 @@ namespace OSI.TraverseApi.Business.Properties {
         ///IF EXISTS (SELECT * FROM [&apos; + @dbName + &apos;].sys.tables WHERE [name] = &apos;&apos;ApiInfo&apos;&apos; AND [type] = &apos;&apos;U&apos;&apos;)
         ///BEGIN
         ///	SET @innerSql = &apos;&apos;
-        ///	INSERT INTO #DatabaseLi [rest of string was truncated]&quot;;.
+        ///	INSERT INTO #DatabaseList (DbName)        /// [rest of string was truncated]&quot;;.
         /// </summary>
         public static string RetrieveApiDbList {
             get {
