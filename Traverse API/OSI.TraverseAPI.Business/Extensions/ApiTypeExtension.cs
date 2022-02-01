@@ -117,7 +117,7 @@ namespace OSI.TraverseApi.Business
         public static CustomFieldsList GetCustomFieldList(this Type type, string compId)
         {
             if (type != null && typeof(EntityBase).IsAssignableFrom(type))
-                return CustomFieldsList.RetrieveAssignedFieldsList(Utils.GetStaticPropertyValue(type, "TableName").ToString(), compId);
+                return CustomFieldsList.RetrieveAssignedFieldsList(Utils.GetStaticPropertyValue(type, "TableName")?.ToString(), compId);
 
             return null;
         }

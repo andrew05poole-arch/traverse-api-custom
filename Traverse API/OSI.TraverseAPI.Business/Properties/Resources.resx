@@ -166,6 +166,9 @@ END
 
 USE [master];</value>
   </data>
+  <data name="ApiDatabaseExits" xml:space="preserve">
+    <value>SELECT 1 as [DBExists] FROM sys.databases WHERE [name] = {0}</value>
+  </data>
   <data name="ApiFunctionHeaderTable" xml:space="preserve">
     <value>DECLARE @dbName as sysname, @sql nvarchar(max)
 

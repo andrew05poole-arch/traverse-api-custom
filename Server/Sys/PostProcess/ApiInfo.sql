@@ -51,7 +51,7 @@ BEGIN
 
 IF EXISTS (SELECT * FROM [ApiInfo])
 BEGIN
-	UPDATE [ApiInfo] SET [Version] = 21103;
+	UPDATE [ApiInfo] SET [Version] = 22031;
 END
 
 	USE [' + DB_NAME() + '];
