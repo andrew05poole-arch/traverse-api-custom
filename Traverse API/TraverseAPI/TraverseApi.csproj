@@ -18,9 +18,10 @@
     <AssemblyName>OSI.TraverseApi.WebService</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -64,7 +65,7 @@
     </Reference>
     <Reference Include="LicenseManagement.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f3f24a3fbab7a33a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files\Open Systems, Inc\Special\TRAVERSE API\TRAVERSE 11.2\LicenseManagement.Client.dll</HintPath>
+      <HintPath>..\..\Core\LicenseManagement.Client.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.TelemetryCorrelation, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.7\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
@@ -181,11 +182,14 @@
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
     <Reference Include="TRAVERSE.Business">
-      <HintPath>..\..\..\..\..\Program Files\Open Systems, Inc\Special\TRAVERSE API\TRAVERSE 11.2\TRAVERSE.Business.dll</HintPath>
+      <HintPath>..\..\Core\TRAVERSE.Business.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="TRAVERSE.Business.Sys">
+      <HintPath>..\..\Core\TRAVERSE.Business.Sys.dll</HintPath>
+    </Reference>
     <Reference Include="TRAVERSE.Core">
-      <HintPath>..\..\..\..\..\Program Files\Open Systems, Inc\Special\TRAVERSE API\TRAVERSE 11.2\TRAVERSE.Core.dll</HintPath>
+      <HintPath>..\..\Core\TRAVERSE.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="WebGrease">
@@ -473,6 +477,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -518,7 +523,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>9699</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/TraverseApi</IISUrl>
+          <IISUrl>http://localhost:9699/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -537,6 +542,9 @@
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetPath)" "$(EverstarGlobalAPI)\Core\$(TargetFileName)"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -110,6 +110,15 @@ namespace OSI.TraverseApi.Business.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SELECT 1 as [DBExists] FROM sys.databases WHERE [name] = {0}.
+        /// </summary>
+        public static string ApiDatabaseExits {
+            get {
+                return ResourceManager.GetString("ApiDatabaseExits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DECLARE @dbName as sysname, @sql nvarchar(max)
         ///
         ///CREATE TABLE #DatabaseList (DbName sysname)
