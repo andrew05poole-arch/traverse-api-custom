@@ -3,11 +3,11 @@ using OSI.TraverseApi.Business;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using TRAVERSE.Business;
-using TRAVERSE.Business.Contacts;
+using TRAVERSE.Business;							 
 using TRAVERSE.Business.Inventory;
 using TRAVERSE.Business.SalesOrder;
 using TRAVERSE.Core;
@@ -22,7 +22,7 @@ namespace OSI.TraverseApi.SalesOrder.Controllers
         [ApiRoute(FunctionID, 2f, "transaction/{id?}", typeof(TransactionHeader), new object[] { ApiSoTransactionSerialController.FunctionID, typeof(TransactionSerial), ApiSoTransactionLotController.FunctionId, typeof(TransactionDetailExt) })]
         public async Task<IHttpActionResult> Get(string id = null)
         {
-            return Ok(await Load(id));
+            return Ok(await Load(id, false));
         }
 
         [ApiRoute(FunctionID, 2f, "transaction/{id?}", typeof(TransactionHeader), new object[] { ApiSoTransactionSerialController.FunctionID, typeof(TransactionSerial), ApiSoTransactionLotController.FunctionId, typeof(TransactionDetailExt) })]
@@ -115,10 +115,19 @@ namespace OSI.TraverseApi.SalesOrder.Controllers
 
         protected virtual async Task<EntityList<TransactionHeader>> Load(string id)
         {
+            return await this.Load(id, false);
+        }
+        protected virtual async Task<EntityList<TransactionHeader>> Load(string id, bool isCreate)
+        {
             if (Provider.Items.Count <= 0 || (!string.IsNullOrEmpty(id) && !Provider.Items.Exists(i => StringHelper.AreEqual(id, i.TransId, false))))
             {
                 if (string.IsNullOrEmpty(id))
-                    await Provider.Load<TransactionHeader>(this.CompId, PageNumber, PageSize);
+                {
+                    if (!isCreate)
+                    {
+                        await Provider.Load<TransactionHeader>(this.CompId, PageNumber, PageSize);
+                    }
+                }
                 else
                 {
                     var builder = new SqlFilterBuilder<TransactionHeaderBase.Columns>();
@@ -135,7 +144,11 @@ namespace OSI.TraverseApi.SalesOrder.Controllers
 
         protected virtual async Task<TransactionHeader> Find(string id)
         {
-            var list = await Load(id);
+            return await this.Find(id, false);
+        }
+        protected virtual async Task<TransactionHeader> Find(string id, bool isCreate)
+        {
+            var list = await Load(id, isCreate);
             return list.Find(x => StringHelper.AreEqual(x.TransId, id, false));
         }
 
@@ -179,7 +192,7 @@ namespace OSI.TraverseApi.SalesOrder.Controllers
             else
                 code = bodyItem.TransId;
 
-            var entity = await this.Find(code);
+            var entity = await this.Find(code, isCreate);
 
             if (isCreate)
             {
@@ -200,6 +213,20 @@ namespace OSI.TraverseApi.SalesOrder.Controllers
             else if (entity == null)
                 throw new InvalidValueException(string.Format("Transaction ID '{0}' could not be found.", code));
 
+            if (this.IsBodyItemExist(bodyItem, "transaction_type"))
+            {
+                SOTransactionType transactionType = this.GetTransactionType(bodyItem.TransType);
+                if (isCreate)
+                {
+                    entity.TransactionType = transactionType;
+                }
+                else
+                {
+                    entity.ChangeTransactionType(transactionType);
+                }
+                entity.CalculateTotals();
+            }
+
             ((ApiEntityModel)bodyItem).EntityPropertyChanging += BodyItem_EntityPropertyChanging;
             entity.PropertyChanged += Entity_PropertyChanged;
             await ((ApiEntityModel)bodyItem).PopulateEntityAsync(entity, ProcessChildObject);
@@ -207,7 +234,10 @@ namespace OSI.TraverseApi.SalesOrder.Controllers
             ((ApiEntityModel)bodyItem).EntityPropertyChanging -= BodyItem_EntityPropertyChanging;
 
             if (string.IsNullOrWhiteSpace(entity.TransId))
+            {
+                this.Provider.CompId = this.CompId;
                 entity.TransId = Provider.GetNextTransId();
+            }
 
             entity.LineItemList.ForEach(d =>
             {
@@ -218,9 +248,50 @@ namespace OSI.TraverseApi.SalesOrder.Controllers
             return entity;
         }
 
+        protected virtual bool IsBodyItemExist(dynamic item, string property)
+        {
+            return ((IDictionary<string, object>)item).ContainsKey(property);
+        }
+
+        protected virtual SOTransactionType GetTransactionType(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                value = value.All(char.IsDigit) ? value : value.ToLower();
+                switch (value)
+                {
+                    case "9":
+                    case "new":
+                        return SOTransactionType.New;
+                    case "1":
+                    case "invoice":
+                        return SOTransactionType.Invoice;
+                    case "2":
+                    case "price quote":
+                        return SOTransactionType.PriceQuote;
+                    case "-1":
+                    case "credit memo":
+                        return SOTransactionType.CreditMemo;
+                    case "-2":
+                    case "rma":
+                        return SOTransactionType.RMA;
+                    case "3":
+                    case "backordered":
+                        return SOTransactionType.Backordered;
+                    case "4":
+                    case "verified":
+                        return SOTransactionType.Verified;
+                    case "5":
+                    case "picked":
+                        return SOTransactionType.Picked;
+                }
+            }
+            return SOTransactionType.New;
+        }
+
         protected virtual async Task MarkToDelete(string id)
         {
-            var entity = await this.Find(id);
+            var entity = await this.Find(id, false);
 
             if (entity == null)
                 throw new NothingToProcessException(string.Format("Transaction '{0}' could not be found.", id));
@@ -378,7 +449,9 @@ namespace OSI.TraverseApi.SalesOrder.Controllers
             if (header == null)
                 return;
 
-            if (((SOTransactionType)e.ActualValue) == SOTransactionType.Verified)
+            SOTransactionType newTransactionType = (SOTransactionType)e.ActualValue;
+
+            if (newTransactionType == SOTransactionType.Verified)
             {
                 if (Utility.WMSIsValidFeature(CompId) && Utility.GetWMYN(CompId) && (header.TransactionType == SOTransactionType.New || header.TransactionType == SOTransactionType.Backordered))
                 {
@@ -390,14 +463,14 @@ namespace OSI.TraverseApi.SalesOrder.Controllers
                 }
             }
 
-            header.ChangeTransactionType((SOTransactionType)e.ActualValue);
+            header.ChangeTransactionType(newTransactionType);
 
             if (header.TransactionType == SOTransactionType.Verified)
             {
                 header.InvcDate = DateTime.Today;
                 header.SetFiscalPeriodYearFromDate(DateTime.Today);
-                header.LineItemList.ForEach(l => 
-                { 
+                header.LineItemList.ForEach(l =>
+                {
                     l.CalculateBackorderedQty();
                     if (l.Kit.GetValueOrDefault())
                         l.KitComponentList.ForEach(k => k.CalculateBackorderedQty());
@@ -439,7 +512,7 @@ namespace OSI.TraverseApi.SalesOrder.Controllers
             if (header == null || !header.TaxableYN.GetValueOrDefault() || ApiUserSkipped.IsApiUserSkipped(bodyItem.NetSalesTaxFgn))
                 return;
 
-            decimal taxValue = 0M; 
+            decimal taxValue = 0M;
             decimal.TryParse(bodyItem.NetSalesTaxFgn.ToString(), out taxValue);
             header.TaxAmtAdjFgn = taxValue - header.SalesTaxFgn;
         }
@@ -716,7 +789,7 @@ namespace OSI.TraverseApi.SalesOrder.Controllers
                 return;
 
             entity.SetDefaults();
-            
+
 
             Lot lot = entity.InItem.AllLocations.Find(ItemLocationBase.Columns.LocId, entity.LocId, true)?
                 .LotNumbers.Find(LotBase.Columns.LotNum, entity.LotNum, true);
@@ -803,7 +876,7 @@ namespace OSI.TraverseApi.SalesOrder.Controllers
                 || entity.LineItem.InItem.InventoryType != InventoryType.Serial)
                 return;
 
-            var serial = entity.InItem.AllLocations.Find(ItemLocationBase.Columns.LocId, entity.LocId,true)?
+            var serial = entity.InItem.AllLocations.Find(ItemLocationBase.Columns.LocId, entity.LocId, true)?
                 .SerialItems.Find(SerialItemBase.Columns.SerNum, entity.SerNum, true);
 
             if (serial == null)

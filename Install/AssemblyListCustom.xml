@@ -1,31 +1,42 @@
 <?xml version="1.0" standalone="yes"?>
 <DocumentElement>
   <AssemblyInformation>
+    <FileName>AssemblyListCustom.xml</FileName>
+    <CreationTime>2022-02-16T13:40:46.3280505-06:00</CreationTime>
+    <FileHash>fe2a75637fb8ed96d1dd8be92c195a937029c5ed</FileHash>
+  </AssemblyInformation>
+  <AssemblyInformation>
     <FileName>OSI.TraverseApi.Business.dll</FileName>
-    <AssemblyVersion>2.0.21012.21103</AssemblyVersion>
-    <FileVersion>11.2.21012.21103</FileVersion>
-    <CreationTime>2021-04-12T07:33:52-05:00</CreationTime>
-    <FileHash>cdf5f6c463118972a5678839f97f47fcd2da07eb</FileHash>
+    <AssemblyVersion>2.0.21088.20352</AssemblyVersion>
+    <FileVersion>11.2.21088.20352</FileVersion>
+    <CreationTime>2022-02-18T12:20:25-06:00</CreationTime>
+    <FileHash>e9ceebffbf3ff0ecb1483847158e55b7bca5e6b4</FileHash>
   </AssemblyInformation>
   <AssemblyInformation>
     <FileName>OSI.TraverseApi.Client.dll</FileName>
-    <AssemblyVersion>2.0.21012.21103</AssemblyVersion>
-    <FileVersion>11.2.21012.21103</FileVersion>
-    <CreationTime>2021-04-12T07:33:24-05:00</CreationTime>
-    <FileHash>9226867cd763725aef25fea05c12fb8fb7f774f7</FileHash>
+    <AssemblyVersion>2.0.21088.20352</AssemblyVersion>
+    <FileVersion>11.2.21088.20352</FileVersion>
+    <CreationTime>2022-02-18T12:20:25-06:00</CreationTime>
+    <FileHash>f092e234508527ed9d3e91db8413d08e0bc769cf</FileHash>
   </AssemblyInformation>
   <AssemblyInformation>
     <FileName>OSI.TraverseApi.Data.dll</FileName>
-    <AssemblyVersion>2.0.21012.21103</AssemblyVersion>
-    <FileVersion>11.2.21012.21103</FileVersion>
+    <AssemblyVersion>2.0.21088.20352</AssemblyVersion>
+    <FileVersion>11.2.21088.20352</FileVersion>
     <FolderName>DataProvider</FolderName>
-    <CreationTime>2021-04-12T07:32:46-05:00</CreationTime>
-    <FileHash>4656d4b7892bc5d4d18fa6d5668ebf66a23db0dd</FileHash>
+    <CreationTime>2022-02-18T12:20:26-06:00</CreationTime>
+    <FileHash>07625bdf485b3008979589d9d1da000ae2036619</FileHash>
   </AssemblyInformation>
   <AssemblyInformation>
-    <FileName>ServerUpdate_Api_v2_21088_2.tsmx</FileName>
+    <FileName>ServerUpdate_Api_v2_22049.tsmx</FileName>
     <FolderName>Server</FolderName>
-    <CreationTime>2021-04-14T10:38:22.6571386-05:00</CreationTime>
-    <FileHash>fe33d43dea4e92bd03129e7ddbd732df85438f59</FileHash>
+    <CreationTime>2022-02-21T10:47:41-06:00</CreationTime>
+    <FileHash>a7363a65dd97a498d9c5550d584c1bbc73d8c154</FileHash>
+  </AssemblyInformation>
+  <AssemblyInformation>
+    <FileName>TraverseApiWebInstall_22049.exe</FileName>
+    <FolderName>Server</FolderName>
+    <CreationTime>2022-02-21T09:18:17-06:00</CreationTime>
+    <FileHash>9f482c76caf72317feffc4fa0362fe6db63aebe3</FileHash>
   </AssemblyInformation>
 </DocumentElement>

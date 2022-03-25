@@ -7541,6 +7541,8 @@ INSERT INTO ApiFunctionSchema (SeqNum, FunctionID, [TravFieldName], ApiFieldName
 SELECT 350 As SeqNum, N''c16315f8-8f21-419d-90c1-3176c35dddc6'' As FunctionID, N''ExtendedList'' As TravFieldName, N''extended_list'' As ApiFieldName, NULL As ValueTranslation, NULL As Notes, 7 As FieldSetting, N''e59b69e9-fce8-47ad-bfec-c4bf934b6e63'' As ChildFunctionID
 INSERT INTO ApiFunctionSchema (SeqNum, FunctionID, [TravFieldName], ApiFieldName, ValueTranslation, Notes, FieldSetting, ChildFunctionID)
 SELECT 360 As SeqNum, N''c16315f8-8f21-419d-90c1-3176c35dddc6'' As FunctionID, N''SerialList'' As TravFieldName, N''serial_list'' As ApiFieldName, NULL As ValueTranslation, NULL As Notes, 7 As FieldSetting, N''19e5ccc8-baeb-4dee-8110-5b566fb118d7'' As ChildFunctionID
+INSERT INTO ApiFunctionSchema (SeqNum, FunctionID, [TravFieldName], ApiFieldName, ValueTranslation, Notes, FieldSetting, ChildFunctionID)
+SELECT 370 As SeqNum, N''c16315f8-8f21-419d-90c1-3176c35dddc6'' As FunctionID, N''QtyOrdSell'' As TravFieldName, N''quantity_needed'' As ApiFieldName, NULL As ValueTranslation, NULL As Notes, 1 As FieldSetting, NULL As ChildFunctionID
 DELETE FROM ApiFunctionSchema WHERE FunctionID = N''e59b69e9-fce8-47ad-bfec-c4bf934b6e63''
 INSERT INTO ApiFunctionSchema (SeqNum, FunctionID, [TravFieldName], ApiFieldName, ValueTranslation, Notes, FieldSetting, ChildFunctionID)
 SELECT 10 As SeqNum, N''e59b69e9-fce8-47ad-bfec-c4bf934b6e63'' As FunctionID, N''SeqNum'' As TravFieldName, N''seq_num'' As ApiFieldName, NULL As ValueTranslation, NULL As Notes, 35 As FieldSetting, NULL As ChildFunctionID
