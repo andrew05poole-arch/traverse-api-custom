@@ -185,6 +185,9 @@
       <HintPath>..\..\Core\TRAVERSE.Business.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="TRAVERSE.Business.API">
+      <HintPath>..\..\Core\TRAVERSE.Business.API.dll</HintPath>
+    </Reference>
     <Reference Include="TRAVERSE.Business.Sys">
       <HintPath>..\..\Core\TRAVERSE.Business.Sys.dll</HintPath>
     </Reference>
@@ -465,13 +468,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\OSI.TraverseAPI.Business\OSI.TraverseApi.Business.csproj">
-      <Project>{95dd000f-c3f6-4c34-9c7d-ea7a0938735d}</Project>
-      <Name>OSI.TraverseApi.Business</Name>
-      <Private>True</Private>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

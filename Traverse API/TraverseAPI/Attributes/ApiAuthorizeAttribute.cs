@@ -1,5 +1,4 @@
-﻿using OSI.TraverseApi.Business;
-using System;
+﻿using System;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -11,6 +10,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using TRAVERSE.Business;
+using TRAVERSE.Business.API;
 using TraverseApi.Properties;
 
 namespace TraverseApi

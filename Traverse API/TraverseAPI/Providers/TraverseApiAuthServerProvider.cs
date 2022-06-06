@@ -1,11 +1,11 @@
 ﻿#region Using Directives
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
-using OSI.TraverseApi.Business;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using TRAVERSE.Business.API;
 using TRAVERSE.Core;
 using TraverseApi.Properties;
 #endregion Using Directives

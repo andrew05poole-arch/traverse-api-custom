@@ -1,5 +1,4 @@
 ﻿#region Using Directives
-using OSI.TraverseApi.Business;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Web.Http;
@@ -7,6 +6,7 @@ using TRAVERSE.Business;
 using TRAVERSE.Business.PurchaseOrder;
 using TRAVERSE.Core;
 using TraverseApi;
+using TRAVERSE.Business.API;
 #endregion Using Directives
 
 namespace OSI.TraverseApi.PurchaseOrder.Controllers

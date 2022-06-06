@@ -3,7 +3,6 @@ using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Microsoft.Owin.Infrastructure;
 using Microsoft.Owin.Security.OAuth;
-using OSI.TraverseApi.Business;
 using Owin;
 using System;
 using System.IO;
@@ -11,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using TRAVERSE.Business.API;
 using TraverseApi.Properties;
 #endregion Using Directives
 

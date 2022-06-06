@@ -1,5 +1,4 @@
 ﻿#region Using Directives
-using OSI.TraverseApi.Business;
 using OSI.TraverseApi.Inventory.Models;
 using System;
 using System.Collections.Generic;
@@ -9,6 +8,7 @@ using TRAVERSE.Business;
 using TRAVERSE.Business.Inventory;
 using TRAVERSE.Core;
 using TraverseApi;
+using TRAVERSE.Business.API;
 #endregion Using Directives
 
 namespace OSI.TraverseApi.Inventory.Controllers

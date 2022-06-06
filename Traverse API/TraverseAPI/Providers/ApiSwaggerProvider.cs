@@ -1,11 +1,11 @@
-﻿using OSI.TraverseApi.Business;
-using Swagger.Net;
+﻿using Swagger.Net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
+using TRAVERSE.Business.API;
 using TraverseApi.Properties;
 
 namespace TraverseApi

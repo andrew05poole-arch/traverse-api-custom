@@ -1,6 +1,4 @@
-﻿using OSI.TraverseApi.Business;
-using System.ComponentModel.DataAnnotations;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace TraverseApi
 {

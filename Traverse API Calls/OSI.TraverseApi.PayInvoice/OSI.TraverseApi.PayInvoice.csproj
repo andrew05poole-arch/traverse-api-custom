@@ -61,11 +61,6 @@
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
-    <Reference Include="OSI.TraverseApi.Business, Version=2.0.20072.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Core\OSI.TraverseApi.Business.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="OSI.TraverseApi.WebService">
       <HintPath>..\..\Core\OSI.TraverseApi.WebService.dll</HintPath>
       <Private>False</Private>
@@ -91,6 +86,9 @@
     <Reference Include="TRAVERSE.Business">
       <HintPath>..\..\Core\TRAVERSE.Business.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="TRAVERSE.Business.API">
+      <HintPath>..\..\Core\TRAVERSE.Business.API.dll</HintPath>
     </Reference>
     <Reference Include="TRAVERSE.Business.Batch, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\Core\TRAVERSE.Business.Batch.dll</HintPath>

@@ -1,8 +1,8 @@
-﻿using OSI.TraverseApi.Business;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using TRAVERSE.Business.API;
 using TRAVERSE.Core;
 
 namespace TraverseApi
@@ -122,10 +122,7 @@ namespace TraverseApi
         {
             get
             {
-                if (ConfigurationManager.AppSettings.AllKeys.Contains("ApiDatabase"))
-                    return ConfigurationManager.AppSettings["ApiDatabase"];
-
-                return "TraverseApi";
+                return TraverseSysDB;
             }
         }
 

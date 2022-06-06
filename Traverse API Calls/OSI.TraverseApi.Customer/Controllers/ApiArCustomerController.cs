@@ -1,6 +1,6 @@
 ﻿#region Using Directives
 using System;
-using OSI.TraverseApi.Business;
+
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -12,6 +12,7 @@ using TraverseApi;
 using TRAVERSE.Business.AccountsReceivable;
 using TRAVERSE.Business.Tax;
 using OSI.TraverseApi.Contacts.Models;
+using TRAVERSE.Business.API;
 #endregion Using Directives 
 
 namespace OSI.TraverseApi.Contacts.Controllers

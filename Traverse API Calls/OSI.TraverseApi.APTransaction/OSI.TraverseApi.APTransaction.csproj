@@ -60,10 +60,6 @@
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
-    <Reference Include="OSI.TraverseApi.Business">
-      <HintPath>..\..\Core\OSI.TraverseApi.Business.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="OSI.TraverseApi.WebService">
       <HintPath>..\..\Core\OSI.TraverseApi.WebService.dll</HintPath>
       <Private>False</Private>
@@ -93,6 +89,9 @@
     <Reference Include="TRAVERSE.Business.AccountsPayable">
       <HintPath>..\..\Core\TRAVERSE.Business.AccountsPayable.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="TRAVERSE.Business.API">
+      <HintPath>..\..\Core\TRAVERSE.Business.API.dll</HintPath>
     </Reference>
     <Reference Include="TRAVERSE.Business.APTransaction">
       <HintPath>..\..\Core\TRAVERSE.Business.APTransaction.dll</HintPath>
