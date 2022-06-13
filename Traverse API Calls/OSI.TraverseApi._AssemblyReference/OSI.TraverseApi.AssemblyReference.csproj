@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{CB2D2AA5-C77B-4209-A5E8-F5E7E55B7BC7}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>OSI.TraverseApi.AssemblyReference</RootNamespace>
-    <AssemblyName>OSI.TraverseApi.AssemblyReference</AssemblyName>
+    <RootNamespace>TRAVERSE.Web.API.AssemblyReference</RootNamespace>
+    <AssemblyName>TRAVERSE.Web.API.AssemblyReference</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

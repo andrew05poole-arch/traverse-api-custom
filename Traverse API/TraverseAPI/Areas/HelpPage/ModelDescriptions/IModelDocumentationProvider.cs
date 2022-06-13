@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace TraverseApi.Areas.HelpPage.ModelDescriptions
+namespace TRAVERSE.Web.API.Areas.HelpPage.ModelDescriptions
 {
     public interface IModelDocumentationProvider
     {

@@ -8,10 +8,10 @@ using TRAVERSE.Business;
 using TRAVERSE.Business.Inventory;
 using TRAVERSE.Business.PurchaseOrder;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.PurchaseOrder.Controllers
+namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
 {
     public class ApiPoTransactionReceiptSerialController : ApiControllerBase
     {

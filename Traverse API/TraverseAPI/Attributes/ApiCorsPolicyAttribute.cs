@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Web.Cors;
 using System.Web.Http.Cors;
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false)]
     public sealed class ApiCorsPolicyAttribute : Attribute, ICorsPolicyProvider

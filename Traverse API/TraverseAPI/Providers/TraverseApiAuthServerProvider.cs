@@ -7,10 +7,10 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using TRAVERSE.Business.API;
 using TRAVERSE.Core;
-using TraverseApi.Properties;
+using TRAVERSE.Web.API.Properties;
 #endregion Using Directives
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     public sealed class TraverseApiAuthServerProvider : OAuthAuthorizationServerProvider
     {

@@ -15,10 +15,10 @@ using System.Web.Http.ExceptionHandling;
 using System.Xml.Serialization;
 using TRAVERSE.Business.API;
 using TRAVERSE.Core;
-using TraverseApi.Properties;
+using TRAVERSE.Web.API.Properties;
 #endregion Using Directives
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     public sealed class ApiErrorHandler : ExceptionHandler
     {

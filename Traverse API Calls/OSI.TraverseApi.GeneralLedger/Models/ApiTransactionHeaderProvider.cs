@@ -7,7 +7,7 @@ using TRAVERSE.Business;
 using TRAVERSE.Business.GeneralLedger;
 using TRAVERSE.Core;
 
-namespace OSI.TraverseApi.GeneralLedger
+namespace TRAVERSE.Web.API.GeneralLedger
 {
     public class ApiTransactionHeaderProvider : TransactionProviderBase<TransactionHeader>
     {

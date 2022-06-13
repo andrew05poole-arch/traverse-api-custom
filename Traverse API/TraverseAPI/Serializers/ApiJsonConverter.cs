@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using TRAVERSE.Business.API;
 #endregion Using Directives
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     public sealed class ApiJsonConverter : JsonConverter
     {

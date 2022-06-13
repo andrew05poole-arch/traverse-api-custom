@@ -9,12 +9,12 @@ using TRAVERSE.Business.Inventory;
 using TRAVERSE.Business.ProjectCosting;
 using W = TRAVERSE.Business.WM;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 using PC = TRAVERSE.Business.ProjectCosting;
 using T = System.Threading.Tasks;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.ProjectCosting.Controllers
+namespace TRAVERSE.Web.API.ProjectCosting.Controllers
 {
     public class ApiPcTransactionLotController : ApiControllerBase
     {

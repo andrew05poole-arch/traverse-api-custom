@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 using System.Web;
 using TRAVERSE.Business;
 using TRAVERSE.Business.API;
-using TraverseApi.Properties;
+using TRAVERSE.Web.API.Properties;
 #endregion Using Directives
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     public sealed class ApiEntityModel : DynamicObject, IDictionary<string, object>, IDisposable
     {

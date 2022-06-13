@@ -8,11 +8,11 @@ using System.Web.Http;
 using TRAVERSE.Business;
 using TRAVERSE.Business.Manufacturing;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 using TRAVERSE.Business.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.MfgCore.Controllers
+namespace TRAVERSE.Web.API.MfgCore.Controllers
 {
     public class ApiMbMediaGroupController : ApiControllerBase
     {

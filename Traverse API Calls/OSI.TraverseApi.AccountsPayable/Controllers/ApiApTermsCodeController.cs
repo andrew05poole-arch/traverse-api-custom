@@ -7,11 +7,11 @@ using System.Web.Http;
 using TRAVERSE.Business;
 using TRAVERSE.Business.AccountsPayable;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 using TRAVERSE.Business.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.AccountsPayable.Controllers
+namespace TRAVERSE.Web.API.AccountsPayable.Controllers
 {
     public class ApiApTermsCodeController : ApiControllerBase
     {

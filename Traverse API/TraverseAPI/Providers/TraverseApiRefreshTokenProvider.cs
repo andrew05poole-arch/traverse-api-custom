@@ -3,9 +3,9 @@ using Microsoft.Owin.Security.Infrastructure;
 using System;
 using System.Threading.Tasks;
 using TRAVERSE.Business.API;
-using TraverseApi.Properties;
+using TRAVERSE.Web.API.Properties;
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     public sealed class TraverseApiRefreshTokenProvider : IAuthenticationTokenProvider
     {

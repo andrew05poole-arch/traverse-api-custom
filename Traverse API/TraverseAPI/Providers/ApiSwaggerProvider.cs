@@ -6,9 +6,9 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using TRAVERSE.Business.API;
-using TraverseApi.Properties;
+using TRAVERSE.Web.API.Properties;
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     public sealed class ApiSwaggerProvider : ISwaggerProvider
     {

@@ -10,11 +10,11 @@ using TRAVERSE.Business.Contacts;
 using TRAVERSE.Business.Inventory;
 using TRAVERSE.Business.SalesOrder;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 using TRAVERSE.Business.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.SalesOrder.Controllers
+namespace TRAVERSE.Web.API.SalesOrder.Controllers
 {
     public class ApiSoTransactionOrderController : ApiControllerBase
     {

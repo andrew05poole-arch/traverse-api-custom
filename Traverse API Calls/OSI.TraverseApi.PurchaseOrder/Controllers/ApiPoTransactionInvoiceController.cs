@@ -1,5 +1,5 @@
 ﻿#region Using Directives
-using OSI.TraverseApi.PurchaseOrder.Models;
+using TRAVERSE.Web.API.PurchaseOrder.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,10 +11,10 @@ using TRAVERSE.Business.CompanySetup;
 using TRAVERSE.Business.Inventory;
 using TRAVERSE.Business.PurchaseOrder;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.PurchaseOrder.Controllers
+namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
 {
     public class ApiPoTransactionInvoiceController : ApiControllerBase
     {

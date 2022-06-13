@@ -7,8 +7,8 @@
     <ProjectGuid>{B95D8F0A-A842-45CC-AE1C-0A4587797546}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OSI.TraverseApi.INTransaction</RootNamespace>
-    <AssemblyName>OSI.TraverseApi.INTransaction</AssemblyName>
+    <RootNamespace>TRAVERSE.Web.API.INTransaction</RootNamespace>
+    <AssemblyName>TRAVERSE.Web.API.INTransaction</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -60,11 +60,6 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="OSI.TraverseApi.WebService, Version=2.0.21088.20352, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\Core\OSI.TraverseApi.WebService.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
@@ -142,6 +137,9 @@
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
+    <Reference Include="TRAVERSE.Web.API">
+      <HintPath>..\..\Core\TRAVERSE.Web.API.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\OSI.TraverseApi._AssemblyReference\ApiAssemblyInfo.cs">
@@ -157,7 +155,9 @@
     <Compile Include="Controllers\ApiInTransferSerialController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

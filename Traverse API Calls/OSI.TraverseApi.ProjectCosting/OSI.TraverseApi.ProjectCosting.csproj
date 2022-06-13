@@ -7,8 +7,8 @@
     <ProjectGuid>{D5368E77-E70E-42D2-8BF1-CDA8DA41298A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OSI.TraverseApi.ProjectCosting</RootNamespace>
-    <AssemblyName>OSI.TraverseApi.ProjectCosting</AssemblyName>
+    <RootNamespace>TRAVERSE.Web.API.ProjectCosting</RootNamespace>
+    <AssemblyName>TRAVERSE.Web.API.ProjectCosting</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -58,11 +58,6 @@
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="OSI.TraverseApi.WebService, Version=11.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Core\OSI.TraverseApi.WebService.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -155,6 +150,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Core\TRAVERSE.Core.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="TRAVERSE.Web.API">
+      <HintPath>..\..\Core\TRAVERSE.Web.API.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -7,8 +7,8 @@
     <ProjectGuid>{D5D4112C-2C50-4001-BC1B-C54193CF72AE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OSI.TraverseApi.CRM</RootNamespace>
-    <AssemblyName>OSI.TraverseApi.CRM</AssemblyName>
+    <RootNamespace>TRAVERSE.Web.API.CRM</RootNamespace>
+    <AssemblyName>TRAVERSE.Web.API.CRM</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>false</Deterministic>
@@ -63,11 +63,6 @@
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
-    <Reference Include="OSI.TraverseApi.WebService, Version=2.0.21088.20352, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\Core\OSI.TraverseApi.WebService.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
@@ -116,6 +111,9 @@
       <HintPath>..\..\Core\TRAVERSE.Core.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="TRAVERSE.Web.API">
+      <HintPath>..\..\Core\TRAVERSE.Web.API.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

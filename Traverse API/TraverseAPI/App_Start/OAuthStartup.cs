@@ -11,11 +11,11 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using TRAVERSE.Business.API;
-using TraverseApi.Properties;
+using TRAVERSE.Web.API.Properties;
 #endregion Using Directives
 
-[assembly: OwinStartup(typeof(TraverseApi.OAuthStartup))]
-namespace TraverseApi
+[assembly: OwinStartup(typeof(TRAVERSE.Web.API.OAuthStartup))]
+namespace TRAVERSE.Web.API
 {
     public class OAuthStartup
     {

@@ -9,10 +9,10 @@ using TRAVERSE.Business;
 using TRAVERSE.Business.Contacts;
 using TRAVERSE.Business.Inventory;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.InventoryLookup.Controllers
+namespace TRAVERSE.Web.API.InventoryLookup.Controllers
 {
     public class ApiInLotNumberController : ApiControllerBase
     {

@@ -4,9 +4,9 @@ using System.Data;
 using System.Threading.Tasks;
 using TRAVERSE.Business;
 using TRAVERSE.Business.API;
-using TraverseApi.Properties;
+using TRAVERSE.Web.API.Properties;
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     internal sealed class ApiQueryHandler
     {

@@ -11,11 +11,11 @@ using TRAVERSE.Business.Batching;
 using TRAVERSE.Business.INTransaction;
 using TRAVERSE.Business.Inventory;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 using TRAVERSE.Business.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.INTransaction
+namespace TRAVERSE.Web.API.INTransaction
 {
     public class ApiInTransactionController : ApiControllerBase
     {

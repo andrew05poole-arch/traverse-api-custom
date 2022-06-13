@@ -7,11 +7,11 @@ using System.Web.Http;
 using TRAVERSE.Business;
 using TRAVERSE.Business.Tax;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 using TRAVERSE.Business.API;
 #endregion  Using Directives
 
-namespace OSI.TraverseApi.Tax.Controllers
+namespace TRAVERSE.Web.API.Tax.Controllers
 {
     public class ApiSmTaxClassController : ApiControllerBase
     {

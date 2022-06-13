@@ -7,11 +7,11 @@ using System.Web.Http;
 using TRAVERSE.Business;
 using TRAVERSE.Business.Payroll;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 using TRAVERSE.Business.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.PayrollTax.Controllers
+namespace TRAVERSE.Web.API.PayrollTax.Controllers
 {
     public class ApiPaFormulaController : ApiControllerBase
     {

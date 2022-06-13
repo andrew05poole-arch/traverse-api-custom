@@ -2,7 +2,7 @@
 using TRAVERSE.Business.Inventory;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.ProjectCosting.Models
+namespace TRAVERSE.Web.API.ProjectCosting.Models
 {
     public class FindSerialItemPC
     {

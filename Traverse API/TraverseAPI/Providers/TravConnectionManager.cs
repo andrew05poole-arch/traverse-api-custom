@@ -2,9 +2,9 @@
 using System.IO;
 using System.Web;
 using TRAVERSE.Core;
-using TraverseApi.Properties;
+using TRAVERSE.Web.API.Properties;
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     public sealed class TravConnectionManager
     {

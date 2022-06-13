@@ -8,11 +8,11 @@ using System.Web.Http;
 using TRAVERSE.Business;
 using TRAVERSE.Business.BillMaterial;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 using TRAVERSE.Business.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.BillMaterial.Controllers
+namespace TRAVERSE.Web.API.BillMaterial.Controllers
 {
     public class ApiBOMHeaderController : ApiControllerBase
     {

@@ -1,5 +1,5 @@
 ﻿#region Using Directives
-using OSI.TraverseApi.AccountsReceivable.Controllers;
+using TRAVERSE.Web.API.AccountsReceivable.Controllers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +11,7 @@ using TRAVERSE.Business.Contacts;
 using TRAVERSE.Core;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.AccountsReceivable
+namespace TRAVERSE.Web.API.AccountsReceivable
 {
     public class SummaryOpenInvoice
     {

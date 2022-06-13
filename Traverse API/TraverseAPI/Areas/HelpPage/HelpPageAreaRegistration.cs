@@ -1,7 +1,7 @@
 using System.Web.Http;
 using System.Web.Mvc;
 
-namespace TraverseApi.Areas.HelpPage
+namespace TRAVERSE.Web.API.Areas.HelpPage
 {
     public class HelpPageAreaRegistration : AreaRegistration
     {

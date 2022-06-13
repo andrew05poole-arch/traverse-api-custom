@@ -6,7 +6,7 @@ using System.IO;
 using System.Threading.Tasks;
 #endregion Using Directives
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     [Serializable]
     public class ApiErrorLogInfo

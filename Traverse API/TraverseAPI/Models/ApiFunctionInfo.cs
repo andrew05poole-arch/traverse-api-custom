@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     public class ApiFunctionInfo
     {

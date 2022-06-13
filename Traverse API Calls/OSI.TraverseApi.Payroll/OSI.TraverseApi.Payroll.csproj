@@ -7,8 +7,8 @@
     <ProjectGuid>{CDA37169-2046-4992-8607-789673B3C4E3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OSI.TraverseApi.Payroll</RootNamespace>
-    <AssemblyName>OSI.TraverseApi.Payroll</AssemblyName>
+    <RootNamespace>TRAVERSE.Web.API.Payroll</RootNamespace>
+    <AssemblyName>TRAVERSE.Web.API.Payroll</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -60,11 +60,6 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="OSI.TraverseApi.WebService, Version=2.0.21088.20352, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\Core\OSI.TraverseApi.WebService.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
@@ -136,6 +131,9 @@
       <HintPath>..\..\Core\TRAVERSE.Core.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="TRAVERSE.Web.API">
+      <HintPath>..\..\Core\TRAVERSE.Web.API.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

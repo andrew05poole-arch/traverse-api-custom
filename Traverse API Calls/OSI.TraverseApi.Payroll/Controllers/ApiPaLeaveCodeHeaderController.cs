@@ -8,11 +8,11 @@ using System.Web.Http;
 using TRAVERSE.Business;
 using TRAVERSE.Business.Payroll;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 using TRAVERSE.Business.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.Payroll.Controllers
+namespace TRAVERSE.Web.API.Payroll.Controllers
 {
     public class ApiPaLeaveCodeHeaderController : ApiControllerBase
     {

@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     public class RouteConfig
     {

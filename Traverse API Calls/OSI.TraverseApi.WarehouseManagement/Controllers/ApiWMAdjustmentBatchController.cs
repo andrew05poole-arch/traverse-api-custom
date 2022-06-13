@@ -8,11 +8,11 @@ using TRAVERSE.Business;
 using TRAVERSE.Business.Batching;
 using TRAVERSE.Business.WM;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 using TRAVERSE.Business.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.WarehouseManagement
+namespace TRAVERSE.Web.API.WarehouseManagement
 {
     public class ApiWMAdjustmentBatchController : ApiControllerBase
     {

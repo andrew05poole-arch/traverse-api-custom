@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     public class ApiChangePassword
     {

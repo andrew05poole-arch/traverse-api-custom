@@ -7,12 +7,12 @@ using System.Web.Http;
 using TRAVERSE.Business;
 using TRAVERSE.Business.ProjectCosting;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 using T = System.Threading.Tasks;
 using TRAVERSE.Business.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.ProjectCosting.Controllers
+namespace TRAVERSE.Web.API.ProjectCosting.Controllers
 {
     public class ApiPcOhAllocCodeController : ApiControllerBase
     {

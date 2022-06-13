@@ -2,7 +2,7 @@
 using System.ComponentModel;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.Pricing.Models
+namespace TRAVERSE.Web.API.Pricing.Models
 {
     public class ContractUpdate
     {

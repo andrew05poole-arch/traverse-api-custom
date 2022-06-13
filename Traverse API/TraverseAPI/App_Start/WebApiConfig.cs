@@ -5,7 +5,7 @@ using System.Net.Http.Formatting;
 using System.Web.Http;
 #endregion Using Directives
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     public static class WebApiConfig
     {

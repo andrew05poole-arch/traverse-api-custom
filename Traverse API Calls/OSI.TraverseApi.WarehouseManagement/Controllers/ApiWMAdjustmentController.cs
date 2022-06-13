@@ -9,11 +9,11 @@ using TRAVERSE.Business;
 using TRAVERSE.Business.Inventory;
 using TRAVERSE.Business.WM;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 using TRAVERSE.Business.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.WarehouseManagement.Controllers
+namespace TRAVERSE.Web.API.WarehouseManagement.Controllers
 {
     public class ApiWMAdjustmentController : ApiControllerBase
     {

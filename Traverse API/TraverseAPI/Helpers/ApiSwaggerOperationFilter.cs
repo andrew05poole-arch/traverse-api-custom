@@ -7,9 +7,9 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 using TRAVERSE.Business;
 using TRAVERSE.Business.API;
-using TraverseApi.Properties;
+using TRAVERSE.Web.API.Properties;
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     public class ApiSwaggerOperationFilter : IOperationFilter
     {

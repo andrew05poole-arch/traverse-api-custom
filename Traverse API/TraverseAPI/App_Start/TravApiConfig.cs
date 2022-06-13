@@ -5,7 +5,7 @@ using System.Linq;
 using TRAVERSE.Business.API;
 using TRAVERSE.Core;
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     public sealed class TravApiConfig
     {

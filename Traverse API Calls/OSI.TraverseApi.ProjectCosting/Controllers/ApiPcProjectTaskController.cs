@@ -7,11 +7,11 @@ using System.Web.Http;
 using TRAVERSE.Business;
 using TRAVERSE.Business.ProjectCosting;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 using Task = System.Threading.Tasks.Task;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.ProjectCosting.Controllers
+namespace TRAVERSE.Web.API.ProjectCosting.Controllers
 {
     public class ApiPcProjectTaskController : ApiControllerBase
     {

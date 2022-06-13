@@ -8,13 +8,13 @@ using TRAVERSE.Business;
 using TRAVERSE.Business.BankRec;
 using TRAVERSE.Business.CompanySetup;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 using System.Linq;
 using System.Net.Http;
 using TRAVERSE.Business.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.BankRec.Controllers
+namespace TRAVERSE.Web.API.BankRec.Controllers
 {
     public class ApBrTransferHeaderController : ApiControllerBase
     {

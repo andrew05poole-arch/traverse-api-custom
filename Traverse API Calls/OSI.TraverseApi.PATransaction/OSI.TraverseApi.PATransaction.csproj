@@ -7,8 +7,8 @@
     <ProjectGuid>{995F837E-62AF-4F15-8ABA-FCF8D7606BA3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OSI.TraverseApi.Payroll</RootNamespace>
-    <AssemblyName>OSI.TraverseApi.PATransaction</AssemblyName>
+    <RootNamespace>TRAVERSE.Web.API.Payroll</RootNamespace>
+    <AssemblyName>TRAVERSE.Web.API.PATransaction</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>false</Deterministic>
@@ -60,10 +60,6 @@
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
-    <Reference Include="OSI.TraverseApi.WebService">
-      <HintPath>..\..\Core\OSI.TraverseApi.WebService.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -104,6 +100,9 @@
     <Reference Include="TRAVERSE.Core">
       <HintPath>..\..\Core\TRAVERSE.Core.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="TRAVERSE.Web.API">
+      <HintPath>..\..\Core\TRAVERSE.Web.API.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

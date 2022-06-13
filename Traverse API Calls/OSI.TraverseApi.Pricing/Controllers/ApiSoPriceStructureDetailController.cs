@@ -8,10 +8,10 @@ using System.Web.Http;
 using TRAVERSE.Business;
 using TRAVERSE.Business.Pricing;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.Pricing.Controllers
+namespace TRAVERSE.Web.API.Pricing.Controllers
 {
     public class ApiSoPriceStructureDetailController : ApiControllerBase
     {
