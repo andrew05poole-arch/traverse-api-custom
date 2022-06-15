@@ -36,7 +36,7 @@
     </xs:element>
   </xs:schema>
   <BuildInfo>
-    <Version>11.2.20031</Version>
+    <Version>11.2.22166</Version>
     <PreviousVersion>11.2.20031</PreviousVersion>
     <Notes>Traverse Api Update</Notes>
   </BuildInfo>
