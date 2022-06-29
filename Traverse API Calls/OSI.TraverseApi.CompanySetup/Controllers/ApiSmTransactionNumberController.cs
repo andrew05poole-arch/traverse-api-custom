@@ -1,5 +1,4 @@
 ﻿#region Using Directives
-using OSI.TraverseApi.Business;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,10 +7,11 @@ using System.Web.Http;
 using TRAVERSE.Business;
 using TRAVERSE.Business.CompanySetup;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
+using TRAVERSE.Business.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.CompanySetup.Controllers
+namespace TRAVERSE.Web.API.CompanySetup.Controllers
 {
     public class ApiSmTransactionNumberController : ApiControllerBase
     {

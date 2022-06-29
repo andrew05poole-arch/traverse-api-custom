@@ -1,14 +1,14 @@
 ﻿#region Using Directives
-using OSI.TraverseApi.Business;
 using System.Threading.Tasks;
 using System.Web.Http;
 using TRAVERSE.Business;
 using TRAVERSE.Business.GeneralLedger;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
+using TRAVERSE.Business.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.GeneralLedger.Controllers
+namespace TRAVERSE.Web.API.GeneralLedger.Controllers
 {
     public class ApiGlAccountTypeController : ApiControllerBase
     {

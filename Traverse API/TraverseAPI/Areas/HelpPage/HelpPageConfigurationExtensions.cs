@@ -11,10 +11,10 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
-using TraverseApi.Areas.HelpPage.ModelDescriptions;
-using TraverseApi.Areas.HelpPage.Models;
+using TRAVERSE.Web.API.Areas.HelpPage.ModelDescriptions;
+using TRAVERSE.Web.API.Areas.HelpPage.Models;
 
-namespace TraverseApi.Areas.HelpPage
+namespace TRAVERSE.Web.API.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {

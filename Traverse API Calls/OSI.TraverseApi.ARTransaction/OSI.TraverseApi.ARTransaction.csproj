@@ -7,8 +7,8 @@
     <ProjectGuid>{F2C8FEB7-5EB7-4D4D-87DE-F5A1A081AF90}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OSI.TraverseApi.AccountsReceivable</RootNamespace>
-    <AssemblyName>OSI.TraverseApi.ARTransaction</AssemblyName>
+    <RootNamespace>TRAVERSE.Web.API.AccountsReceivable</RootNamespace>
+    <AssemblyName>TRAVERSE.Web.API.ARTransaction</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -55,23 +55,29 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
-    <Reference Include="OSI.TraverseApi.Business, Version=2.0.20058.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files\Open Systems, Inc\Clients\TRAVERSE Global 2 - API\OSI.TraverseApi.Business.dll</HintPath>
-      <Private>False</Private>
     </Reference>
-    <Reference Include="OSI.TraverseApi.WebService, Version=2.0.20058.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files\Open Systems, Inc\Clients\TRAVERSE Global 2 - API\OSI.TraverseApi.WebService.dll</HintPath>
-      <Private>False</Private>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
+    <Reference Include="System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
@@ -82,76 +88,82 @@
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-    <Reference Include="TRAVERSE.Business, Version=2.0.0.0, Culture=neutral, PublicKeyToken=65ed39acbe64cb1a, processorArchitecture=MSIL">
+    <Reference Include="System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files\Open Systems, Inc\Clients\TRAVERSE Global 2 - API\TRAVERSE.Business.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="TRAVERSE.Business, Version=2.0.0.0, Culture=neutral, PublicKeyToken=65ed39acbe64cb1a, processorArchitecture=MSIL">
+      <HintPath>..\..\Core\TRAVERSE.Business.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
     <Reference Include="TRAVERSE.Business.AccountsReceivable, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Core\TRAVERSE.Business.AccountsReceivable.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files\Open Systems, Inc\Clients\TRAVERSE Global 2 - API\TRAVERSE.Business.AccountsReceivable.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="TRAVERSE.Business.API">
+      <HintPath>..\..\Core\TRAVERSE.Business.API.dll</HintPath>
+    </Reference>
     <Reference Include="TRAVERSE.Business.ARHistory, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Core\TRAVERSE.Business.ARHistory.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Trav11\Global2\TRAVERSE Global 2 API\TRAVERSE.Business.ARHistory.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="TRAVERSE.Business.ARTransaction, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Core\TRAVERSE.Business.ARTransaction.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files\Open Systems, Inc\Clients\TRAVERSE Global 2 - API\TRAVERSE.Business.ARTransaction.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="TRAVERSE.Business.Batch, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Core\TRAVERSE.Business.Batch.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files\Open Systems, Inc\Clients\TRAVERSE Global 2 - API\TRAVERSE.Business.Batch.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="TRAVERSE.Business.CompanySetup, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Core\TRAVERSE.Business.CompanySetup.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Trav11\Global2\TRAVERSE Global 2 API\TRAVERSE.Business.CompanySetup.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="TRAVERSE.Business.Inventory, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="TRAVERSE.Business.Inventory, Version=1.0.8045.31343, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Core\TRAVERSE.Business.Inventory.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Trav11\Global2\TRAVERSE Global 2 API\TRAVERSE.Business.Inventory.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="TRAVERSE.Business.PayInvoice, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Core\TRAVERSE.Business.PayInvoice.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Trav11\Global2\TRAVERSE Global 2 API\TRAVERSE.Business.PayInvoice.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="TRAVERSE.Business.Payment, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Core\TRAVERSE.Business.Payment.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Trav11\Global2\TRAVERSE Global 2 API\TRAVERSE.Business.Payment.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="TRAVERSE.Business.PeriodConversion, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Core\TRAVERSE.Business.PeriodConversion.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Trav11\Global2\TRAVERSE Global 2 API\TRAVERSE.Business.PeriodConversion.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="TRAVERSE.Business.Rules, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="TRAVERSE.Business.Rules, Version=1.1.15190.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Core\TRAVERSE.Business.Rules.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Trav11\Global2\TRAVERSE Global 2 API\TRAVERSE.Business.Rules.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="TRAVERSE.Business.Transaction, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Core\TRAVERSE.Business.Transaction.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files\Open Systems, Inc\Clients\TRAVERSE Global 2 - API\TRAVERSE.Business.Transaction.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="TRAVERSE.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=65ed39acbe64cb1a, processorArchitecture=MSIL">
+      <HintPath>..\..\Core\TRAVERSE.Core.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files\Open Systems, Inc\Clients\TRAVERSE Global 2 - API\TRAVERSE.Core.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="TRAVERSE.Web.API">
+      <HintPath>..\..\Core\TRAVERSE.Web.API.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -173,4 +185,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetPath)" "$(EverstarGlobalAPI)\ApiPlugins\$(TargetFileName)"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

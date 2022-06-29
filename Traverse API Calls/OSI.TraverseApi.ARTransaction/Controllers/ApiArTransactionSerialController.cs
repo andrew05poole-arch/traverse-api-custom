@@ -8,10 +8,10 @@ using TRAVERSE.Business;
 using TRAVERSE.Business.AccountsReceivable;
 using TRAVERSE.Business.Inventory;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.AccountsReceivable.Controllers
+namespace TRAVERSE.Web.API.AccountsReceivable.Controllers
 {
     public class ApiArTransactionSerialController : ApiControllerBase
     {

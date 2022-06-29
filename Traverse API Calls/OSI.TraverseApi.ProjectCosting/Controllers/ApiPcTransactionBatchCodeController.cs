@@ -1,5 +1,4 @@
 ﻿#region Using Diretives
-using OSI.TraverseApi.Business;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,11 +8,12 @@ using TRAVERSE.Business;
 using TRAVERSE.Business.Batching;
 using TRAVERSE.Business.ProjectCosting;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 using Task = System.Threading.Tasks.Task;
+using TRAVERSE.Business.API;
 #endregion Using Diretives
 
-namespace OSI.TraverseApi.ProjectCosting.Controllers
+namespace TRAVERSE.Web.API.ProjectCosting.Controllers
 {
     public class ApiPcTransactionBatchCodeController : ApiControllerBase
     {

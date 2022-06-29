@@ -5,12 +5,12 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using OSI.TraverseApi.Business;
+using TRAVERSE.Business.API;
 using TRAVERSE.Business;
 using TRAVERSE.Business.Pricing;
 using TRAVERSE.Core;
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     public class ApiSamplerController : ApiControllerBase
     {

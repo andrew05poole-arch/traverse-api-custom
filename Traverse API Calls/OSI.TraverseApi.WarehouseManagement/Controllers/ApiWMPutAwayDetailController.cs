@@ -8,12 +8,12 @@ using TRAVERSE.Business;
 using TRAVERSE.Business.WM;
 using TRAVERSE.Business.WMS;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 using System.Linq;
 using TRAVERSE.Business.Inventory;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.WarehouseManagement.Controllers
+namespace TRAVERSE.Web.API.WarehouseManagement.Controllers
 {
     public class ApiWMPutAwayDetailController : ApiControllerBase
     {

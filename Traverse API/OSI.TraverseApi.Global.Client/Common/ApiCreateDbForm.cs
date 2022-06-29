@@ -1,6 +1,8 @@
 ﻿#region Using Directives
 using OSI.TraverseApi.Business;
 using System;
+using System.Linq;
+using System.Windows.Forms;
 using TRAVERSE.Business;
 using TRAVERSE.Client;
 using TRAVERSE.Core;
@@ -62,6 +64,14 @@ namespace OSI.TraverseApi.Client
                 ProcessEngine.Password = this.txtPassword.Text;
                 ProcessEngine.UseTrusted = this.chkUseTrusted.Checked;
 
+                 if (!ProcessEngine.ValidateProperties())
+                {
+                    TravMessageBox.Show(string.Empty
+                        , string.Join(System.Environment.NewLine, this.ProcessEngine.InvalidPropertyList.Select(p => p.Value))
+                        , MessageBoxButtons.OK
+                        , MessageBoxIcon.Information);
+                    return;
+                }
                 ProcessEngine.Execute(null);
 
                 TravMessageBox.Show(string.Empty, 
@@ -83,7 +93,7 @@ namespace OSI.TraverseApi.Client
             get
             {
                 if (_processEngine == null)
-                    _processEngine = ProcessBase.LoadProcessEngine<ApiCreateDb>(ApplicationContext.CompId);
+                    _processEngine = ProcessBase.LoadProcessEngine<ApiCreateDb>(TRAVERSE.Core.ApplicationContext.CompId);
                 return _processEngine;
             }
         }

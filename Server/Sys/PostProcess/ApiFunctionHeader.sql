@@ -1,6 +1,6 @@
-DECLARE @dbName as nvarchar(128), @sql nvarchar(max)
+DECLARE @dbName as sysname, @sql nvarchar(max)
 
-CREATE TABLE #DatabaseList (DbName nvarchar(128))
+CREATE TABLE #DatabaseList (DbName sysname)
 
 DECLARE dbSearch CURSOR FOR
 SELECT [name]

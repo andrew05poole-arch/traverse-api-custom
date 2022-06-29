@@ -9,7 +9,7 @@ using Comp = TRAVERSE.Business.CompanySetup;
 using TRAVERSE.Business.Inventory;
 using TRAVERSE.Core;
 
-namespace OSI.TraverseApi.Inventory
+namespace TRAVERSE.Web.API.Inventory
 {
     public class ItemUtility
     {
@@ -32,7 +32,7 @@ namespace OSI.TraverseApi.Inventory
             {
                 DataSet set = 
                     EntityProvider.ExecuteCommand(string.Format(
-                        Properties.Resources.GetExchangeRateSql, 
+                        TRAVERSE.Web.API.Inventory.Properties.Resources.GetExchangeRateSql, 
                         period.FiscalYear, period.FiscalPeriod,
                         SqlUtil.Encode(currency, true),
                         SqlUtil.Encode(entity.CurrencyIdACV, true)),

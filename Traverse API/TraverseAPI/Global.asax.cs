@@ -1,10 +1,10 @@
-﻿using OSI.TraverseApi.Business;
-using System;
+﻿using System;
 using System.Web;
 using System.Web.Http;
 using System.Web.Security;
+using TRAVERSE.Business.API;
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     public class WebApiApplication : HttpApplication
     {

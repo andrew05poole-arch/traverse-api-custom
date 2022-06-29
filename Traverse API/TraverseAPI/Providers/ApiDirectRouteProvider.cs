@@ -4,7 +4,7 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Routing;
 #endregion Using Directives
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     public class ApiDirectRouteProvider : DefaultDirectRouteProvider
     {

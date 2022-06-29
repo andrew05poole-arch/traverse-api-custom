@@ -1,14 +1,14 @@
 ﻿#region Using Directives
-using OSI.TraverseApi.AccountsReceivable;
+using TRAVERSE.Web.API.AccountsReceivable;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 using TRAVERSE.Business;
 using TRAVERSE.Business.AccountsReceivable;
-using TraverseApi;
+using TRAVERSE.Web.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.AccountsReceivable.Controllers
+namespace TRAVERSE.Web.API.AccountsReceivable.Controllers
 {
     public class ApiArSummaryOpenInvoiceController : ApiControllerBase
     {

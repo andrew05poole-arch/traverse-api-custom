@@ -6,7 +6,7 @@ using TRAVERSE.Business.PurchaseOrder;
 using TRAVERSE.Core;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.PurchaseOrder.Models
+namespace TRAVERSE.Web.API.PurchaseOrder.Models
 {
     public class Invoices
     {

@@ -58,40 +58,40 @@
   <ItemGroup>
     <Reference Include="DevExpress.Data, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
+      
     </Reference>
     <Reference Include="DevExpress.Printing.Core, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
+      
     </Reference>
     <Reference Include="DevExpress.Utils, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
+      
     </Reference>
     <Reference Include="DevExpress.XtraEditors, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
+      
     </Reference>
     <Reference Include="DevExpress.XtraGrid, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
+      
     </Reference>
     <Reference Include="DevExpress.XtraLayout, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
+      
     </Reference>
     <Reference Include="DevExpress.XtraPrinting, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
+      
     </Reference>
     <Reference Include="DevExpress.XtraReports, Version=1.1.1.1, Culture=neutral, PublicKeyToken=052c7f8c54c9d9d9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
+      
     </Reference>
     <Reference Include="OSI.TraverseApi.Business, Version=2.0.20254.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\inetpub\wwwroot\APIs\bin\OSI.TraverseApi.Business.dll</HintPath>
-      <Private>False</Private>
+      
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -105,31 +105,31 @@
     <Reference Include="System.Xml" />
     <Reference Include="TRAVERSE.Business">
       <HintPath>..\..\..\..\..\Program Files\Open Systems, Inc\Special\TRAVERSE API\TRAVERSE 11.2\TRAVERSE.Business.dll</HintPath>
-      <Private>False</Private>
+      
     </Reference>
     <Reference Include="TRAVERSE.Business.FormPrinter">
       <HintPath>..\..\..\..\..\Program Files\Open Systems, Inc\Special\TRAVERSE API\TRAVERSE 11.2\TRAVERSE.Business.FormPrinter.dll</HintPath>
-      <Private>False</Private>
+      
     </Reference>
     <Reference Include="TRAVERSE.Business.Sys">
       <HintPath>..\..\..\..\..\Program Files\Open Systems, Inc\Special\TRAVERSE API\TRAVERSE 11.2\TRAVERSE.Business.Sys.dll</HintPath>
-      <Private>False</Private>
+      
     </Reference>
     <Reference Include="TRAVERSE.Client">
       <HintPath>..\..\..\..\..\Program Files\Open Systems, Inc\Special\TRAVERSE API\TRAVERSE 11.2\TRAVERSE.Client.dll</HintPath>
-      <Private>False</Private>
+      
     </Reference>
     <Reference Include="TRAVERSE.Client.ReportViewer">
       <HintPath>..\..\..\..\..\Program Files\Open Systems, Inc\Special\TRAVERSE API\TRAVERSE 11.2\TRAVERSE.Client.ReportViewer.dll</HintPath>
-      <Private>False</Private>
+      
     </Reference>
     <Reference Include="TRAVERSE.Controls">
       <HintPath>..\..\..\..\..\Program Files\Open Systems, Inc\Special\TRAVERSE API\TRAVERSE 11.2\TRAVERSE.Controls.dll</HintPath>
-      <Private>False</Private>
+      
     </Reference>
     <Reference Include="TRAVERSE.Core">
       <HintPath>..\..\..\..\..\Program Files\Open Systems, Inc\Special\TRAVERSE API\TRAVERSE 11.2\TRAVERSE.Core.dll</HintPath>
-      <Private>False</Private>
+      
     </Reference>
   </ItemGroup>
   <ItemGroup>

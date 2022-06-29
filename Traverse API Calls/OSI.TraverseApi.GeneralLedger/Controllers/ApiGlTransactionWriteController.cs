@@ -1,5 +1,5 @@
 ﻿#region Using Directives
-using OSI.TraverseApi.Business;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +10,10 @@ using TRAVERSE.Business;
 using TRAVERSE.Business.Batching;
 using TRAVERSE.Business.GeneralLedger;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.GeneralLedger.Controllers
+namespace TRAVERSE.Web.API.GeneralLedger.Controllers
 {
     public class ApiGlTransactionWriteController : ApiControllerBase
     {

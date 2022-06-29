@@ -1,5 +1,5 @@
 ﻿#region Using Directives
-using OSI.TraverseApi.Business;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,10 +9,10 @@ using System.Web.Http;
 using TRAVERSE.Business;
 using TRAVERSE.Business.AccountsReceivable;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.AccountsReceivable.Controllers
+namespace TRAVERSE.Web.API.AccountsReceivable.Controllers
 {
     public class ApiArPaymentsController : ApiControllerBase
     {

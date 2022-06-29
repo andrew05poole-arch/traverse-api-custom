@@ -11,6 +11,10 @@ namespace OSI.TraverseApi.Business
 {
     public sealed class ApiCreateDb : ProcessBase
     {
+        #region Fields
+        PropertyCollection<string> _invalidPropertyList;
+        #endregion Fields
+
         #region Constructors
         public ApiCreateDb()
             : this(string.Empty)
@@ -71,14 +75,65 @@ namespace OSI.TraverseApi.Business
             command.CommandText = string.Format(Resources.ApiAddTravMasterUser, DatabaseName, MasterUsername);
             command.ExecuteNonQuery();
         }
+
+        private bool DatabaseExists()
+        {
+            bool exists = false;
+            string query = string.Format(Resources.ApiDatabaseExits, SqlUtil.Encode(this.DatabaseName, true));
+            var ds = EntityProvider.ExecuteCommand(query, ApplicationContext.SysDb, null);
+            if(ds != null && ds.Tables.Count>0 
+                && ds.Tables[0].Rows.Count>0 
+                && ds.Tables[0].Rows[0]["DBExists"] != DBNull.Value)
+            {
+                exists = true;
+            }
+            return exists;
+        }
         #endregion Private
+
+        #region Public
+        public bool ValidateProperties()
+        {
+            //clear the invalid property list 
+            this.InvalidPropertyList.Clear();
+
+            //validate the properties
+            if (string.IsNullOrWhiteSpace(this.DatabaseName))
+            {
+                this.InvalidPropertyList.Add(new EntityProperty<string>("DatabaseName", "Api Database Name is required."));
+            }
+
+            if (ApplicationContext.IsSaaS
+              && !string.IsNullOrWhiteSpace(this.DatabaseName)
+              && this.DatabaseName.Length <= 3)
+            {
+                this.InvalidPropertyList.Add(new EntityProperty<string>("DatabaseName", "Api Database Name must be greater than 3 characters."));
+            }
+
+            if (this.InvalidPropertyList.Count == 0
+                && this.DatabaseExists())
+            {
+                this.InvalidPropertyList.Add(new EntityProperty<string>("DatabaseName", "Api Database already exists."));
+            }
+
+            return (this.InvalidPropertyList.Count == 0);
+        }
+        #endregion
 
         #region Overrides
         public override void Execute(Status status)
         {
-            try
+            this.ProcessStatus = status;
+
+            //validate required property values
+            if (ValidateProperties() == false)
             {
-                this.ProcessStatus = status;
+                throw new InvalidValueException("One or more property values is invalid.  Refer to the InvalidPropertyList for details.");
+            }
+
+            try
+            {            
+              
                 this.RaiseStatus("Preparing");
                 this.RebuildSqlConnectionString();
                 this.RaiseStatus("Creating database");
@@ -110,6 +165,20 @@ namespace OSI.TraverseApi.Business
         #endregion Overrides
 
         #region Properties
+
+        /// <summary>
+        /// Gets the list of invalid properties
+        /// </summary>
+        public  PropertyCollection<string> InvalidPropertyList
+        {
+            get
+            {
+                if (_invalidPropertyList == null)
+                    _invalidPropertyList = new PropertyCollection<string>();
+                return _invalidPropertyList;
+            }
+        }
+
         public string DatabaseName { get; set; }
 
         public string Username { get; set; }

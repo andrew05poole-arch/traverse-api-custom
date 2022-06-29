@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.Web.Http.Description;
-using TraverseApi.Areas.HelpPage.ModelDescriptions;
+using TRAVERSE.Web.API.Areas.HelpPage.ModelDescriptions;
 
-namespace TraverseApi.Areas.HelpPage.Models
+namespace TRAVERSE.Web.API.Areas.HelpPage.Models
 {
     /// <summary>
     /// The model that represents an API displayed on the help page.
