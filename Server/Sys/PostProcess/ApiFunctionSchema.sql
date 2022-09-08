@@ -6330,9 +6330,9 @@ SELECT 110 As SeqNum, N''709529b9-0e66-4822-a647-7cfabf388a31'' As FunctionID, N
 INSERT INTO ApiFunctionSchema (SeqNum, FunctionID, [TravFieldName], ApiFieldName, ValueTranslation, Notes, FieldSetting, ChildFunctionID)
 SELECT 120 As SeqNum, N''709529b9-0e66-4822-a647-7cfabf388a31'' As FunctionID, N''LineStatus'' As TravFieldName, N''status'' As ApiFieldName, NULL As ValueTranslation, NULL As Notes, 7 As FieldSetting, NULL As ChildFunctionID
 INSERT INTO ApiFunctionSchema (SeqNum, FunctionID, [TravFieldName], ApiFieldName, ValueTranslation, Notes, FieldSetting, ChildFunctionID)
-SELECT 130 As SeqNum, N''709529b9-0e66-4822-a647-7cfabf388a31'' As FunctionID, N''UnitCost'' As TravFieldName, N''ord_unit_cost'' As ApiFieldName, NULL As ValueTranslation, NULL As Notes, 7 As FieldSetting, NULL As ChildFunctionID
+SELECT 130 As SeqNum, N''709529b9-0e66-4822-a647-7cfabf388a31'' As FunctionID, N''UnitCostFgn'' As TravFieldName, N''ord_unit_cost'' As ApiFieldName, NULL As ValueTranslation, NULL As Notes, 7 As FieldSetting, NULL As ChildFunctionID
 INSERT INTO ApiFunctionSchema (SeqNum, FunctionID, [TravFieldName], ApiFieldName, ValueTranslation, Notes, FieldSetting, ChildFunctionID)
-SELECT 140 As SeqNum, N''709529b9-0e66-4822-a647-7cfabf388a31'' As FunctionID, N''ExtCost'' As TravFieldName, N''ord_ext_cost'' As ApiFieldName, NULL As ValueTranslation, NULL As Notes, 7 As FieldSetting, NULL As ChildFunctionID
+SELECT 140 As SeqNum, N''709529b9-0e66-4822-a647-7cfabf388a31'' As FunctionID, N''ExtCostFgn'' As TravFieldName, N''ord_ext_cost'' As ApiFieldName, NULL As ValueTranslation, NULL As Notes, 7 As FieldSetting, NULL As ChildFunctionID
 INSERT INTO ApiFunctionSchema (SeqNum, FunctionID, [TravFieldName], ApiFieldName, ValueTranslation, Notes, FieldSetting, ChildFunctionID)
 SELECT 150 As SeqNum, N''709529b9-0e66-4822-a647-7cfabf388a31'' As FunctionID, N''GLAcct'' As TravFieldName, N''gl_acct'' As ApiFieldName, NULL As ValueTranslation, NULL As Notes, 7 As FieldSetting, NULL As ChildFunctionID
 INSERT INTO ApiFunctionSchema (SeqNum, FunctionID, [TravFieldName], ApiFieldName, ValueTranslation, Notes, FieldSetting, ChildFunctionID)
