@@ -2,7 +2,7 @@
 using TRAVERSE.Business.AccountsPayable;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.AccountsPayable.Models
+namespace TRAVERSE.Web.API.AccountsPayable.Models
 {
     public class ApOpenInvoice : OpenInvoice
     {

@@ -2,10 +2,10 @@
 using System.Threading.Tasks;
 using System.Web.Http;
 using TRAVERSE.Business.BankRec;
-using TraverseApi;
+using TRAVERSE.Web.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.BankRec.Controllers
+namespace TRAVERSE.Web.API.BankRec.Controllers
 {
     public class ApiBrDepositDetailController : ApiBrTransactionDetailBaseController
     {

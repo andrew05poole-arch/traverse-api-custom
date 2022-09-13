@@ -3,7 +3,6 @@ using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Microsoft.Owin.Infrastructure;
 using Microsoft.Owin.Security.OAuth;
-using OSI.TraverseApi.Business;
 using Owin;
 using System;
 using System.IO;
@@ -11,11 +10,12 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using TraverseApi.Properties;
+using TRAVERSE.Business.API;
+using TRAVERSE.Web.API.Properties;
 #endregion Using Directives
 
-[assembly: OwinStartup(typeof(TraverseApi.OAuthStartup))]
-namespace TraverseApi
+[assembly: OwinStartup(typeof(TRAVERSE.Web.API.OAuthStartup))]
+namespace TRAVERSE.Web.API
 {
     public class OAuthStartup
     {

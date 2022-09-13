@@ -1,5 +1,4 @@
 ﻿#region Using Directives
-using OSI.TraverseApi.Business;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,10 +10,11 @@ using TRAVERSE.Business;
 using TRAVERSE.Business.Inventory;
 using TRAVERSE.Business.SalesOrder;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
+using TRAVERSE.Business.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.SalesOrder.Controllers
+namespace TRAVERSE.Web.API.SalesOrder.Controllers
 {
     public class ApiSoTransactionOrderController : ApiControllerBase
     {

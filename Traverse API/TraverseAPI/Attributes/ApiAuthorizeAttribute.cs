@@ -1,5 +1,4 @@
-﻿using OSI.TraverseApi.Business;
-using System;
+﻿using System;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -11,9 +10,10 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using TRAVERSE.Business;
-using TraverseApi.Properties;
+using TRAVERSE.Business.API;
+using TRAVERSE.Web.API.Properties;
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     public class ApiAuthorizeAttribute : AuthorizeAttribute
     {

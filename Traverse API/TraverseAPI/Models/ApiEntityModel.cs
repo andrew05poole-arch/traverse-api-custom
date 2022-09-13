@@ -1,5 +1,4 @@
 ﻿#region Using Directives
-using OSI.TraverseApi.Business;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,10 +8,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using TRAVERSE.Business;
-using TraverseApi.Properties;
+using TRAVERSE.Business.API;
+using TRAVERSE.Web.API.Properties;
 #endregion Using Directives
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     public sealed class ApiEntityModel : DynamicObject, IDictionary<string, object>, IDisposable
     {

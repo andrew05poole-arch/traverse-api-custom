@@ -1,5 +1,5 @@
 ﻿#region Using Directives
-using OSI.TraverseApi.Business;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,10 +10,10 @@ using TRAVERSE.Business.Contacts;
 using TRAVERSE.Business.Inventory;
 using TRAVERSE.Business.Sys;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.Inventory.Controllers
+namespace TRAVERSE.Web.API.Inventory.Controllers
 {
     public class ApiInItemVendorController : ApiControllerBase
     {

@@ -4,7 +4,7 @@ using TRAVERSE.Business;
 using TRAVERSE.Business.PurchaseOrder;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.PurchaseOrder.Models
+namespace TRAVERSE.Web.API.PurchaseOrder.Models
 {
     public class Receipts
     {

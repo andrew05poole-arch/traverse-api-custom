@@ -1,5 +1,4 @@
 ﻿#region Using Directives
-using OSI.TraverseApi.Business;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,10 +8,10 @@ using TRAVERSE.Business;
 using TRAVERSE.Business.BankRec;
 using TRAVERSE.Business.CompanySetup;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.BankRec.Controllers
+namespace TRAVERSE.Web.API.BankRec.Controllers
 {
     public class ApiBrDisbursementHeaderController : ApiBrTransactionBaseController
     {

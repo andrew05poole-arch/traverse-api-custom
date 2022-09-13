@@ -1,4 +1,4 @@
-﻿namespace TraverseApi
+﻿namespace TRAVERSE.Web.API
 {
     public sealed class ApiUserSkipped
     {

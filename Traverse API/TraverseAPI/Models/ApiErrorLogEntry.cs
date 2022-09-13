@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 #endregion Using Directives
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     [Serializable]
     public sealed class ApiErrorLogEntry

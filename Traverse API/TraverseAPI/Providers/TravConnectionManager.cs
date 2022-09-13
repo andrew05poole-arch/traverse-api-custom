@@ -2,9 +2,9 @@
 using System.IO;
 using System.Web;
 using TRAVERSE.Core;
-using TraverseApi.Properties;
+using TRAVERSE.Web.API.Properties;
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     public sealed class TravConnectionManager
     {
@@ -63,6 +63,7 @@ namespace TraverseApi
                     ApplicationContext.ConfigFileName = Path.Combine(HttpRuntime.AppDomainAppPath, "web.config");
 
                     Connected = WebEnvironment.Setup(username, password, new LoadAppSettings(LoadTraverseSettings));
+                    TRAVERSE.Business.CloudUtility.LoadSaaSSetting();
                 }
             }
             catch (Exception ex)

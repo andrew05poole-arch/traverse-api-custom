@@ -1,14 +1,14 @@
-﻿using OSI.TraverseApi.Business;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
-using TraverseApi.Properties;
+using TRAVERSE.Business.API;
+using TRAVERSE.Web.API.Properties;
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     [ApiExplorerSettings(IgnoreApi = true)]
     public sealed class ApiSystemController : ApiControllerBase

@@ -365,6 +365,7 @@ FodyWeavers.xsd
 /DataCore
 /DataProvider
 /G2UnitTests
+/ApiPlugins
 
 /Server/Metadata/System/Upload to me.bat
 /Server/Metadata/System/Download to me.bat

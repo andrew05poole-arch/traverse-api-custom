@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     internal sealed class ApiDocModel
     {

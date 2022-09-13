@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     public class ApiRequestException : Exception
     {

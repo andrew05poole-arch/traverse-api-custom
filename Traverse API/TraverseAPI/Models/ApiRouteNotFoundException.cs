@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web;
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     public sealed class ApiRouteNotFoundException : Exception
     {

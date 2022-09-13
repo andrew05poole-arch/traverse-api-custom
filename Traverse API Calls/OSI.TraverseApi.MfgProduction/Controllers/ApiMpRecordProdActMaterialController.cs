@@ -10,10 +10,10 @@ using TRAVERSE.Business.CompanySetup;
 using TRAVERSE.Business.Inventory;
 using TRAVERSE.Business.Manufacturing;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.Manufacturing.Controllers
+namespace TRAVERSE.Web.API.Manufacturing.Controllers
 {
     public class ApiMpRecordProdActMaterialController : ApiControllerBase
     {

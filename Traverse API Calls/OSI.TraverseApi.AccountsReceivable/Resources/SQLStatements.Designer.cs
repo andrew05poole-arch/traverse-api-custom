@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OSI.TraverseApi.AccountsReceivable.Resources {
+namespace TRAVERSE.Web.API.AccountsReceivable.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace OSI.TraverseApi.AccountsReceivable.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("OSI.TraverseApi.AccountsReceivable.Resources.SQLStatements", typeof(SQLStatements).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TRAVERSE.Web.API.AccountsReceivable.Resources.SQLStatements", typeof(SQLStatements).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

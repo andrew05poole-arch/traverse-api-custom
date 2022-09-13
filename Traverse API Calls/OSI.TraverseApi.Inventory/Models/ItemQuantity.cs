@@ -2,7 +2,7 @@
 using TRAVERSE.Business;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.Inventory.Models
+namespace TRAVERSE.Web.API.Inventory.Models
 {
     public class ItemQuantity
     {
