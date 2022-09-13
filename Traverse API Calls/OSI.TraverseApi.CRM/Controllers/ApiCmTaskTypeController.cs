@@ -1,5 +1,5 @@
 ﻿#region Using Directives
-using OSI.TraverseApi.Business;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,11 +8,12 @@ using System.Web.Http;
 using TRAVERSE.Business;
 using TRAVERSE.Business.CRM;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 using T = System.Threading.Tasks;
+using TRAVERSE.Business.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.CRM.Controllers
+namespace TRAVERSE.Web.API.CRM.Controllers
 {
     public class ApiCmTaskTypeController : ApiControllerBase
     {

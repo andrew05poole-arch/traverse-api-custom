@@ -1,13 +1,13 @@
 ﻿#region Using Directives
-using OSI.TraverseApi.Business;
 using System;
 using System.Collections.Generic;
 using System.Web.Http.Routing;
 using System.Web.Routing;
-using TraverseApi.Properties;
+using TRAVERSE.Business.API;
+using TRAVERSE.Web.API.Properties;
 #endregion Using Directives
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = false, AllowMultiple = true)]
     public sealed class ApiRouteAttribute : Attribute, IDirectRouteFactory

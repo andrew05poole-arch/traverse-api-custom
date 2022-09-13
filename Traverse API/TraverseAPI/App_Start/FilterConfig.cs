@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     public class FilterConfig
     {

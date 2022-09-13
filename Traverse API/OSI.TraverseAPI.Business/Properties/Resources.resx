@@ -142,7 +142,7 @@ IF NOT EXISTS (SELECT * FROM sys.tables WHERE [object_id] = OBJECT_ID(N'[dbo].[A
 BEGIN
 	CREATE TABLE [dbo].[ApiInfo] (
 		[ID] [int] NOT NULL,                --Only 1
-		[SysDb] [nvarchar](128) NULL,		--System Database from Installer
+		[SysDb] [sysname] NULL,		--System Database from Installer
 		[Version] [nvarchar](20) NULL,		--Version Information from installer
 		[AuthorizeTimeout] [int] NULL,		--Default to 15 minutes; user set in installer
 		[AccessExpireHours] [int] NULL,		--Default to 12 hours; user set in installer
@@ -166,10 +166,13 @@ END
 
 USE [master];</value>
   </data>
+  <data name="ApiDatabaseExits" xml:space="preserve">
+    <value>SELECT 1 as [DBExists] FROM sys.databases WHERE [name] = {0}</value>
+  </data>
   <data name="ApiFunctionHeaderTable" xml:space="preserve">
-    <value>DECLARE @dbName as nvarchar(128), @sql nvarchar(max)
+    <value>DECLARE @dbName as sysname, @sql nvarchar(max)
 
-CREATE TABLE #DatabaseList (DbName nvarchar(128))
+CREATE TABLE #DatabaseList (DbName sysname)
 
 DECLARE dbSearch CURSOR FOR
 SELECT [name]
@@ -249,9 +252,9 @@ CLOSE dbCreate
 DEALLOCATE dbCreate</value>
   </data>
   <data name="ApiFunctionSchemaTable" xml:space="preserve">
-    <value>DECLARE @dbName as nvarchar(128), @sql nvarchar(max)
+    <value>DECLARE @dbName as sysname, @sql nvarchar(max)
 
-CREATE TABLE #DatabaseList (DbName nvarchar(128))
+CREATE TABLE #DatabaseList (DbName sysname)
 
 DECLARE dbSearch CURSOR FOR
 SELECT [name]
@@ -380,9 +383,9 @@ DEALLOCATE dbUpdate
 DROP TABLE #DatabaseList;</value>
   </data>
   <data name="RetrieveApiDbList" xml:space="preserve">
-    <value>DECLARE @dbName as nvarchar(128), @sql nvarchar(max)
+    <value>DECLARE @dbName as sysname, @sql nvarchar(max)
 
-CREATE TABLE #DatabaseList (DbName nvarchar(128))
+CREATE TABLE #DatabaseList (DbName sysname)
 
 DECLARE dbSearch CURSOR FOR
 SELECT [name]

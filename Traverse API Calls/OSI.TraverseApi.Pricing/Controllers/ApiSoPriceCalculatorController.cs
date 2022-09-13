@@ -6,10 +6,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
-using TraverseApi;
+using TRAVERSE.Web.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.SalesOrder
+namespace TRAVERSE.Web.API.SalesOrder
 {
     public class ApiSoPriceCalculatorController : ApiControllerBase
     {

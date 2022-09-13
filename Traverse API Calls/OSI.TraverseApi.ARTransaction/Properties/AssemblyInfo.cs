@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("OSI.TraverseApi.ARTransaction")]
+[assembly: AssemblyTitle("TRAVERSE.Web.API.ARTransaction")]
 [assembly: AssemblyDescription("")]
 //[assembly: AssemblyConfiguration("")]
 //[assembly: AssemblyCompany("")]
-//[assembly: AssemblyProduct("OSI.TraverseApi.ARTransaction")]
+//[assembly: AssemblyProduct("TRAVERSE.Web.API.ARTransaction")]
 //[assembly: AssemblyCopyright("Copyright ©  2020")]
 //[assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

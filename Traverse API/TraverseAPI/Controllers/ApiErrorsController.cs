@@ -1,7 +1,7 @@
 ﻿using System.Web.Http;
 using System.Web.Http.Description;
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     [ApiAuthorize(true)]
     [ApiExplorerSettings(IgnoreApi = true)]

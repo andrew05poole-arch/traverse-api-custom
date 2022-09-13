@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace TraverseApi.Areas.HelpPage.ModelDescriptions
+namespace TRAVERSE.Web.API.Areas.HelpPage.ModelDescriptions
 {
     public class ParameterDescription
     {

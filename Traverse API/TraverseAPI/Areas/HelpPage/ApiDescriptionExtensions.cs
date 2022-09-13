@@ -3,7 +3,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http.Description;
 
-namespace TraverseApi.Areas.HelpPage
+namespace TRAVERSE.Web.API.Areas.HelpPage
 {
     public static class ApiDescriptionExtensions
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OSI.TraverseApi._AssemblyReference
+namespace TRAVERSE.Web.API._AssemblyReference
 {
     class Program
     {

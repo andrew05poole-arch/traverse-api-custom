@@ -4,7 +4,7 @@ using TRAVERSE.Business.UserDefault;
 using TRAVERSE.Core;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.Contacts.Models
+namespace TRAVERSE.Web.API.Contacts.Models
 {
 	public static class Utility
     {

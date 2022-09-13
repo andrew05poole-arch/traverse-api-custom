@@ -1,5 +1,4 @@
 ﻿#region Using Directives
-using OSI.TraverseApi.Business;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,12 +10,13 @@ using TRAVERSE.Business.CompanySetup;
 using TRAVERSE.Business.Inventory;
 using TRAVERSE.Business.ProjectCosting;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 using PC = TRAVERSE.Business.ProjectCosting;
 using T = System.Threading.Tasks;
+using TRAVERSE.Business.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.ProjectCosting.Controllers
+namespace TRAVERSE.Web.API.ProjectCosting.Controllers
 {
     public class ApiPcTransactionController : ApiControllerBase
     {

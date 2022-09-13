@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     public class BundleConfig
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     internal sealed class ApiAssemblyHelper
     {

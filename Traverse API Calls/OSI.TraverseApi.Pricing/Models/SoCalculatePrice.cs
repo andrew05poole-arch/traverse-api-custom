@@ -6,10 +6,10 @@ using TRAVERSE.Business.Contacts;
 using TRAVERSE.Business.Inventory;
 using TRAVERSE.Business.Pricing;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.SalesOrder
+namespace TRAVERSE.Web.API.SalesOrder
 {
     public class SoCalculatePrice : PriceEngine
     {

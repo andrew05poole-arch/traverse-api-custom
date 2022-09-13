@@ -1,5 +1,4 @@
 ﻿#region Using Directives
-using OSI.TraverseApi.Business;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Formatting;
@@ -8,10 +7,11 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Results;
-using TraverseApi.Properties;
+using TRAVERSE.Business.API;
+using TRAVERSE.Web.API.Properties;
 #endregion Using Directives
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     internal sealed class ApiOkResult : OkNegotiatedContentResult<List<dynamic>>
     {

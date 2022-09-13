@@ -4,7 +4,7 @@ using TRAVERSE.Business.AccountsPayable;
 using TRAVERSE.Core;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.AccountsPayable.Models
+namespace TRAVERSE.Web.API.AccountsPayable.Models
 {
     public class SummaryOpenInvoiceProvider
     {

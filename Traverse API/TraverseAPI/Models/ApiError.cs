@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     internal sealed class ApiError
     {

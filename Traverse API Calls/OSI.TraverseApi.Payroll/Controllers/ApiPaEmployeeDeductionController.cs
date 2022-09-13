@@ -7,11 +7,11 @@ using System.Web.Http;
 using TRAVERSE.Business;
 using TRAVERSE.Business.Payroll;
 using TRAVERSE.Core;
-using TraverseApi;
+using TRAVERSE.Web.API;
 using SM = TRAVERSE.Business.CompanySetup;
 #endregion Using Directives
 
-namespace OSI.TraverseApi.Payroll.Controllers
+namespace TRAVERSE.Web.API.Payroll.Controllers
 {
     public class ApiPaEmployeeDeductionController : ApiControllerBase
     {

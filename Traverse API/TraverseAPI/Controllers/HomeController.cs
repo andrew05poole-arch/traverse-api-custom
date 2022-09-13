@@ -1,12 +1,12 @@
 ﻿#region Using Directives
-using OSI.TraverseApi.Business;
 using System;
 using System.Web.Mvc;
 using System.Web.Security;
-using TraverseApi.Properties;
+using TRAVERSE.Business.API;
+using TRAVERSE.Web.API.Properties;
 #endregion Using Directives
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     public class HomeController : Controller
     {

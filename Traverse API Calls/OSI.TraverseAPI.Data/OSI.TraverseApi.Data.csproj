@@ -59,11 +59,11 @@
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=4.1.0.0, Culture=neutral, PublicKeyToken=e44a2bc38ed2c13c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Program Files\Open Systems, Inc\Special\TRAVERSE API\TRAVERSE 11.2\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
-      <Private>False</Private>
+      
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
       <HintPath>..\..\..\..\..\..\Program Files\Open Systems, Inc\Special\TRAVERSE API\TRAVERSE 11.2\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
-      <Private>False</Private>
+      
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -75,15 +75,15 @@
     <Reference Include="System.Xml" />
     <Reference Include="TRAVERSE.Business">
       <HintPath>..\..\..\..\..\..\Program Files\Open Systems, Inc\Special\TRAVERSE API\TRAVERSE 11.2\TRAVERSE.Business.dll</HintPath>
-      <Private>False</Private>
+      
     </Reference>
     <Reference Include="TRAVERSE.Core">
       <HintPath>..\..\..\..\..\..\Program Files\Open Systems, Inc\Special\TRAVERSE API\TRAVERSE 11.2\TRAVERSE.Core.dll</HintPath>
-      <Private>False</Private>
+      
     </Reference>
     <Reference Include="TRAVERSE.Data">
       <HintPath>..\..\..\..\..\..\Program Files\Open Systems, Inc\Special\TRAVERSE API\TRAVERSE 11.2\DataProvider\TRAVERSE.Data.dll</HintPath>
-      <Private>False</Private>
+      
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -117,7 +117,7 @@
     <ProjectReference Include="..\OSI.TraverseAPI.Business\OSI.TraverseApi.Business.csproj">
       <Project>{95dd000f-c3f6-4c34-9c7d-ea7a0938735d}</Project>
       <Name>OSI.TraverseApi.Business</Name>
-      <Private>False</Private>
+      
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

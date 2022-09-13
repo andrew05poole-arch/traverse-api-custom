@@ -1,5 +1,4 @@
 ﻿#region Using Directives
-using OSI.TraverseApi.Business;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,11 +13,12 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
 using System.Xml.Serialization;
+using TRAVERSE.Business.API;
 using TRAVERSE.Core;
-using TraverseApi.Properties;
+using TRAVERSE.Web.API.Properties;
 #endregion Using Directives
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     public sealed class ApiErrorHandler : ExceptionHandler
     {

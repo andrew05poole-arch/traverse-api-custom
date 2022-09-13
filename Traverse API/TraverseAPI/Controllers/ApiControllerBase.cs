@@ -1,5 +1,4 @@
 ﻿#region Using Directives
-using OSI.TraverseApi.Business;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,10 +9,11 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using TRAVERSE.Business;
-using TraverseApi.Properties;
+using TRAVERSE.Business.API;
+using TRAVERSE.Web.API.Properties;
 #endregion Using Directives
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     [ApiAuthorize, ApiCorsPolicy]
     public abstract class ApiControllerBase : ApiController

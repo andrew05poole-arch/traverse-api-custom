@@ -7,12 +7,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
-using TraverseApi;
+using TRAVERSE.Web.API;
 #endregion Using Directives
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     public class SwaggerConfig
     {
@@ -218,7 +218,7 @@ namespace TraverseApi
                         // The file must be included in your project as an "Embedded Resource", and then the resource's
                         // "Logical Name" is passed to the method as shown below.
                         //
-                        //c.InjectStylesheet(thisAssembly, "TraverseApi.Content.site.css");
+                        //c.InjectStylesheet(thisAssembly, "TRAVERSE.Web.API.Content.site.css");
 
                         // Use the "InjectJavaScript" option to invoke one or more custom JavaScripts after the swagger-ui
                         // has loaded. The file must be included in your project as an "Embedded Resource", and then the resource's
@@ -286,7 +286,7 @@ namespace TraverseApi
                         // in your project as an "Embedded Resource", and then the resource's "Logical Name" is passed to
                         // the method as shown below.
                         //
-                        c.CustomAsset("index", thisAssembly, "TraverseApi.Views.Home.document.html");
+                        c.CustomAsset("index", thisAssembly, "TRAVERSE.Web.API.Views.Home.document.html");
 
                         // If your API has multiple versions and you've applied the MultipleApiVersions setting
                         // as described above, you can also enable a select box in the swagger-ui, that displays

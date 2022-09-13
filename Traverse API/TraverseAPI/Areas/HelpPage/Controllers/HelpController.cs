@@ -1,10 +1,10 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using TraverseApi.Areas.HelpPage.ModelDescriptions;
-using TraverseApi.Areas.HelpPage.Models;
+using TRAVERSE.Web.API.Areas.HelpPage.ModelDescriptions;
+using TRAVERSE.Web.API.Areas.HelpPage.Models;
 
-namespace TraverseApi.Areas.HelpPage.Controllers
+namespace TRAVERSE.Web.API.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.

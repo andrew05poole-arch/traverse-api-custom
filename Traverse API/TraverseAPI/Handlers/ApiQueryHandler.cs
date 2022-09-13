@@ -1,12 +1,12 @@
-﻿using OSI.TraverseApi.Business;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using TRAVERSE.Business;
-using TraverseApi.Properties;
+using TRAVERSE.Business.API;
+using TRAVERSE.Web.API.Properties;
 
-namespace TraverseApi
+namespace TRAVERSE.Web.API
 {
     internal sealed class ApiQueryHandler
     {
