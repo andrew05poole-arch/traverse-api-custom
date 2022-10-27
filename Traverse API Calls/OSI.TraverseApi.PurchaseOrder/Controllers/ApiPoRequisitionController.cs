@@ -9,6 +9,7 @@ using TRAVERSE.Business.PurchaseOrder;
 using TRAVERSE.Core;
 using TRAVERSE.Web.API;
 using TRAVERSE.Business.API;
+using System.Threading.Tasks;
 #endregion Using Directives
 
 namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
@@ -17,62 +18,29 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
     {
         #region Web Methods
         [ApiRoute(FunctionID, 2f, "requisition/{reqid?}", typeof(Requisition))]
-        public IHttpActionResult Get(int? reqId = null)
+        public async Task<IHttpActionResult> Get(int id)
         {
-            return Ok(Load(reqId));
+            return Ok(await Load(id));
         }
 
         [ApiRoute(FunctionID, 2f, "requisition/{reqid?}", typeof(Requisition))]
-        public IHttpActionResult Put([FromBody] dynamic body, int? reqId = null)
+        public async Task<IHttpActionResult> Put([FromBody] dynamic body, int id)
         {
-            List<Requisition> requisitionList = new List<Requisition>();
-            object[] list;
-            if (body is object[])
-                list = body;
-            else
-                list = new object[1] { body };
 
-            if (list.Length > 1 && reqId != null)
-                throw new InvalidValueException("Call is ambiguous. ID is provided along with more than one record.");
+            return Ok(await ProcessEditRequest(false, body, id));
 
-            foreach (dynamic item in list)
-            {
-                var requisition = UpdateRequisition(item, reqId);
-                if (!requisitionList.Contains(requisition))
-                    requisitionList.Add(requisition);
-            }
-            this.Provider?.Update(this.CompId);
-
-            return Ok(requisitionList);
         }
 
         [ApiRoute(FunctionID, 2f, "requisition", typeof(Requisition))]
-        public IHttpActionResult Add([FromBody] dynamic body)
+        public async Task<IHttpActionResult> Add([FromBody] dynamic body)
         {
-            List<Requisition> requisitionList = new List<Requisition>();
-            object[] list;
-            if (body is object[])
-                list = body;
-            else
-                list = new object[1] { body };
-
-            foreach (dynamic item in list)
-            {
-                var requisition = CreateRequisition(item);
-                this.Provider.Items.Add(requisition);
-
-                if (!requisitionList.Contains(requisition))
-                    requisitionList.Add(requisition);
-            }
-            this.Provider?.Update(this.CompId);
-
-            return Ok(requisitionList);
+            return Ok(await ProcessEditRequest(true, body, null));
         }
 
         [ApiRoute(FunctionID, 2f, "requisition/{reqid}", typeof(Requisition))]
-        public IHttpActionResult Delete(int? reqId = null)
+        public async Task<IHttpActionResult> Delete(int id)
         {
-            this.MarkToDelete(reqId);
+            await this.MarkToDelete(id);
             this.Provider?.Update(this.CompId);
 
             return Ok(null);
@@ -81,194 +49,123 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
 
         #region Helper Methods
         protected override void AddPropertyDelegates() { }
-
-        private EntityList<Requisition> Load(int? reqId)
+        protected virtual async Task<List<Requisition>> ProcessEditRequest(bool isCreate, dynamic bodyItem, int? id)
         {
-            SqlFilterBuilder<RequisitionBase.Columns> builder = new SqlFilterBuilder<RequisitionBase.Columns>();
-            if (reqId != null)
-                builder.AppendEquals(RequisitionBase.Columns.ReqId, reqId.ToString());
-            Provider.CompId = CompId;
-            Provider.SetPage(PageNumber, PageSize);
-            Provider.Load(CompId, new FilterCriteria(builder.ToString(), string.Empty));
+            object[] list;
 
-            if (Provider.Items.Count <= 0)
+            if (bodyItem is object[])
+                list = bodyItem;
+            else
+                list = new object[1] { bodyItem };
+
+            if (list.Length > 1)
+                throw new InvalidValueException("Call is ambiguous. ReqId Id is provided along with more than one record.");
+
+            var entityList = new List<Requisition>();
+            foreach (dynamic item in list)
             {
-                if (reqId != null)
-                    throw new InvalidValueException(string.Format("Requisition ID '{0}' could not be found.", reqId));
-                else
-                    throw new InvalidValueException("No results were found.");
+                var entity = await this.ProcessBodyItem(isCreate, item, id);
+                this.Provider.Items.Add(entity);
+
+                if (!entityList.Contains(entity))
+                    entityList.Add(entity);
+
+                await this.ValidateEntityListAsync(entityList);
+                this.Provider?.Update(this.CompId);
             }
+
+            return entityList;
+        }
+
+        protected virtual async Task<Requisition> ProcessBodyItem(bool isCreate, dynamic bodyItem, int? id)
+        {
+            int? code = ApiUserSkipped.IsApiUserSkipped(bodyItem.ReqId) ? bodyItem.ReqId = id : Convert.ToInt32(bodyItem.ReqId);
+
+            var entity = await this.Find(code);
+
+            if (isCreate)
+            {
+                if (entity != null)
+                    return entity;
+
+                entity = new Requisition(this.CompId);
+            }
+            else if (entity == null)
+                throw new InvalidValueException(string.Format("ReqId  '{0}' could not be found.", id));
+
+            ((ApiEntityModel)bodyItem).EntityPropertyChanging += BodyItem_EntityPropertyChanging;
+            entity.PropertyChanged += Entity_PropertyChanged;
+            await ((ApiEntityModel)bodyItem).PopulateEntityAsync(entity);
+            //entity.Lock = (!ApiUserSkipped.IsApiUserSkipped(bodyItem.Lock)) ? (bool)bodyItem.Lock : false;
+            entity.PropertyChanged -= Entity_PropertyChanged;
+            ((ApiEntityModel)bodyItem).EntityPropertyChanging -= BodyItem_EntityPropertyChanging;
+
+            return entity;
+        }
+
+        protected virtual async Task MarkToDelete(int id)
+        {
+            Requisition entity = null;
+            var list = await Load(id);
+            if (list.Count > 0)
+                entity = list[0];
+
+            if (entity == null)
+                throw new InvalidValueException(string.Format("ReqId '{0}' could not be found.", id));
+
+            this.Provider.Items.Remove(entity);
+            this.Provider.Update(this.CompId);
+        }
+
+        protected virtual async Task<EntityList<Requisition>> Load(int? id)
+        {
+            if (id != null && (Provider.Items.Count <= 0 || !Provider.Items.Exists(i => Equals(id, i.ReqId))))
+            {
+
+                var builder = new SqlFilterBuilder<Requisition.Columns>();
+                builder.AppendEquals(Requisition.Columns.ReqId, id.ToString());
+                var list = new RequisitionProvider().Load(this.CompId, new FilterCriteria(builder.ToString(), string.Empty));
+                Provider.Items.AddRange(list);
+                await this.FilterEntityListAsync(Provider.Items);
+            }
+
             return Provider.Items;
         }
 
-        private Requisition UpdateRequisition(dynamic bodyItem, int? reqId)
+        protected virtual async Task<Requisition> Find(int? id)
         {
-            Requisition requisition = this.Find((int?)bodyItem.ReqId ?? reqId);
-            if (requisition == null)
-                throw new InvalidValueException(string.Format("Requisition ID '{0}' could not be found.", bodyItem.ReqId ?? reqId));
-
-            requisition.PropertyChanged += Requisition_PropertyChanged;
-            requisition.VendorId = bodyItem.VendorId ?? requisition.VendorId;
-            requisition.ItemId = bodyItem.ItemId ?? requisition.ItemId;           
-            requisition.CurrencyId = bodyItem.CurrencyId ?? requisition.CurrencyId;          
-            requisition.LocId = bodyItem.LocId ?? requisition.LocId;
-            requisition.Description = bodyItem.Description ?? requisition.Description;
-            requisition.Qty = (decimal?)bodyItem.Qty ?? requisition.Qty;          
-            requisition.Uom = bodyItem.Uom ?? requisition.Uom;
-            requisition.InitDate = (DateTime?)bodyItem.InitDate ?? requisition.InitDate;
-            requisition.SourceApp = bodyItem.SourceApp ?? requisition.SourceApp;
-            requisition.RefId = bodyItem.RefId ?? requisition.RefId;
-            requisition.GenerateYn = (bool?)bodyItem.GenerateYn ?? requisition.GenerateYn;
-            requisition.GlAcct = bodyItem.GlAcct ?? requisition.GlAcct;
-            requisition.DropShipYn = (bool?)bodyItem.DropShipYn ?? requisition.DropShipYn;
-            requisition.ExpReceiptDate = (DateTime?)bodyItem.ExpReceiptDate ?? requisition.ExpReceiptDate;
-            requisition.AddnlDescr = bodyItem.AddnlDescr ?? requisition.AddnlDescr;
-            requisition.UnitCost = (decimal?)bodyItem.UnitCost ?? requisition.UnitCost;
-            requisition.ExtCost = (decimal?)bodyItem.ExtCost ?? requisition.ExtCost;
-            requisition.PropertyChanged -= Requisition_PropertyChanged;
-
-            this.ValidateEntity(requisition);
-
-            return requisition;
-        }       
-
-        private Requisition CreateRequisition(dynamic bodyItem)
-        {
-            Requisition requisition = this.Find(bodyItem.ReqId );
-            if (requisition != null)
-                throw new InvalidValueException(string.Format("Requisition ID '{0}' already exists.", bodyItem.DistCode));
-            else
-                requisition = new Requisition(this.CompId);
-
-            requisition.PropertyChanged += Requisition_PropertyChanged;
-            requisition.VendorId = bodyItem.VendorId;
-            requisition.ItemId = bodyItem.ItemId;
-            requisition.SetDefaults();
-            requisition.SetItemDefaults();
-            requisition.CurrencyId = bodyItem.CurrencyId ?? requisition.CurrencyId;
-            requisition.LocId = bodyItem.LocId ?? requisition.LocId;
-            requisition.Description = bodyItem.Description ?? requisition.Description;
-            requisition.Qty = (decimal?)bodyItem.Qty ?? requisition.Qty;
-            Item item = requisition.SMItemInfo;           
-            requisition.Uom = bodyItem.Uom ?? requisition.Uom;
-            requisition.InitDate = (DateTime?)bodyItem.InitDate ?? requisition.InitDate;
-            requisition.EnteredBy = bodyItem.EnteredBy ?? requisition.EnteredBy;
-            requisition.SourceApp = bodyItem.SourceApp ?? requisition.SourceApp;
-            requisition.RefId = bodyItem.RefId;
-            requisition.GenerateYn = (bool?)bodyItem.GenerateYn ?? requisition.GenerateYn;
-            requisition.GlAcct = bodyItem.GlAcct ?? requisition.GlAcct;
-            requisition.DropShipYn = (bool?)bodyItem.DropShipYn ?? requisition.DropShipYn;
-            requisition.ExpReceiptDate = (DateTime?)bodyItem.ExpReceiptDate;
-            requisition.AddnlDescr = bodyItem.AddnlDescr;
-            requisition.UnitCost = (decimal?)bodyItem.UnitCost ?? item.UnitCost;
-            requisition.ExtCost = (decimal?)bodyItem.ExtCost ?? requisition.ExtCost;
-            requisition.PropertyChanged -= Requisition_PropertyChanged;
-
-            this.ValidateEntity(requisition);
-
-            return requisition;
+            var list = await Load(id);
+            return list.Find(x => Equals(x.ReqId, id));
         }
 
-        private void MarkToDelete(int? reqId)
-        {
-            Requisition requisition = this.Find(reqId);
-            if (requisition == null)
-                throw new NothingToProcessException(string.Format("Requisition ID '{0}' could not be found.", reqId));
-            else
-                this.Provider.Items[0].MarkToDelete();
-        }
-
-        private void ValidateEntity(Requisition entity)
-        {
-            if (!entity.ValidateAll(true))
-            {
-                if (entity.BrokenRulesList.Count > 0)
-                {
-                    throw new InvalidValueException(string.Format("The value for property {0} is not valid. Detail: {1}",
-                         entity.BrokenRulesList[0].Property, entity.BrokenRulesList[0].Description));
-                }
-            }
-        }
-
-        private Requisition Find(int? reqId)
-        {
-            var requisition = Provider.Items?.Find(x => x.ReqId == reqId);
-            if (requisition == null)
-            {
-                requisition = EntityProvider.GetEntity<Requisition, RequisitionProvider>(new string[] { reqId.ToString() }, CompId, null);
-                if (requisition != null)
-                    Provider.Items.Add(requisition);
-            }
-            return requisition;
-        }
         #endregion Helper Methods
 
         #region Event Handler
-        private void Requisition_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void BodyItem_EntityPropertyChanging(object sender, ApiEntityPropertyChangingArgs e)
         {
-            this.OnRequisition_PropertyChanged(sender as Requisition, e);
+            Action<dynamic, ApiEntityPropertyChangingArgs> action = null;
+            if (EntityPropertyDictionary.TryGetValue(e.FieldName, out action))
+                action.Invoke(sender as dynamic, e);
         }
-        public virtual void OnRequisition_PropertyChanged(Requisition entity, PropertyChangedEventArgs e)
+
+        private void Entity_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (entity != null)
-            {
-                if (e.PropertyName == RequisitionBase.Columns.ItemId.ToString())
-                {
-                    if (entity.ItemId != null)
-                    {
-                        entity.SetItemDefaults();
-                        return;
-                    }
-                }
-                else
-                {
-                    if (e.PropertyName == RequisitionBase.Columns.Uom.ToString())
-                    {
-                        entity.SetCostDefaults();
-                        return;
-                    }
-                    if (e.PropertyName == RequisitionBase.Columns.LocId.ToString())
-                    {
-                        entity.SetItemLocationDefaults();
-                        return;
-                    }
-                    if (e.PropertyName == RequisitionBase.Columns.Qty.ToString())
-                    {
-                        entity.SetCostDefaults();
-                        entity.CalculateExtendedCost();
-                        return;
-                    }
-                    if (e.PropertyName == RequisitionBase.Columns.UnitCost.ToString())
-                    {
-                        entity.CalculateExtendedCost();
-                        return;
-                    }
-                    if (e.PropertyName == RequisitionBase.Columns.ExtCost.ToString())
-                    {
-                        entity.CalculateUnitCost();
-                        return;
-                    }
-                    if (e.PropertyName == RequisitionBase.Columns.VendorId.ToString())
-                    {
-                        if (entity.VendorInfo != null)
-                        {
-                            entity.SetVendorDefaults();
-                        }
-                        else
-                        {
-                            entity.CurrencyId = Utility.BaseCurrencyId;
-                        }
-                        return;
-                    }
-                }
-            }
+            Action<Requisition> action = null;
+            if (PropertyDictionary.TryGetValue(e.PropertyName, out action))
+                action.Invoke(sender as Requisition);
         }
         #endregion Event Handler
 
         #region Properties
         private RequisitionProvider Provider { get; } = new RequisitionProvider();
 
-        private const string FunctionID = "F9B9EE5D-B001-468C-9C84-B13224FA4AE9";
+        protected SortedDictionary<string, Action<Requisition>> PropertyDictionary { get; } = new SortedDictionary<string, Action<Requisition>>();
+
+        protected SortedDictionary<string, Action<dynamic, ApiEntityPropertyChangingArgs>> EntityPropertyDictionary { get; } = new SortedDictionary<string, Action<dynamic, ApiEntityPropertyChangingArgs>>();
         #endregion Properties
+
+        #region Fields
+        private const string FunctionID = "F9B9EE5D-B001-468C-9C84-B13224FA4AE9";
+        #endregion Fields
     }
 }
