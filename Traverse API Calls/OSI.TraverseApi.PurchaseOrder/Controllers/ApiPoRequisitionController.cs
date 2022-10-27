@@ -48,7 +48,20 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
         #endregion Web Methods
 
         #region Helper Methods
-        protected override void AddPropertyDelegates() { }
+        protected override void AddPropertyDelegates()
+        {
+
+            PropertyDictionary.Add(RequisitionBase.Columns.VendorId.ToString(), VendorIdPropertyChanged);
+            PropertyDictionary.Add(RequisitionBase.Columns.ItemId.ToString(), ItemIdPropertyChanged);
+            PropertyDictionary.Add(RequisitionBase.Columns.CurrencyId.ToString(), VendorIdPropertyChanged);
+            PropertyDictionary.Add(RequisitionBase.Columns.LocId.ToString(), LocIdIdPropertyChanged);
+            PropertyDictionary.Add(RequisitionBase.Columns.Qty.ToString(), QtyPropertyChanged);
+            PropertyDictionary.Add(RequisitionBase.Columns.Uom.ToString(), UOMPropertyChanged);
+            PropertyDictionary.Add(RequisitionBase.Columns.UnitCost.ToString(), UnitCostPropertyChanged);
+            PropertyDictionary.Add(RequisitionBase.Columns.ExtCost.ToString(), ExtCostPropertyChanged);
+
+
+        }
         protected virtual async Task<List<Requisition>> ProcessEditRequest(bool isCreate, dynamic bodyItem, int? id)
         {
             object[] list;
@@ -89,6 +102,7 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
                     return entity;
 
                 entity = new Requisition(this.CompId);
+                entity.SetDefaults();
             }
             else if (entity == null)
                 throw new InvalidValueException(string.Format("ReqId  '{0}' could not be found.", id));
@@ -137,8 +151,61 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
             var list = await Load(id);
             return list.Find(x => Equals(x.ReqId, id));
         }
-
         #endregion Helper Methods
+
+        #region  Update Methods
+        protected virtual void VendorIdPropertyChanged(Requisition entity)
+        {
+            if (!string.IsNullOrEmpty(entity.VendorId) && entity.IsNew)
+            {
+                entity.SetVendorDefaults();
+            }
+
+        }
+
+        protected virtual void ItemIdPropertyChanged(Requisition entity)
+        {
+            if (entity.ItemId != null && entity.IsNew)
+            {
+                entity.SetItemDefaults();
+
+            }
+        }
+        protected virtual void LocIdIdPropertyChanged(Requisition entity)
+        {
+            if ((entity.LocId) != null && entity.IsNew)
+            {
+                entity.SetItemLocationDefaults();
+            }
+        }
+        protected virtual void QtyPropertyChanged(Requisition entity)
+        {
+            entity.SetCostDefaults();
+            entity.CalculateExtendedCost();
+            return;
+        }
+        protected virtual void UOMPropertyChanged(Requisition entity)
+        {
+            if (!string.IsNullOrEmpty(entity.LocId))
+            {
+                entity.SetCostDefaults();
+            }
+        }
+        protected virtual void UnitCostPropertyChanged(Requisition entity)
+        {
+            if ((entity.UnitCost) != null && entity.IsNew)
+            {
+                entity.SetVendorDefaults();
+            }
+        }
+        protected virtual void ExtCostPropertyChanged(Requisition entity)
+        {
+            if ((entity.ExtCost) != null && entity.IsNew)
+            {
+                entity.SetVendorDefaults();
+            }
+        }
+        #endregion Update Methods
 
         #region Event Handler
         private void BodyItem_EntityPropertyChanging(object sender, ApiEntityPropertyChangingArgs e)
@@ -154,6 +221,7 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
             if (PropertyDictionary.TryGetValue(e.PropertyName, out action))
                 action.Invoke(sender as Requisition);
         }
+
         #endregion Event Handler
 
         #region Properties
