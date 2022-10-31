@@ -39,21 +39,21 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
         [ApiRoute(FunctionID, 2f, "transaction/{id}", typeof(TransactionHeader))]
         public async Task Delete(string id)
         {
-            await this.MarkToDelete(id);           
+            await this.MarkToDelete(id);
         }
         #endregion Web Methods
 
         #region Helper Methods
         #region Override
-        protected override void AddPropertyDelegates() 
-        {   
+        protected override void AddPropertyDelegates()
+        {
             //Header Property Changes
             PropertyDictionary.Add(TransactionHeaderBase.Columns.VendorId.ToString(), VendorIdPropertyChanged);
             PropertyDictionary.Add(TransactionHeaderBase.Columns.MemoPrepaidFgn.ToString(), (entity) => entity.SetPayments(0));
             PropertyDictionary.Add(TransactionHeaderBase.Columns.MemoPmtAmt1Fgn.ToString(), (entity) => entity.SetPayments(1));
             PropertyDictionary.Add(TransactionHeaderBase.Columns.MemoPmtAmt2Fgn.ToString(), (entity) => entity.SetPayments(2));
             PropertyDictionary.Add(TransactionHeaderBase.Columns.MemoDiscFgn.ToString(), (entity) => entity.SetPayments(0));
-            PropertyDictionary.Add(TransactionHeaderBase.Columns.MemoSalesTaxFgn.ToString(), (entity) => entity.SetPayments(0));           
+            PropertyDictionary.Add(TransactionHeaderBase.Columns.MemoSalesTaxFgn.ToString(), (entity) => entity.SetPayments(0));
             PropertyDictionary.Add(TransactionHeaderBase.Columns.ShipToId.ToString(), ShipToIdPropertyChanged);
             PropertyDictionary.Add(TransactionHeaderBase.Columns.CurrencyId.ToString(), ExchangeRatePropertyChanged);
             PropertyDictionary.Add(TransactionHeaderBase.Columns.TermsCode.ToString(), TermsCodePropertyChanged);
@@ -215,7 +215,7 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
                 ShipTo shipTo = this.ShipToList.Find(ShipToBase.Columns.ShiptoId, entity.ShipToId);
                 if (shipTo != null)
                 {
-                    if (!string.IsNullOrEmpty(shipTo.DistCode) && string.Compare(shipTo.DistCode, entity.DistCode, true) != 0 )
+                    if (!string.IsNullOrEmpty(shipTo.DistCode) && string.Compare(shipTo.DistCode, entity.DistCode, true) != 0)
                     {
                         entity.DistCode = shipTo.DistCode;
                     }
@@ -416,13 +416,9 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
         {
             get
             {
-                if (ShipToList == null)
-                {
-                    return ListFactory.CreateList<ShipTo, ShipToProvider>(this.CompId);
-                }
-                return ShipToList;
+                return ListFactory.CreateList<ShipTo, ShipToProvider>(this.CompId);
             }
-        }        
+        }
         #endregion Properties
 
         #region Fields
