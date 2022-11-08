@@ -193,16 +193,16 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
         }
         protected virtual void UnitCostPropertyChanged(Requisition entity)
         {
-            if ((entity.UnitCost) != null && entity.IsNew)
+            if ((entity.UnitCost) != null)
             {
-                entity.SetVendorDefaults();
+                entity.CalculateExtendedCost();
             }
         }
         protected virtual void ExtCostPropertyChanged(Requisition entity)
         {
-            if ((entity.ExtCost) != null && entity.IsNew)
+            if ((entity.ExtCost) != null)
             {
-                entity.SetVendorDefaults();
+                entity.CalculateUnitCost();
             }
         }
         #endregion Update Methods
