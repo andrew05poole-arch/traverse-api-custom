@@ -156,7 +156,7 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
         #region  Update Methods
         protected virtual void VendorIdPropertyChanged(Requisition entity)
         {
-            if (!string.IsNullOrEmpty(entity.VendorId) && entity.IsNew)
+            if (!string.IsNullOrEmpty(entity.VendorId))
             {
                 entity.SetVendorDefaults();
             }
@@ -165,7 +165,7 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
 
         protected virtual void ItemIdPropertyChanged(Requisition entity)
         {
-            if (entity.ItemId != null && entity.IsNew)
+            if (entity.ItemId != null)
             {
                 entity.SetItemDefaults();
 
@@ -173,7 +173,7 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
         }
         protected virtual void LocIdIdPropertyChanged(Requisition entity)
         {
-            if ((entity.LocId) != null && entity.IsNew)
+            if ((entity.LocId) != null )
             {
                 entity.SetItemLocationDefaults();
             }
@@ -186,10 +186,8 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
         }
         protected virtual void UOMPropertyChanged(Requisition entity)
         {
-            if (!string.IsNullOrEmpty(entity.LocId))
-            {
                 entity.SetCostDefaults();
-            }
+          
         }
         protected virtual void UnitCostPropertyChanged(Requisition entity)
         {
