@@ -123,6 +123,7 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
                     entityList.Add(entity);
             }
 
+            RecalculateTotals();
             await this.ValidateEntityListAsync(entityList);
             this.Provider.Update(this.CompId);
 
@@ -170,6 +171,7 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
                 throw new InvalidValueException(string.Format("Line item {0} could not be found on transaction '{1}'", id, transId));
 
             CurrentTransaction.DetailList.Remove(entity);
+            RecalculateTotals();
             this.Provider.Update(this.CompId);
         }
        
@@ -225,6 +227,15 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
                 if (((TransactionDetail)e.Entity).EntryNum != 0)
                     e.Handled = true;
             }
+        }
+        protected virtual void RecalculateTotals()
+        {
+            CurrentTransaction.CalculateTotals();
+
+            if (ConfigurationValueProvider.GetRule<bool>(AppId.AP, ConfigurationValue.DiscAutoYn, this.CompId))
+                CurrentTransaction.MemoDiscFgn = CurrentTransaction.GetDiscountAmount();
+
+            CurrentTransaction.SetPayments(0);
         }
         #endregion Entity Methods
         #endregion Helper Methods
