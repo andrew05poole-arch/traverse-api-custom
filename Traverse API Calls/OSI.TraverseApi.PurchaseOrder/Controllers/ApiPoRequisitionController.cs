@@ -71,8 +71,8 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
             else
                 list = new object[1] { bodyItem };
 
-            if (list.Length > 1)
-                throw new InvalidValueException("Call is ambiguous. ReqId Id is provided along with more than one record.");
+            //if (list.Length > 1)
+            //    throw new InvalidValueException("Call is ambiguous. ReqId Id is provided along with more than one record.");
 
             var entityList = new List<Requisition>();
             foreach (dynamic item in list)
