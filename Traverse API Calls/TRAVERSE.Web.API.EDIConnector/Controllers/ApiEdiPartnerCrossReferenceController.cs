@@ -20,16 +20,16 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
         {
             return Ok(await this.Load(false, partnerId, docId));
         }
-        [ApiRoute(FunctionID, 2f, "partner/{partnerId:long?}/doc/{docId:long?}", typeof(PartnerDocOverride))]
-        public async Task<IHttpActionResult> Put([FromBody] dynamic body, long? partnerId = null, long? docId = null)
+        [ApiRoute(FunctionID, 2f, "partnercrossref/{id:long?}", typeof(PartnerDocOverride))]
+        public async Task<IHttpActionResult> Put([FromBody] dynamic body, long? id = null)
         {
-               return Ok(await ProcessEditRequest(false, body, partnerId, docId));
+               return Ok(await ProcessEditRequest(false, body, null, null,id));
         }
         
         [ApiRoute(FunctionID, 2f, "partner/{partnerId:long?}/doc/{docId:long?}", typeof(PartnerDocOverride))]
         public async Task<IHttpActionResult> Add([FromBody] dynamic body, long? partnerId = null, long? docId = null)
         {
-            return Ok(await ProcessEditRequest(true, body, partnerId, docId));
+            return Ok(await ProcessEditRequest(true, body, partnerId, docId,null));
         }
 
         [ApiRoute(FunctionID, 2f, "partnercrossref/{id:long}", typeof(PartnerDocOverride))]
@@ -73,7 +73,7 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
 
             return Provider.Items;
         }
-        protected virtual async Task<List<PartnerDocOverride>> ProcessEditRequest(bool isCreate, dynamic body, long? partnerId = null, long? docId = null)
+        protected virtual async Task<List<PartnerDocOverride>> ProcessEditRequest(bool isCreate, dynamic body, long? partnerId = null, long? docId = null, long? id = null)
         {
             object[] list;
 
@@ -88,7 +88,7 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
             var entityList = new List<PartnerDocOverride>();
             foreach (dynamic item in list)
             {
-                var entity = await this.ProcessBodyItem(isCreate, item, partnerId, docId);
+                var entity = await this.ProcessBodyItem(isCreate, item, partnerId, docId,id);
                 if (isCreate) this.Provider.Items.Add(entity);
 
                 if (!entityList.Contains(entity))
@@ -101,7 +101,7 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
             return entityList;
         }
 
-        protected virtual async Task<PartnerDocOverride> ProcessBodyItem(bool isCreate, dynamic bodyItem, long? partnerId, long? docId)
+        protected virtual async Task<PartnerDocOverride> ProcessBodyItem(bool isCreate, dynamic bodyItem, long? partnerId, long? docId, long? id)
         {
             long partner = partnerId.GetValueOrDefault();
             long doc = docId.GetValueOrDefault();
@@ -115,14 +115,19 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
                 bodyItem.DocId = doc;
             else
                 doc = bodyItem.DocId;
-
-            var entity = await this.Find(isCreate, partner, doc);
+            PartnerDocOverride entity = null;
+            if (!isCreate)
+            {
+                long partnerCrossId = id.GetValueOrDefault();
+                if (ApiUserSkipped.IsApiUserSkipped(bodyItem.Id) || bodyItem.Id == null)
+                    bodyItem.Id = partnerCrossId;
+                else
+                    partnerCrossId = bodyItem.Id;
+                entity = await this.Find(partnerCrossId);
+            }
 
             if (isCreate)
             {
-                //if (entity != null)
-                //    return entity;
-
                 entity = new PartnerDocOverride(this.CompId);
                 entity.SetDefaults();
             }
