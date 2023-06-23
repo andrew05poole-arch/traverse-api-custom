@@ -12,31 +12,31 @@ using System.ComponentModel;
 
 namespace TRAVERSE.Web.API.EDIConnector.Controllers
 {
-    public class ApiECPartnerController : ApiControllerBase
+    public class ApiEdiPartnerController : ApiControllerBase
     {
         #region Web Methods
-        [ApiRoute(FunctionID, 2f, "partner/{id?}", typeof(Partner))]
-        public async Task<IHttpActionResult> Get(string id = null)
+        [ApiRoute(FunctionID, 2f, "partner/{partnerId}", typeof(Partner))]
+        public async Task<IHttpActionResult> Get(string partnerId)
         {
-            return Ok(await this.Load(id));
+            return Ok(await this.Load(partnerId));
         }
 
-        [ApiRoute(FunctionID, 2f, "partner/{id?}", typeof(Partner))]
-        public async Task<IHttpActionResult> Put([FromBody] dynamic body, string id = null)
+        [ApiRoute(FunctionID, 2f, "partner/{partnerId?}", typeof(Partner))]
+        public async Task<IHttpActionResult> Put([FromBody] dynamic body, string partnerId = null)
         {
-            return Ok(await ProcessEditRequest(false, body, id));
+            return Ok(await ProcessEditRequest(false, body, partnerId));
         }
 
-        [ApiRoute(FunctionID, 2f, "partner/{id?}", typeof(Partner))]
-        public async Task<IHttpActionResult> Add([FromBody] dynamic body, string id = null)
+        [ApiRoute(FunctionID, 2f, "partner/{partnerId?}", typeof(Partner))]
+        public async Task<IHttpActionResult> Add([FromBody] dynamic body, string partnerId = null)
         {
-            return Ok(await ProcessEditRequest(true, body, id));
+            return Ok(await ProcessEditRequest(true, body, partnerId));
         }
 
-        [ApiRoute(FunctionID, 2f, "partner/{id}", typeof(Partner))]
-        public async Task Delete(string id)
+        [ApiRoute(FunctionID, 2f, "partner/{partnerId}", typeof(Partner))]
+        public async Task Delete(string partnerId)
         {
-            await this.MarkToDelete(id);
+            await this.MarkToDelete(partnerId);
         }
         #endregion Web Methods
 
@@ -71,7 +71,7 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
             return list.Find(x => StringHelper.AreEqual(x.PartnerId, id, false));
         }
 
-        protected virtual async Task<List<Partner>> ProcessEditRequest(bool isCreate, dynamic body, string id = null)
+        protected virtual async Task<List<Partner>> ProcessEditRequest(bool isCreate, dynamic body, string partnerId)
         {
             object[] list;
 
@@ -80,13 +80,13 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
             else
                 list = new object[1] { body };
 
-            if (list.Length > 1 && !string.IsNullOrEmpty(id))
-                throw new InvalidValueException("Call is ambiguous. Partner ID is provided along with more than one record.");
+            //if (list.Length > 1 && !string.IsNullOrEmpty(id))
+            //    throw new InvalidValueException("Call is ambiguous. Partner ID is provided along with more than one record.");
 
             var entityList = new List<Partner>();
             foreach (dynamic item in list)
             {
-                var entity = await this.ProcessBodyItem(isCreate, item, id);
+                var entity = await this.ProcessBodyItem(isCreate, item, partnerId);
                 this.Provider.Items.Add(entity);
 
                 if (!entityList.Contains(entity))
@@ -99,15 +99,14 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
             return entityList;
         }
 
-        protected virtual async Task<Partner> ProcessBodyItem(bool isCreate, dynamic bodyItem, string id)
+        protected virtual async Task<Partner> ProcessBodyItem(bool isCreate, dynamic bodyItem, string partnerId)
         {
-            string code = id;
             if (ApiUserSkipped.IsApiUserSkipped(bodyItem.PartnerId) || string.IsNullOrWhiteSpace(bodyItem.PartnerId))
-                bodyItem.PartnerId = code;
+                bodyItem.PartnerId = partnerId;
             else
-                code = bodyItem.PartnerId;
+                partnerId = bodyItem.PartnerId;
 
-            var entity = await this.Find(code);
+            var entity = await this.Find(partnerId);
 
             if (isCreate)
             {
@@ -118,7 +117,7 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
                 entity.SetDefaults();
             }
             else if (entity == null)
-                throw new InvalidValueException(string.Format("Partner '{0}' could not be found.", code));
+                throw new InvalidValueException(string.Format("Partner '{0}' could not be found.", partnerId));
 
             ((ApiEntityModel)bodyItem).EntityPropertyChanging += BodyItem_EntityPropertyChanging;
             entity.PropertyChanged += Entity_PropertyChanged;
@@ -129,12 +128,12 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
             return entity;
         }
 
-        protected virtual async Task MarkToDelete(string id)
+        protected virtual async Task MarkToDelete(string partnerId)
         {
-            var entity = await this.Find(id);
+            var entity = await this.Find(partnerId);
 
             if (entity == null)
-                throw new NothingToProcessException(string.Format("Partner '{0}' could not be found.", id));
+                throw new NothingToProcessException(string.Format("Partner '{0}' could not be found.", partnerId));
 
             this.Provider.Items.Remove(entity);
             this.Provider?.Update(this.CompId);
@@ -166,7 +165,7 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
         #endregion Properties
 
         #region Fields
-        private const string FunctionID = "EF0BDDEC-4A6E-48AD-9889-FC9E6D4CEA02";
+        public const string FunctionID = "EF0BDDEC-4A6E-48AD-9889-FC9E6D4CEA02";
         #endregion Fields
     }
 }

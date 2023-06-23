@@ -68,7 +68,8 @@
     <Compile Include="..\OSI.TraverseApi._AssemblyReference\ApiAssemblyInfo.cs">
       <Link>Properties\ApiAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Controllers\ApiECPartnerController.cs" />
+    <Compile Include="Controllers\ApiEdiPartnerController.cs" />
+    <Compile Include="Controllers\ApiEdiPartnerDocumentController.cs" />
     <Compile Include="Controllers\ApiEdiPartnerCrossReferenceController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
