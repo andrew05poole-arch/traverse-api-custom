@@ -16,18 +16,21 @@ namespace TRAVERSE.Web.API.Inventory.Controllers
     public class ApiInItemCustomerSetupController : ApiControllerBase
     {
         #region Web Methods
-        [ApiRoute(FunctionID, 2f, "itemcustomer/item/{itemid}", typeof(ItemCustHeader))]     
+        [ApiRoute(FunctionID, 2f, "itemcustomer/item/{itemid}", typeof(ItemCustHeader))]
+        [ApiRoute(FunctionID, 2f, "itemcustomer/customer/{custid}", typeof(ItemCustHeader))]
         public async Task<IHttpActionResult> Get(string itemId = null, string custid = null)
         {
             return Ok(await this.Load(false, itemId, custid));
         }
-        [ApiRoute(FunctionID, 2f, "itemcustomer/item/{itemid}", typeof(ItemCustHeader))]     
+        [ApiRoute(FunctionID, 2f, "itemcustomer/item/{itemid}", typeof(ItemCustHeader))]
+        [ApiRoute(FunctionID, 2f, "itemcustomer/customer/{custid}", typeof(ItemCustHeader))]
         public async Task<IHttpActionResult> Put([FromBody] dynamic body, string itemId = null, string custid = null)
         {
             return Ok(await ProcessEditRequest(false, body, itemId, custid));
         }
 
-        [ApiRoute(FunctionID, 2f, "itemcustomer/item/{itemid}", typeof(ItemCustHeader))]       
+        [ApiRoute(FunctionID, 2f, "itemcustomer/item/{itemid}", typeof(ItemCustHeader))]
+        [ApiRoute(FunctionID, 2f, "itemcustomer/customer/{custid}", typeof(VendorItem))]
         public async Task<IHttpActionResult> Add([FromBody] dynamic body, string itemId = null, string custid = null)
         {
             return Ok(await ProcessEditRequest(true, body, itemId, custid));
