@@ -12,31 +12,31 @@ using System.ComponentModel;
 
 namespace TRAVERSE.Web.API.EDIConnector.Controllers
 {
-    public class ApiEdiPartnerDocumentController : ApiControllerBase
+    public class ApiEdiPartnerSACController : ApiControllerBase
     {
         #region Web Methods
-        [ApiRoute(FunctionID, 2f, "partner/{partnerId}/partnerdoc/{docId}", typeof(PartnerDoc))]
-        public async Task<IHttpActionResult> Get(string partnerId, long docId)
+        [ApiRoute(FunctionID, 2f, "partner/{partnerId}/partnersac/{sacCode}", typeof(PartnerSAC))]
+        public async Task<IHttpActionResult> Get(string partnerId, string sacCode)
         {
-            return Ok(await this.Load(partnerId, docId, false));
+            return Ok(await this.Load(partnerId, sacCode, false));
         }
 
-        [ApiRoute(FunctionID, 2f, "partner/{partnerId}/partnerdoc/{docId?}", typeof(PartnerDoc))]
-        public async Task<IHttpActionResult> Put([FromBody] dynamic body, string partnerId, long? docId = null)
+        [ApiRoute(FunctionID, 2f, "partner/{partnerId}/partnersac/{sacCode?}", typeof(PartnerSAC))]
+        public async Task<IHttpActionResult> Put([FromBody] dynamic body, string partnerId, string sacCode = null)
         {
-            return Ok(await ProcessEditRequest(false, body, partnerId, docId));
+            return Ok(await ProcessEditRequest(false, body, partnerId, sacCode));
         }
 
-        [ApiRoute(FunctionID, 2f, "partner/{partnerId}/partnerdoc/{docId?}", typeof(PartnerDoc))]
-        public async Task<IHttpActionResult> Add([FromBody] dynamic body, string partnerId, long? docId = null)
+        [ApiRoute(FunctionID, 2f, "partner/{partnerId}/partnersac/{sacCode?}", typeof(PartnerSAC))]
+        public async Task<IHttpActionResult> Add([FromBody] dynamic body, string partnerId, string sacCode = null)
         {
-            return Ok(await ProcessEditRequest(true, body, partnerId, docId));
+            return Ok(await ProcessEditRequest(true, body, partnerId, sacCode));
         }
 
-        [ApiRoute(FunctionID, 2f, "partner/{partnerId}/partnerdoc/{docId}", typeof(PartnerDoc))]
-        public async Task Delete(string partnerId, long docId)
+        [ApiRoute(FunctionID, 2f, "partner/{partnerId}/partnersac/{sacCode}", typeof(PartnerSAC))]
+        public async Task Delete(string partnerId, string sacCode)
         {
-            await this.MarkToDelete(partnerId, docId);
+            await this.MarkToDelete(partnerId, sacCode);
         }
         #endregion Web Methods
 
@@ -45,9 +45,9 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
         {
         }
 
-        protected virtual async Task<EntityList<PartnerDoc>> Load(string partnerId, long? docId, bool isCreate)
+        protected virtual async Task<EntityList<PartnerSAC>> Load(string partnerId, string sacCode, bool isCreate)
         {
-            var list = CurrentPartner?.PartnerDocDetailList as EntityList<PartnerDoc>;
+            var list = CurrentPartner?.PartnerSacDetailList as EntityList<PartnerSAC>;
 
             if (CurrentPartner == null || !this.Provider.Items.Exists(i => i.PartnerId == partnerId))
             {
@@ -61,16 +61,16 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
 
                 CurrentPartner = Provider.Items[0];
 
-                list = CurrentPartner.PartnerDocDetailList as EntityList<PartnerDoc>;
+                list = CurrentPartner.PartnerSacDetailList as EntityList<PartnerSAC>;
                 await this.FilterEntityListAsync(list);
             }
 
-            if (docId.HasValue && !isCreate)
+            if (!string.IsNullOrEmpty(sacCode) && !isCreate)
             {
-                list = list.FindAll(PartnerDocBase.Columns.DocId, docId.Value);
+                list = list.FindAll(PartnerSACBase.Columns.SACCode, sacCode);
                 if (list.Count <= 0)
                 {
-                    throw new InvalidValueException(string.Format("Partner Document '{0}' could not be found on Partner '{1}'.", docId.Value, partnerId));
+                    throw new InvalidValueException(string.Format("Partner SAC '{0}' could not be found on Partner '{1}'.", sacCode, partnerId));
                 }
                 else
                     return list;
@@ -79,13 +79,13 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
             return list;
         }
 
-        protected virtual async Task<PartnerDoc> Find(string partnerId, long? docId, bool isCreate)
+        protected virtual async Task<PartnerSAC> Find(string partnerId, string sacCode, bool isCreate)
         {
-            var list = await Load(partnerId, docId, isCreate);
-            return list.Find(x => x.DocId == docId);
+            var list = await Load(partnerId, sacCode, isCreate);
+            return list.Find(x => StringHelper.AreEqual(x.SACCode, sacCode));
         }
 
-        protected virtual async Task<List<PartnerDoc>> ProcessEditRequest(bool isCreate, dynamic body, string partnerId, long? docId)
+        protected virtual async Task<List<PartnerSAC>> ProcessEditRequest(bool isCreate, dynamic body, string partnerId, string sacCode)
         {
             object[] list;
 
@@ -97,10 +97,10 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
             //if (list.Length > 1 && id.HasValue)
             //    throw new InvalidValueException("Call is ambiguous. Partner Document is provided along with more than one record.");
 
-            var entityList = new List<PartnerDoc>();
+            var entityList = new List<PartnerSAC>();
             foreach (dynamic item in list)
             {
-                var entity = await this.ProcessBodyItem(isCreate, item, partnerId, docId);
+                var entity = await this.ProcessBodyItem(isCreate, item, partnerId, sacCode);
 
                 if (!entityList.Contains(entity))
                     entityList.Add(entity);
@@ -112,26 +112,26 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
             return entityList;
         }
 
-        protected virtual async Task<PartnerDoc> ProcessBodyItem(bool isCreate, dynamic bodyItem, string partnerId, long? docId)
+        protected virtual async Task<PartnerSAC> ProcessBodyItem(bool isCreate, dynamic bodyItem, string partnerId, string sacCode)
         {
-            if (docId.HasValue && (ApiUserSkipped.IsApiUserSkipped(bodyItem.DocId) || bodyItem.DocId == null))
-                bodyItem.DocId = docId;
-            else
-                docId = Convert.ToInt64(bodyItem.DocId);
+            sacCode = StringHelper.AreEqual(sacCode, "undefined") ? null : sacCode;
 
-            var entity = await this.Find(partnerId, docId, isCreate);
+            if (ApiUserSkipped.IsApiUserSkipped(bodyItem.SACCode) || bodyItem.SACCode == null || StringHelper.AreEqual(Convert.ToString(bodyItem.SACCode), "undefined"))
+                bodyItem.SACCode = sacCode;
+            else
+                sacCode = Convert.ToString(bodyItem.SACCode);
+
+            var entity = await this.Find(partnerId, sacCode, isCreate);
 
             if (isCreate)
             {
                 if (entity != null)
                     return entity;
 
-                entity = this.CurrentPartner.PartnerDocDetailList.AddNew();
-                //entity.SetDefaults();
-                entity.SetDocumentDefaults();
+                entity = this.CurrentPartner.PartnerSacDetailList.AddNew();
             }
             else if (entity == null)
-                throw new InvalidValueException(string.Format("Partner Document '{0}' could not be found on Partner '{1}'.", docId, partnerId));
+                throw new InvalidValueException(string.Format("Partner SAC '{0}' could not be found on Partner '{1}'.", sacCode, partnerId));
 
             ((ApiEntityModel)bodyItem).EntityPropertyChanging += BodyItem_EntityPropertyChanging;
             entity.PropertyChanged += Entity_PropertyChanged;
@@ -142,14 +142,14 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
             return entity;
         }
 
-        protected virtual async Task MarkToDelete(string partnerId, long docId)
+        protected virtual async Task MarkToDelete(string partnerId, string sacCode)
         {
-            var entity = await this.Find(partnerId, docId, false);
+            var entity = await this.Find(partnerId, sacCode, false);
 
             if (entity == null)
-                throw new InvalidValueException(string.Format("Partner Document '{0}' could not be found on Partner '{1}'", docId, partnerId));
+                throw new InvalidValueException(string.Format("Partner SAC '{0}' could not be found on Partner '{1}'", sacCode, partnerId));
 
-            CurrentPartner.PartnerDocDetailList.Remove(entity);
+            CurrentPartner.PartnerSacDetailList.Remove(entity);
             this.Provider.Update(this.CompId);
         }
         #endregion Helper Methods
@@ -164,9 +164,9 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
 
         private void Entity_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Action<PartnerDoc> action = null;
+            Action<PartnerSAC> action = null;
             if (PropertyDictionary.TryGetValue(e.PropertyName, out action))
-                action.Invoke(sender as PartnerDoc);
+                action.Invoke(sender as PartnerSAC);
         }
         #endregion Event Handlers
 
@@ -175,13 +175,13 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
 
         protected Partner CurrentPartner { get; set; }
 
-        protected SortedDictionary<string, Action<PartnerDoc>> PropertyDictionary { get; } = new SortedDictionary<string, Action<PartnerDoc>>();
+        protected SortedDictionary<string, Action<PartnerSAC>> PropertyDictionary { get; } = new SortedDictionary<string, Action<PartnerSAC>>();
 
         protected SortedDictionary<string, Action<dynamic, ApiEntityPropertyChangingArgs>> EntityPropertyDictionary { get; } = new SortedDictionary<string, Action<dynamic, ApiEntityPropertyChangingArgs>>();
         #endregion Properties
 
         #region Fields
-        public const string FunctionID = "413FB54E-B78A-449B-B20E-5A04C5402B75";
+        public const string FunctionID = "29B09AA3-1476-4971-A71C-E818EC110C2C";
         #endregion Fields
     }
 }
