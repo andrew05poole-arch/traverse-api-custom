@@ -72,6 +72,7 @@
     <Compile Include="Controllers\ApiEdiPartnerController.cs" />
     <Compile Include="Controllers\ApiEdiPartnerDocumentController.cs" />
     <Compile Include="Controllers\ApiEdiPartnerCrossReferenceController.cs" />
+    <Compile Include="Controllers\ApiEdiPartnerSACController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
