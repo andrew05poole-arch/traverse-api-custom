@@ -163,6 +163,7 @@
     <Compile Include="..\OSI.TraverseApi._AssemblyReference\ApiAssemblyInfo.cs">
       <Link>Properties\ApiAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Controllers\ApiInItemCustomerDetailController.cs" />
     <Compile Include="Controllers\ApiInItemCustomerSetupController.cs" />
     <Compile Include="Controllers\ApiInItemPictureController.cs" />
     <Compile Include="Controllers\ApiInItemPriceController.cs" />

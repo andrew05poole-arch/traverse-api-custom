@@ -18,23 +18,32 @@ namespace TRAVERSE.Web.API.Inventory.Controllers
         #region Web Methods
         [ApiRoute(FunctionID, 2f, "itemcustomer/item/{itemid}", typeof(ItemCustHeader))]
         [ApiRoute(FunctionID, 2f, "itemcustomer/customer/{custid}", typeof(ItemCustHeader))]
+        [ApiRoute(FunctionID, 2f, "itemcustomer/item/{itemid}/customer/{custid}", typeof(ItemCustHeader))]
         public async Task<IHttpActionResult> Get(string itemId = null, string custid = null)
         {
             return Ok(await this.Load(false, itemId, custid));
         }
         [ApiRoute(FunctionID, 2f, "itemcustomer/item/{itemid}", typeof(ItemCustHeader))]
         [ApiRoute(FunctionID, 2f, "itemcustomer/customer/{custid}", typeof(ItemCustHeader))]
+        [ApiRoute(FunctionID, 2f, "itemcustomer/item/{itemid}/customer/{custid}", typeof(ItemCustHeader))]
         public async Task<IHttpActionResult> Put([FromBody] dynamic body, string itemId = null, string custid = null)
         {
             return Ok(await ProcessEditRequest(false, body, itemId, custid));
         }
 
         [ApiRoute(FunctionID, 2f, "itemcustomer/item/{itemid}", typeof(ItemCustHeader))]
-        [ApiRoute(FunctionID, 2f, "itemcustomer/customer/{custid}", typeof(VendorItem))]
+        [ApiRoute(FunctionID, 2f, "itemcustomer/customer/{custid}", typeof(ItemCustHeader))]
+        [ApiRoute(FunctionID, 2f, "itemcustomer/item/{itemid}/customer/{custid}", typeof(ItemCustHeader))]
         public async Task<IHttpActionResult> Add([FromBody] dynamic body, string itemId = null, string custid = null)
         {
             return Ok(await ProcessEditRequest(true, body, itemId, custid));
         }
+        [ApiRoute(FunctionID, 2f, "itemcustomer/item/{itemid}/customer/{custid}", typeof(ItemCustHeader))]
+        public async Task Delete(string itemId, string custid)
+        {
+            await this.MarkToDelete(itemId, custid);
+        }
+
         #endregion
 
         #region Helper Methods
@@ -77,10 +86,10 @@ namespace TRAVERSE.Web.API.Inventory.Controllers
             return Provider.Items;
         }
 
-        protected virtual async Task<ItemCustHeader> Find(bool isCreate, string itemId, string vendorId)
+        protected virtual async Task<ItemCustHeader> Find(bool isCreate, string itemId, string custid)
         {
-            var list = await Load(isCreate, itemId, vendorId);
-            return list.Find(x => StringHelper.AreEqual(x.ItemId, itemId, false) && StringHelper.AreEqual(x.CustId, vendorId, false));
+            var list = await Load(isCreate, itemId, custid);
+            return list.Find(x => StringHelper.AreEqual(x.ItemId, itemId, false) && StringHelper.AreEqual(x.CustId, custid, false));
         }
 
         protected virtual async Task<List<ItemCustHeader>> ProcessEditRequest(bool isCreate, dynamic body, string itemId = null, string customerId = null)
@@ -193,7 +202,7 @@ namespace TRAVERSE.Web.API.Inventory.Controllers
             if (ApiUserSkipped.IsApiUserSkipped(bodyItem.Uom))
                 throw new InvalidValueException("Unit is required.");
 
-            this.FilterEntityList(parent.ItemCustDetailList, ApiInItemVendorDetailController.FunctionID);
+            this.FilterEntityList(parent.ItemCustDetailList, ApiInItemCustomerDetailController.FunctionID);
 
             var entity = parent.ItemCustDetailList.Find(x => StringHelper.AreEqual(x.Uom, bodyItem.Uom, false));
             if (entity == null)
