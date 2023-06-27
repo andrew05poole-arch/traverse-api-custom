@@ -43,6 +43,7 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
         #region Helper Methods
         protected override void AddPropertyDelegates()
         {
+            PropertyDictionary.Add(PartnerDocBase.Columns.MailIdKeyType.ToString(), MailIdKeyTypePropertyChanged);
         }
 
         protected virtual async Task<EntityList<PartnerDoc>> Load(string partnerId, long? docId, bool isCreate)
@@ -127,7 +128,7 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
                     return entity;
 
                 entity = this.CurrentPartner.PartnerDocDetailList.AddNew();
-                //entity.SetDefaults();
+                entity.EdiMailKeyType = MailKeyType.NoOverride;
                 entity.SetDocumentDefaults();
             }
             else if (entity == null)
@@ -151,6 +152,14 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
 
             CurrentPartner.PartnerDocDetailList.Remove(entity);
             this.Provider.Update(this.CompId);
+        }
+
+        protected virtual void MailIdKeyTypePropertyChanged(PartnerDoc entity)
+        {
+            if (entity.EdiMailKeyType == null)
+            {
+                entity.EdiMailKeyType = MailKeyType.NoOverride;
+            }
         }
         #endregion Helper Methods
 
