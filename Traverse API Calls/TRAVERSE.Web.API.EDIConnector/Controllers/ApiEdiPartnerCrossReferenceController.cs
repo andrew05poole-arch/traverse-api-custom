@@ -82,8 +82,8 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
             else
                 list = new object[1] { body };
 
-            if (list.Length > 1 && (partnerId!=null && docId != null))
-                throw new InvalidValueException("Call is ambiguous. Parnter ID and Doc ID are provided along with more than one record.");
+            //if (list.Length > 1 && (id != null))
+            //    throw new InvalidValueException("Call is ambiguous. Parnter ID and Doc ID are provided along with more than one record.");
 
             var entityList = new List<PartnerDocOverride>();
             foreach (dynamic item in list)
@@ -115,15 +115,17 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
                 bodyItem.DocId = doc;
             else
                 doc = bodyItem.DocId;
+
             PartnerDocOverride entity = null;
+
             if (!isCreate)
             {
                 long partnerCrossId = id.GetValueOrDefault();
+                entity = await this.Find(partnerCrossId);
                 if (ApiUserSkipped.IsApiUserSkipped(bodyItem.Id) || bodyItem.Id == null)
                     bodyItem.Id = partnerCrossId;
                 else
                     partnerCrossId = bodyItem.Id;
-                entity = await this.Find(partnerCrossId);
             }
 
             if (isCreate)
