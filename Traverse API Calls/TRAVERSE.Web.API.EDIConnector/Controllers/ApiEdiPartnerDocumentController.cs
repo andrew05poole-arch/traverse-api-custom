@@ -94,8 +94,8 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
             else
                 list = new object[1] { body };
 
-            //if (list.Length > 1 && id.HasValue)
-            //    throw new InvalidValueException("Call is ambiguous. Partner Document is provided along with more than one record.");
+            if (list.Length > 1 && docId.HasValue)
+                throw new InvalidValueException("Call is ambiguous. Partner Document is provided along with more than one record.");
 
             var entityList = new List<PartnerDoc>();
             foreach (dynamic item in list)
