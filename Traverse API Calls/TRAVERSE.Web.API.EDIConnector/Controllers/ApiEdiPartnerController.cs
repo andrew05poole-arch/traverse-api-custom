@@ -73,6 +73,8 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
 
         protected virtual async Task<List<Partner>> ProcessEditRequest(bool isCreate, dynamic body, string partnerId)
         {
+            partnerId = (StringHelper.AreEqual(partnerId, "undefined") || StringHelper.AreEqual(partnerId, "{partnerId}")) ? null : partnerId;
+
             object[] list;
 
             if (body is object[])
@@ -80,8 +82,8 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
             else
                 list = new object[1] { body };
 
-            //if (list.Length > 1 && !string.IsNullOrEmpty(id))
-            //    throw new InvalidValueException("Call is ambiguous. Partner ID is provided along with more than one record.");
+            if (list.Length > 1 && !string.IsNullOrEmpty(partnerId))
+                throw new InvalidValueException("Call is ambiguous. Partner ID is provided along with more than one record.");
 
             var entityList = new List<Partner>();
             foreach (dynamic item in list)

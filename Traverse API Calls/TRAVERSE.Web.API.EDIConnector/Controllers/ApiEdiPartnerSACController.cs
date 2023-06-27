@@ -87,6 +87,8 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
 
         protected virtual async Task<List<PartnerSAC>> ProcessEditRequest(bool isCreate, dynamic body, string partnerId, string sacCode)
         {
+            sacCode = (StringHelper.AreEqual(sacCode, "undefined") || StringHelper.AreEqual(sacCode, "{sacCode}")) ? null : sacCode;
+
             object[] list;
 
             if (body is object[])
@@ -94,8 +96,8 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
             else
                 list = new object[1] { body };
 
-            //if (list.Length > 1 && id.HasValue)
-            //    throw new InvalidValueException("Call is ambiguous. Partner Document is provided along with more than one record.");
+            if (list.Length > 1 && !string.IsNullOrEmpty(sacCode))
+                throw new InvalidValueException("Call is ambiguous. Partner SAC is provided along with more than one record.");
 
             var entityList = new List<PartnerSAC>();
             foreach (dynamic item in list)
@@ -114,7 +116,7 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
 
         protected virtual async Task<PartnerSAC> ProcessBodyItem(bool isCreate, dynamic bodyItem, string partnerId, string sacCode)
         {
-            sacCode = StringHelper.AreEqual(sacCode, "undefined") ? null : sacCode;
+            sacCode = (StringHelper.AreEqual(sacCode, "undefined") || StringHelper.AreEqual(sacCode, "{sacCode}")) ? null : sacCode;
 
             if (ApiUserSkipped.IsApiUserSkipped(bodyItem.SACCode) || bodyItem.SACCode == null || StringHelper.AreEqual(Convert.ToString(bodyItem.SACCode), "undefined"))
                 bodyItem.SACCode = sacCode;
