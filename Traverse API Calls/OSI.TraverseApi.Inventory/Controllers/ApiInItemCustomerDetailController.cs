@@ -86,8 +86,8 @@ namespace TRAVERSE.Web.API.Inventory.Controllers
             else
                 list = new object[1] { body };
 
-            if (list.Length > 1 && !string.IsNullOrEmpty(uom))
-                throw new InvalidValueException("Call is ambiguous. Unit is provided along with more than one record.");
+            //if (list.Length > 1 && !string.IsNullOrEmpty(uom))
+            //    throw new InvalidValueException("Call is ambiguous. Unit is provided along with more than one record.");
 
             var entityList = new List<ItemCustDetail>();
             foreach (dynamic item in list)
