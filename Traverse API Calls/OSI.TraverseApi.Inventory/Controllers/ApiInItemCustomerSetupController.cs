@@ -95,6 +95,8 @@ namespace TRAVERSE.Web.API.Inventory.Controllers
         protected virtual async Task<List<ItemCustHeader>> ProcessEditRequest(bool isCreate, dynamic body, string itemId = null, string customerId = null)
         {
             object[] list;
+            customerId = (StringHelper.AreEqual(customerId, "undefined") || StringHelper.AreEqual(customerId, "{custid}")) ? null : customerId;
+            itemId = (StringHelper.AreEqual(itemId, "undefined") || StringHelper.AreEqual(itemId, "{itemId}")) ? null : itemId;
 
             if (body is object[])
                 list = body;
