@@ -43,6 +43,8 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
         #region Helper Methods
         protected override void AddPropertyDelegates()
         {
+            PropertyDictionary.Add(PartnerDocBase.Columns.MailIdKeyType.ToString(), SACAdjTypePropertyChanged);
+            PropertyDictionary.Add(PartnerDocBase.Columns.MailIdKeyType.ToString(), SACIndicatorPropertyChanged);
         }
 
         protected virtual async Task<EntityList<PartnerSAC>> Load(string partnerId, string sacCode, bool isCreate)
@@ -153,6 +155,22 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
 
             CurrentPartner.PartnerSacDetailList.Remove(entity);
             this.Provider.Update(this.CompId);
+        }
+
+        protected virtual void SACAdjTypePropertyChanged(PartnerSAC entity)
+        {
+            if (entity.SACAdjType == null)
+            {
+                entity.SACAdjustmentType = SACType.Allowance;
+            }
+        }
+
+        protected virtual void SACIndicatorPropertyChanged(PartnerSAC entity)
+        {
+            if (entity.SACIndicator == null)
+            {
+                entity.SACIndicatorType = AdjustmentType.Amount;
+            }
         }
         #endregion Helper Methods
 
