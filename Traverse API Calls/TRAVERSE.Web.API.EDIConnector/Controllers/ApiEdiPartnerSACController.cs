@@ -43,8 +43,8 @@ namespace TRAVERSE.Web.API.EDIConnector.Controllers
         #region Helper Methods
         protected override void AddPropertyDelegates()
         {
-            PropertyDictionary.Add(PartnerDocBase.Columns.MailIdKeyType.ToString(), SACAdjTypePropertyChanged);
-            PropertyDictionary.Add(PartnerDocBase.Columns.MailIdKeyType.ToString(), SACIndicatorPropertyChanged);
+            PropertyDictionary.Add(PartnerSAC.Columns.SACAdjType.ToString(), SACAdjTypePropertyChanged);
+            PropertyDictionary.Add(PartnerSAC.Columns.SACIndicator.ToString(), SACIndicatorPropertyChanged);
         }
 
         protected virtual async Task<EntityList<PartnerSAC>> Load(string partnerId, string sacCode, bool isCreate)
