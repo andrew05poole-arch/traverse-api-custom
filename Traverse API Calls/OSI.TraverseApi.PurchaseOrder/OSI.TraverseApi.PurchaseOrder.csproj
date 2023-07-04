@@ -98,6 +98,10 @@
       <HintPath>..\..\Core\TRAVERSE.Business.Inventory.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="TRAVERSE.Business.InventoryLookup">
+      <HintPath>..\..\Core\TRAVERSE.Business.InventoryLookup.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="TRAVERSE.Business.PcCore">
       <HintPath>..\..\Core\TRAVERSE.Business.PcCore.dll</HintPath>
       <Private>False</Private>
@@ -144,6 +148,9 @@
     <Compile Include="..\OSI.TraverseApi._AssemblyReference\ApiAssemblyInfo.cs">
       <Link>Properties\ApiAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Controllers\ApiPoShipmentController.cs" />
+    <Compile Include="Controllers\ApiPoShipmentDetailController.cs" />
+    <Compile Include="Controllers\ApiPoShipmentLandedCostDetailController.cs" />
     <Compile Include="Controllers\ApiPoTransactionInvoiceDetailController.cs" />
     <Compile Include="Controllers\ApiPoTransactionInvoiceController.cs" />
     <Compile Include="Controllers\ApiPoRequisitionController.cs" />
