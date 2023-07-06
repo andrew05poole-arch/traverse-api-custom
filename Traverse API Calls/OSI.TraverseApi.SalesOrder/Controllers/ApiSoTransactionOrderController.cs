@@ -19,25 +19,25 @@ namespace TRAVERSE.Web.API.SalesOrder.Controllers
     public class ApiSoTransactionOrderController : ApiControllerBase
     {
         #region Web Methods
-        [ApiRoute(FunctionID, 2f, "transaction/{id?}", typeof(TransactionHeader), new object[] { ApiSoTransactionSerialController.FunctionID, typeof(TransactionSerial), ApiSoTransactionLotController.FunctionId, typeof(TransactionDetailExt) })]
+        [ApiRoute(FunctionID, 2f, "transaction/{id?}", typeof(TransactionHeader), new object[] { ApiSoTransactionSerialController.FunctionID, typeof(TransactionSerial) })]
         public async Task<IHttpActionResult> Get(string id = null)
         {
             return Ok(await Load(id, false));
         }
 
-        [ApiRoute(FunctionID, 2f, "transaction/{id?}", typeof(TransactionHeader), new object[] { ApiSoTransactionSerialController.FunctionID, typeof(TransactionSerial), ApiSoTransactionLotController.FunctionId, typeof(TransactionDetailExt) })]
+        [ApiRoute(FunctionID, 2f, "transaction/{id?}", typeof(TransactionHeader), new object[] { ApiSoTransactionSerialController.FunctionID, typeof(TransactionSerial) })]
         public async Task<IHttpActionResult> Put([FromBody] dynamic body, string id = null)
         {
             return Ok(await ProcessEditRequest(false, body, id));
         }
 
-        [ApiRoute(FunctionID, 2f, "transaction/{id?}", typeof(TransactionHeader), new object[] { ApiSoTransactionSerialController.FunctionID, typeof(TransactionSerial), ApiSoTransactionLotController.FunctionId, typeof(TransactionDetailExt) })]
+        [ApiRoute(FunctionID, 2f, "transaction/{id?}", typeof(TransactionHeader), new object[] { ApiSoTransactionSerialController.FunctionID, typeof(TransactionSerial) })]
         public async Task<IHttpActionResult> Add([FromBody] dynamic body, string id = null)
         {
             return Ok(await ProcessEditRequest(true, body, id));
         }
 
-        [ApiRoute(FunctionID, 2f, "transaction/{id}", typeof(TransactionHeader), new object[] { ApiSoTransactionSerialController.FunctionID, typeof(TransactionSerial), ApiSoTransactionLotController.FunctionId, typeof(TransactionDetailExt) })]
+        [ApiRoute(FunctionID, 2f, "transaction/{id}", typeof(TransactionHeader), new object[] { ApiSoTransactionSerialController.FunctionID, typeof(TransactionSerial) })]
         public async Task Delete(string id)
         {
             await this.MarkToDelete(id);
