@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,32 +15,32 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
     public class ApiPoShipmentDetailController : ApiControllerBase
     {
         #region Web Methods
-        [ApiRoute(FunctionID, 2f, "shipmentDetail/{shipNum}/detail/{transId}/entrynum/{entryNum:int}", typeof(ShipmentDetail))]
+        [ApiRoute(FunctionID, 2f, "shipment/{shipNum}/shipmentDetail/{transId}/entrynum/{entryNum:int}", typeof(ShipmentDetail))]
         public async Task<IHttpActionResult> Get(string shipNum, string transId, int entryNum)
         {
             return Ok(await this.Load(shipNum, transId, entryNum, false));
         }
 
-        [ApiRoute(FunctionID, 2f, "shipmentDetail/{shipNum}/detail/{transId}/entrynum/{entryNum:int}", typeof(ShipmentDetail))]
+        [ApiRoute(FunctionID, 2f, "shipment/{shipNum}/shipmentDetail/{transId}/entrynum/{entryNum:int}", typeof(ShipmentDetail))]
         public async Task<IHttpActionResult> Put([FromBody] dynamic body, string shipNum, string transId, int entryNum)
         {
             return Ok(await ProcessEditRequest(false, body, shipNum, transId, entryNum));
         }
 
-        [ApiRoute(FunctionID, 2f, "shipmentDetail/{shipNum}", typeof(ShipmentDetail))]
+        [ApiRoute(FunctionID, 2f, "shipment/{shipNum}/shipmentDetail", typeof(ShipmentDetail))]
         public async Task<IHttpActionResult> Add([FromBody] dynamic body, string shipNum)
         {
             return Ok(await ProcessEditRequest(true, body, shipNum, null, null));
         }
 
-        [ApiRoute(FunctionID, 2f, "shipmentDetail/{shipNum}/detail/{transId}/entryNum/{entryNum}", typeof(ShipmentDetail))]
+        [ApiRoute(FunctionID, 2f, "shipment/{shipNum}/shipmentDetail/{transId}/entryNum/{entryNum}", typeof(ShipmentDetail))]
         public async Task Delete(string shipNum, string transId, int entryNum)
         {
             await this.MarkToDelete(shipNum, transId, entryNum);
         }
         #endregion Web Methods
 
-        #region Helper Methods
+        #region Helper Methods        
         protected override void AddPropertyDelegates()
         {
         }
@@ -118,12 +119,12 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
             else
                 transId = bodyItem.TransId;
 
-            if (entryNum.HasValue && (ApiUserSkipped.IsApiUserSkipped(bodyItem.EntryNum) || bodyItem.EntryNum == null))
-                bodyItem.EntryNum = entryNum;
+            if (ApiUserSkipped.IsApiUserSkipped(bodyItem.EntryNum) || bodyItem.EntryNum == null)
+                bodyItem.EntryNum = entryNum.GetValueOrDefault();
             else
                 entryNum = Convert.ToInt32(bodyItem.EntryNum);
 
-            var entity = await this.Find(shipNum, transId, entryNum, isCreate);
+            var entity = await this.Find(shipNum, transId, entryNum.GetValueOrDefault(), isCreate);
 
             if (isCreate)
             {
