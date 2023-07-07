@@ -88,6 +88,7 @@ namespace TRAVERSE.Web.API.SalesOrder.Controllers
 
         protected virtual async Task<List<TransactionPayment>> ProcessEditRequest(bool isCreate, dynamic body, string transId, int? id = null)
         {
+  
             object[] list;
 
             if (body is object[])
@@ -164,7 +165,9 @@ namespace TRAVERSE.Web.API.SalesOrder.Controllers
                 && entity.PaymentMethod.PaymentType != TRAVERSE.Business.AccountsReceivable.PaymentType.Cash
                 && entity.PaymentMethod.PaymentType != TRAVERSE.Business.AccountsReceivable.PaymentType.Check
                 && entity.PaymentMethod.PaymentType != TRAVERSE.Business.AccountsReceivable.PaymentType.Other
-                && entity.PaymentMethod.PaymentType != TRAVERSE.Business.AccountsReceivable.PaymentType.WriteOff)
+                && entity.PaymentMethod.PaymentType != TRAVERSE.Business.AccountsReceivable.PaymentType.WriteOff
+                && entity.PaymentMethod.PaymentType != TRAVERSE.Business.AccountsReceivable.PaymentType.CreditCard
+                && entity.PaymentMethod.PaymentType != TRAVERSE.Business.AccountsReceivable.PaymentType.DirectDebit)
                 throw new InvalidValueException(string.Format("The selected payment method '{0}' is not supported via the API", entity.PmtMethodId));
         }
         #endregion Helper Methods
