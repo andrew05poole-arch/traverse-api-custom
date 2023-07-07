@@ -177,7 +177,18 @@ namespace TRAVERSE.Web.API.ProjectCosting.Controllers
         #endregion Event Handlers
 
         #region Properties
-        protected TimeTicketProvider Provider { get; } = new TimeTicketProvider();
+        protected TimeTicketProvider Provider
+        {
+            get
+            {
+                if (_timeTicketProvider == null)
+                {
+                    _timeTicketProvider = new TimeTicketProvider();
+                    _timeTicketProvider.CompId = this.CompId;
+                }
+                return _timeTicketProvider;
+            }
+        }
 
         protected SortedDictionary<string, Action<TimeTicket>> PropertyDictionary { get; } = new SortedDictionary<string, Action<TimeTicket>>();
 
@@ -185,6 +196,8 @@ namespace TRAVERSE.Web.API.ProjectCosting.Controllers
         #endregion Properties
 
         #region Fields
+        TimeTicketProvider _timeTicketProvider;
+
         public const string FunctionID = "7358E34E-FB2F-428C-B110-F595CB4EB69D";
         #endregion Fields
     }
