@@ -160,7 +160,9 @@ namespace TRAVERSE.Web.API.AccountsReceivable.Controllers
                 && entity.PaymentMethod.PaymentType != PaymentType.Cash
                 && entity.PaymentMethod.PaymentType != PaymentType.Check
                 && entity.PaymentMethod.PaymentType != PaymentType.Other
-                && entity.PaymentMethod.PaymentType != PaymentType.WriteOff)
+                && entity.PaymentMethod.PaymentType != PaymentType.WriteOff
+                && entity.PaymentMethod.PaymentType != PaymentType.CreditCard
+                && entity.PaymentMethod.PaymentType != PaymentType.DirectDebit)
                 throw new InvalidValueException(string.Format("The selected payment method '{0}' is not supported via the API", entity.PmtMethodId));
         }
         #endregion Helper Methods
