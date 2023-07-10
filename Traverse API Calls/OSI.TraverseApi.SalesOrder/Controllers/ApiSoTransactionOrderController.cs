@@ -12,6 +12,7 @@ using TRAVERSE.Business.SalesOrder;
 using TRAVERSE.Core;
 using TRAVERSE.Web.API;
 using TRAVERSE.Business.API;
+using s = TRAVERSE.Business.Shipping;
 #endregion Using Directives
 
 namespace TRAVERSE.Web.API.SalesOrder.Controllers
@@ -67,6 +68,7 @@ namespace TRAVERSE.Web.API.SalesOrder.Controllers
             PropertyDictionary.Add(TransactionHeaderBase.Columns.NonTaxableSalesFgn.ToString(), (entity) => entity.ResetTaxAdjustment());
             PropertyDictionary.Add(TransactionHeaderBase.Columns.TaxGrpId.ToString(), (entity) => RecalculateOrder(entity, true));
             PropertyDictionary.Add(TransactionHeaderBase.Columns.CurrencyId.ToString(), (entity) => entity.UpdateExchangeRate());
+            EntityPropertyDictionary.Add("FreightTermDescription", FreightTermsDescPropertyChanged);
             EntityPropertyDictionary.Add("NetSalesTaxFgn", NetSalesTaxChanging);
             EntityPropertyDictionary.Add(TransactionHeaderBase.Columns.TransType.ToString(), TransTypePropertyChanging);
 
@@ -449,6 +451,25 @@ namespace TRAVERSE.Web.API.SalesOrder.Controllers
                 entity.SetExchangeRateBase();
                 entity.UpdateExchangeRate();
             }
+        }
+
+        protected virtual void FreightTermsDescPropertyChanged(dynamic bodyItem, ApiEntityPropertyChangingArgs e)
+        {
+            TransactionHeader header = e.Entity as TransactionHeader;
+            header.FreightTermId = null;
+
+            if (ApiUserSkipped.IsApiUserSkipped(bodyItem.FreightTermDescription) || string.IsNullOrEmpty(bodyItem.FreightTermDescription) || StringHelper.AreEqual(Convert.ToString(bodyItem.FreightTermDescription), "undefined"))
+                return;
+            
+            var filter = new SqlFilterBuilder<s.FreightTerm.Columns>();
+            filter.AppendEquals(s.FreightTerm.Columns.Description, bodyItem.FreightTermDescription);
+            FreightTermProvider.Load(this.CompId, new FilterCriteria(filter.ToString(), string.Empty));
+
+            if (FreightTermProvider.Items.Count > 0)
+                header.FreightTermId = FreightTermProvider.Items[0].Id;
+            else
+                throw new InvalidValueException(string.Format("Freight Term '{0}' could not be found.", bodyItem.FreightTermDescription));
+
         }
 
         protected virtual void TransTypePropertyChanging(dynamic bodyItem, ApiEntityPropertyChangingArgs e)
@@ -1052,6 +1073,7 @@ namespace TRAVERSE.Web.API.SalesOrder.Controllers
 
         #region Properties
         protected TransactionHeaderProvider Provider { get; } = new TransactionHeaderProvider();
+        protected s.FreightTermProvider FreightTermProvider { get; } = new s.FreightTermProvider();
 
         protected Dictionary<TransactionHeader, Action<TransactionHeader>> ProcessList { get; } = new Dictionary<TransactionHeader, Action<TransactionHeader>>();
 
