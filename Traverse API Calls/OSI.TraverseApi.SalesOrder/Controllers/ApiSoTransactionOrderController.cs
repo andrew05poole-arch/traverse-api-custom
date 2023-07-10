@@ -429,7 +429,15 @@ namespace TRAVERSE.Web.API.SalesOrder.Controllers
             else
             {
                 entity.SetShipToDefaults(true, true, true);
-                RecalculateOrder(entity, true);
+                if (string.IsNullOrEmpty(entity.TaxGrpId))
+                {
+                    entity.TaxGrpId = entity.SoldToCustomer.TaxLocId;
+                }
+                if (string.IsNullOrEmpty(entity.DistCode))
+                {
+                    entity.DistCode = entity.SoldToCustomer.DistCode;
+                }
+                RecalculateOrder(entity, true);               
             }
         }
 
