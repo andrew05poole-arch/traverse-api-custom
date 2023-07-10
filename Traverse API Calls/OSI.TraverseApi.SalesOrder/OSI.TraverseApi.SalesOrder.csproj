@@ -142,6 +142,9 @@
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
+    <Reference Include="TRAVERSE.Business.Shipping">
+      <HintPath>..\..\Core\TRAVERSE.Business.Shipping.dll</HintPath>
+    </Reference>
     <Reference Include="TRAVERSE.Business.Transaction, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\Core\TRAVERSE.Business.Transaction.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
