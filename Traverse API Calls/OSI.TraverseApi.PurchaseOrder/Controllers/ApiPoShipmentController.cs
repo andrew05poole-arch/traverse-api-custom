@@ -47,6 +47,39 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
         protected override void AddPropertyDelegates()
         {
             PropertyDictionary.Add(ShipmentHeaderBase.Columns.Status.ToString(), SetCompletedDate);
+
+            ShipmentDetailPropertyDictionary.Add(ShipmentDetailBase.Columns.TransId.ToString(), ValidateTransId);
+        }
+
+        protected virtual void ValidateTransId(ShipmentDetail entity)
+        {
+            SqlFilterBuilder<TransactionHeader> builder = new SqlFilterBuilder<TransactionHeader>();
+
+            builder.AppendEquals(TransactionHeaderBase.Columns.TransId.ToString(), entity.TransId);
+            TransactionHeaderProvider provider = new TransactionHeaderProvider();
+            provider.Load(CompId, new FilterCriteria(builder.ToString(), string.Empty));
+            if (provider.Count > 0)
+            {
+                TransactionDetail transactionDetail = provider.Items[0].TransactionDetailList.Find(TransactionDetailBase.Columns.EntryNum, entity.EntryNum);
+                if (transactionDetail != null)
+                {
+                    entity.VendorId = provider.Items[0].VendorId;
+                    entity.ItemId = transactionDetail.ItemId;
+                    entity.Description = transactionDetail.Description;
+                    entity.LocId = transactionDetail.LocationId;
+                    entity.Unit = transactionDetail.Unit;
+                    entity.OrdQty = transactionDetail.QtyOrd;
+                    entity.OrdUnitCost = transactionDetail.UnitCost;
+                }
+                else
+                {
+                    throw new InvalidValueException(String.Format("Trans ID '{0}' with Entry Num {1} is invalid.", entity.TransId, entity.EntryNum));
+                }
+            }
+            else
+            {
+                throw new InvalidValueException(String.Format("Trans ID '{0}' is invalid.", entity.TransId));
+            }
         }
 
         protected virtual void SetCompletedDate(ShipmentHeader entity)
@@ -172,18 +205,15 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
         #region Shipment Detail Method
         protected virtual ShipmentDetail UpdateShipmentDetail(ShipmentHeader parent, dynamic bodyItem)
         {
-            if (ApiUserSkipped.IsApiUserSkipped(bodyItem.HeaderId))
-                throw new InvalidValueException("Shipment ID is required.");
             if (ApiUserSkipped.IsApiUserSkipped(bodyItem.TransId))
                 throw new InvalidValueException("Transaction ID is required.");
             if (ApiUserSkipped.IsApiUserSkipped(bodyItem.EntryNum))
                 throw new InvalidValueException("Entry Num is required.");
 
             this.FilterEntityList(parent.DetailList, ApiPoShipmentDetailController.FunctionID);
-            ShipmentDetail entity = parent?.DetailList?.Find(d => d.HeaderId == Convert.ToInt64(bodyItem.HeaderId)
-            && StringHelper.AreEqual(d.TransId, bodyItem.TransId, false) && d.EntryNum == Convert.ToInt32(bodyItem.EntryNum));
+            ShipmentDetail entity = parent?.DetailList?.Find(d => StringHelper.AreEqual(d.TransId, bodyItem.TransId, false) && d.EntryNum == Convert.ToInt32(bodyItem.EntryNum));
             if (entity == null)
-                throw new InvalidValueException(string.Format("Transaction ID {0} with Entry Num {1} could not be found on Shipment '{2}'", Convert.ToInt64(bodyItem.Id), bodyItem.EntryNum, parent.ShipNum));
+                throw new InvalidValueException(string.Format("Transaction ID '{0}' with Entry Num '{1}' could not be found on Shipment '{2}'", Convert.ToString(bodyItem.TransId), bodyItem.EntryNum, parent.ShipNum));
 
             ((ApiEntityModel)bodyItem).EntityPropertyChanging += BodyItem_EntityPropertyChanging;
             ((ApiEntityModel)bodyItem).FieldUpdateIsComplete = ShipmentDetailUpdateComplete;

@@ -43,6 +43,38 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
         #region Helper Methods        
         protected override void AddPropertyDelegates()
         {
+            PropertyDictionary.Add(ShipmentDetailBase.Columns.TransId.ToString(), ValidateTransId);
+        }
+
+        protected virtual void ValidateTransId(ShipmentDetail entity)
+        {
+            SqlFilterBuilder<TransactionHeader> builder = new SqlFilterBuilder<TransactionHeader>();
+
+            builder.AppendEquals(TransactionHeaderBase.Columns.TransId.ToString(), entity.TransId);
+            TransactionHeaderProvider provider = new TransactionHeaderProvider();
+            provider.Load(CompId, new FilterCriteria(builder.ToString(), string.Empty));
+            if (provider.Count > 0)
+            {
+                TransactionDetail transactionDetail = provider.Items[0].TransactionDetailList.Find(TransactionDetailBase.Columns.EntryNum, entity.EntryNum);
+                if (transactionDetail != null)
+                {
+                    entity.VendorId = provider.Items[0].VendorId;
+                    entity.ItemId = transactionDetail.ItemId;
+                    entity.Description = transactionDetail.Description;
+                    entity.LocId = transactionDetail.LocationId;
+                    entity.Unit = transactionDetail.Unit;
+                    entity.OrdQty = transactionDetail.QtyOrd;
+                    entity.OrdUnitCost = transactionDetail.UnitCost;
+                }
+                else
+                {
+                    throw new InvalidValueException(String.Format("Trans ID '{0}' with Entry Num {1} is invalid.", entity.TransId, entity.EntryNum));
+                }
+            }
+            else
+            {
+                throw new InvalidValueException(String.Format("Trans ID '{0}' is invalid.", entity.TransId));
+            }
         }
 
         protected virtual async Task<EntityList<ShipmentDetail>> Load(string shipNum, string transId, int? entryNum, bool isCreate)
