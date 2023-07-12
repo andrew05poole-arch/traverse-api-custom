@@ -29,7 +29,7 @@ namespace TRAVERSE.Web.API.Payroll.Controllers
             return Ok(await ProcessEditRequest(false, body, employeeId, id));
         }
 
-        [ApiRoute(FunctionID, 2f, "employee/{employeeid}/earningcode/{id?}", typeof(ValidEarnCode))]
+        [ApiRoute(FunctionID, 2f, "employee/{employeeid}/earningcode", typeof(ValidEarnCode))]
         public async Task<IHttpActionResult> Add([FromBody] dynamic body, string employeeId)
         {
             return Ok(await ProcessEditRequest(true, body, employeeId, null));
