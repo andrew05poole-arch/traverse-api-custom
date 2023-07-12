@@ -45,6 +45,8 @@ namespace TRAVERSE.Web.API.SalesOrder.Controllers
         protected override void AddPropertyDelegates()
         {
             PropertyDictionary.Add(TransactionPaymentBase.Columns.PmtMethodId.ToString(), PmtMethodIdPropertyChanged);
+
+            PropertyDictionary.Add("CcNumUnprotected", CcNumPropertyChanged);
             PropertyDictionary.Add(TransactionPaymentBase.Columns.ExchRate.ToString(), (entity) => { if (!string.IsNullOrEmpty(entity.PmtMethodId)) entity.Calculate(); });
             PropertyDictionary.Add(TransactionPaymentBase.Columns.PmtAmtFgn.ToString(), (entity) =>
             {
@@ -79,6 +81,7 @@ namespace TRAVERSE.Web.API.SalesOrder.Controllers
 
             return list;
         }
+       
 
         protected virtual async Task<TransactionPayment> Find(string transId, int id)
         {
@@ -169,6 +172,13 @@ namespace TRAVERSE.Web.API.SalesOrder.Controllers
                 && entity.PaymentMethod.PaymentType != TRAVERSE.Business.AccountsReceivable.PaymentType.CreditCard
                 && entity.PaymentMethod.PaymentType != TRAVERSE.Business.AccountsReceivable.PaymentType.DirectDebit)
                 throw new InvalidValueException(string.Format("The selected payment method '{0}' is not supported via the API", entity.PmtMethodId));
+        }
+        protected virtual void CcNumPropertyChanged(TransactionPayment entity)
+        {
+            if (entity.CcNumUnprotected != null && entity.CcNumUnprotected.Length > 20)
+            {
+                throw new InvalidValueException("The CreditCard No. cannot be more than 20 characters");
+            }
         }
         #endregion Helper Methods
 
