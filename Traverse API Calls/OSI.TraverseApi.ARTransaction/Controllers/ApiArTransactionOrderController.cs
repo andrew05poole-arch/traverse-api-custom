@@ -92,6 +92,7 @@ namespace TRAVERSE.Web.API.AccountsReceivable.Controllers
 
             //Payment Property Changes
             PaymentPropertyDictionary.Add(TransactionPaymentBase.Columns.PmtMethodId.ToString(), PmtMethodIdPropertyChanged);
+            PaymentPropertyDictionary.Add("CcNumUnprotected", CcNumPropertyChanged);
             PaymentPropertyDictionary.Add(TransactionPaymentBase.Columns.ExchRate.ToString(), (entity) => { if (!string.IsNullOrEmpty(entity.PmtMethodId)) entity.Calculate(); });
             PaymentPropertyDictionary.Add(TransactionPaymentBase.Columns.PmtAmtFgn.ToString(), (entity) =>
             {
@@ -675,7 +676,7 @@ namespace TRAVERSE.Web.API.AccountsReceivable.Controllers
 
             ((ApiEntityModel)bodyItem).EntityPropertyChanging += BodyItem_EntityPropertyChanging;
             ((ApiEntityModel)bodyItem).FieldUpdateIsComplete = PaymentUpdateComplete;
-            entity.PropertyChanged += LotEntity_PropertyChanged;
+            entity.PropertyChanged += PaymentEntity_PropertyChanged;
 
             Request.RegisterForDispose(entity);
             Request.RegisterForDispose((ApiEntityModel)bodyItem);
@@ -690,7 +691,7 @@ namespace TRAVERSE.Web.API.AccountsReceivable.Controllers
 
             ((ApiEntityModel)bodyItem).EntityPropertyChanging += BodyItem_EntityPropertyChanging;
             ((ApiEntityModel)bodyItem).FieldUpdateIsComplete = PaymentUpdateComplete;
-            entity.PropertyChanged += LotEntity_PropertyChanged;
+            entity.PropertyChanged += PaymentEntity_PropertyChanged;
 
             Request.RegisterForDispose(entity);
             Request.RegisterForDispose((ApiEntityModel)bodyItem);
@@ -706,8 +707,17 @@ namespace TRAVERSE.Web.API.AccountsReceivable.Controllers
                 && entity.PaymentMethod.PaymentType != PaymentType.Cash
                 && entity.PaymentMethod.PaymentType != PaymentType.Check
                 && entity.PaymentMethod.PaymentType != PaymentType.Other
-                && entity.PaymentMethod.PaymentType != PaymentType.WriteOff)
+                && entity.PaymentMethod.PaymentType != PaymentType.WriteOff
+                && entity.PaymentMethod.PaymentType != PaymentType.CreditCard
+                && entity.PaymentMethod.PaymentType != PaymentType.DirectDebit)
                 throw new InvalidValueException(string.Format("The selected payment method '{0}' is not supported via the API", entity.PmtMethodId));
+        }
+        protected virtual void CcNumPropertyChanged(TransactionPayment entity)
+        {
+            if (entity.CcNumUnprotected != null && entity.CcNumUnprotected.Length > 20)
+            {
+                throw new InvalidValueException("The CreditCard No. cannot be more than 20 characters");
+            }
         }
 
         protected virtual void PaymentUpdateComplete(object entityObject)
