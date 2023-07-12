@@ -122,6 +122,7 @@ namespace TRAVERSE.Web.API.Contacts.Controllers
 
                 entity = new CustomerShipTo(this.CompId);
                 entity.CustId = customerId;
+                entity.SetDefaults();
             }
             else if (entity == null)
                 throw new InvalidValueException(string.Format("Ship To '{0}' for customer '{1}' could not be found.", code, customerId));
