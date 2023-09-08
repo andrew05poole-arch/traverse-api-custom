@@ -12,6 +12,7 @@ using TRAVERSE.Business.SalesOrder;
 using TRAVERSE.Core;
 using TRAVERSE.Web.API;
 using TRAVERSE.Business.API;
+using s = TRAVERSE.Business.Shipping;
 #endregion Using Directives
 
 namespace TRAVERSE.Web.API.SalesOrder.Controllers
@@ -19,25 +20,25 @@ namespace TRAVERSE.Web.API.SalesOrder.Controllers
     public class ApiSoTransactionOrderController : ApiControllerBase
     {
         #region Web Methods
-        [ApiRoute(FunctionID, 2f, "transaction/{id?}", typeof(TransactionHeader), new object[] { ApiSoTransactionSerialController.FunctionID, typeof(TransactionSerial), ApiSoTransactionLotController.FunctionId, typeof(TransactionDetailExt) })]
+        [ApiRoute(FunctionID, 2f, "transaction/{id?}", typeof(TransactionHeader), new object[] { ApiSoTransactionSerialController.FunctionID, typeof(TransactionSerial) })]
         public async Task<IHttpActionResult> Get(string id = null)
         {
             return Ok(await Load(id, false));
         }
 
-        [ApiRoute(FunctionID, 2f, "transaction/{id?}", typeof(TransactionHeader), new object[] { ApiSoTransactionSerialController.FunctionID, typeof(TransactionSerial), ApiSoTransactionLotController.FunctionId, typeof(TransactionDetailExt) })]
+        [ApiRoute(FunctionID, 2f, "transaction/{id?}", typeof(TransactionHeader), new object[] { ApiSoTransactionSerialController.FunctionID, typeof(TransactionSerial) })]
         public async Task<IHttpActionResult> Put([FromBody] dynamic body, string id = null)
         {
             return Ok(await ProcessEditRequest(false, body, id));
         }
 
-        [ApiRoute(FunctionID, 2f, "transaction/{id?}", typeof(TransactionHeader), new object[] { ApiSoTransactionSerialController.FunctionID, typeof(TransactionSerial), ApiSoTransactionLotController.FunctionId, typeof(TransactionDetailExt) })]
+        [ApiRoute(FunctionID, 2f, "transaction/{id?}", typeof(TransactionHeader), new object[] { ApiSoTransactionSerialController.FunctionID, typeof(TransactionSerial) })]
         public async Task<IHttpActionResult> Add([FromBody] dynamic body, string id = null)
         {
             return Ok(await ProcessEditRequest(true, body, id));
         }
 
-        [ApiRoute(FunctionID, 2f, "transaction/{id}", typeof(TransactionHeader), new object[] { ApiSoTransactionSerialController.FunctionID, typeof(TransactionSerial), ApiSoTransactionLotController.FunctionId, typeof(TransactionDetailExt) })]
+        [ApiRoute(FunctionID, 2f, "transaction/{id}", typeof(TransactionHeader), new object[] { ApiSoTransactionSerialController.FunctionID, typeof(TransactionSerial) })]
         public async Task Delete(string id)
         {
             await this.MarkToDelete(id);
@@ -67,6 +68,7 @@ namespace TRAVERSE.Web.API.SalesOrder.Controllers
             PropertyDictionary.Add(TransactionHeaderBase.Columns.NonTaxableSalesFgn.ToString(), (entity) => entity.ResetTaxAdjustment());
             PropertyDictionary.Add(TransactionHeaderBase.Columns.TaxGrpId.ToString(), (entity) => RecalculateOrder(entity, true));
             PropertyDictionary.Add(TransactionHeaderBase.Columns.CurrencyId.ToString(), (entity) => entity.UpdateExchangeRate());
+            EntityPropertyDictionary.Add("FreightTermDescription", FreightTermsDescPropertyChanged);
             EntityPropertyDictionary.Add("NetSalesTaxFgn", NetSalesTaxChanging);
             EntityPropertyDictionary.Add(TransactionHeaderBase.Columns.TransType.ToString(), TransTypePropertyChanging);
 
@@ -104,6 +106,8 @@ namespace TRAVERSE.Web.API.SalesOrder.Controllers
 
             //Payment Property Changes
             PaymentPropertyDictionary.Add(TransactionPaymentBase.Columns.PmtMethodId.ToString(), PmtMethodIdPropertyChanged);
+            PaymentPropertyDictionary.Add("CcNumUnprotected", CcNumPropertyChanged);
+
             PaymentPropertyDictionary.Add(TransactionPaymentBase.Columns.ExchRate.ToString(), (entity) => { if (!string.IsNullOrEmpty(entity.PmtMethodId)) entity.Calculate(); });
             PaymentPropertyDictionary.Add(TransactionPaymentBase.Columns.PmtAmtFgn.ToString(), (entity) =>
             {
@@ -111,6 +115,13 @@ namespace TRAVERSE.Web.API.SalesOrder.Controllers
                 entity.Parent.CalculateTotals();
             });
             PaymentPropertyDictionary.Add(TransactionPaymentBase.Columns.CurrencyId.ToString(), (entity) => entity.Parent.CalculateTotals());
+        }
+        protected virtual void CcNumPropertyChanged(TransactionPayment entity)
+        {
+            if (entity.CcNumUnprotected != null && entity.CcNumUnprotected.Length > 20)
+            {
+                throw new InvalidValueException("The CreditCard No. cannot be more than 20 characters");
+            }
         }
 
         protected virtual async Task<EntityList<TransactionHeader>> Load(string id)
@@ -428,8 +439,19 @@ namespace TRAVERSE.Web.API.SalesOrder.Controllers
                 entity.SetShipToDefaults(false, false, false);
             else
             {
-                entity.SetShipToDefaults(true, true, true);
-                RecalculateOrder(entity, true);
+                if (entity.ShipTo!=null)
+                {
+                    entity.SetShipToDefaults(true, true, true);
+                }             
+                if (string.IsNullOrEmpty(entity.TaxGrpId))
+                {
+                    entity.TaxGrpId = entity.SoldToCustomer.TaxLocId;
+                }
+                if (string.IsNullOrEmpty(entity.DistCode))
+                {
+                    entity.DistCode = entity.SoldToCustomer.DistCode;
+                }
+                RecalculateOrder(entity, true);               
             }
         }
 
@@ -441,6 +463,25 @@ namespace TRAVERSE.Web.API.SalesOrder.Controllers
                 entity.SetExchangeRateBase();
                 entity.UpdateExchangeRate();
             }
+        }
+
+        protected virtual void FreightTermsDescPropertyChanged(dynamic bodyItem, ApiEntityPropertyChangingArgs e)
+        {
+            TransactionHeader header = e.Entity as TransactionHeader;
+            header.FreightTermId = null;
+
+            if (ApiUserSkipped.IsApiUserSkipped(bodyItem.FreightTermDescription) || string.IsNullOrEmpty(bodyItem.FreightTermDescription) || StringHelper.AreEqual(Convert.ToString(bodyItem.FreightTermDescription), "undefined"))
+                return;
+            
+            var filter = new SqlFilterBuilder<s.FreightTerm.Columns>();
+            filter.AppendEquals(s.FreightTerm.Columns.Description, bodyItem.FreightTermDescription);
+            FreightTermProvider.Load(this.CompId, new FilterCriteria(filter.ToString(), string.Empty));
+
+            if (FreightTermProvider.Items.Count > 0)
+                header.FreightTermId = FreightTermProvider.Items[0].Id;
+            else
+                throw new InvalidValueException(string.Format("Freight Term '{0}' could not be found.", bodyItem.FreightTermDescription));
+
         }
 
         protected virtual void TransTypePropertyChanging(dynamic bodyItem, ApiEntityPropertyChangingArgs e)
@@ -956,7 +997,7 @@ namespace TRAVERSE.Web.API.SalesOrder.Controllers
 
             ((ApiEntityModel)bodyItem).EntityPropertyChanging += BodyItem_EntityPropertyChanging;
             ((ApiEntityModel)bodyItem).FieldUpdateIsComplete = PaymentUpdateComplete;
-            entity.PropertyChanged += LotEntity_PropertyChanged;
+            entity.PropertyChanged += PaymentEntity_PropertyChanged;
 
             Request.RegisterForDispose(entity);
             Request.RegisterForDispose((ApiEntityModel)bodyItem);
@@ -971,7 +1012,7 @@ namespace TRAVERSE.Web.API.SalesOrder.Controllers
 
             ((ApiEntityModel)bodyItem).EntityPropertyChanging += BodyItem_EntityPropertyChanging;
             ((ApiEntityModel)bodyItem).FieldUpdateIsComplete = PaymentUpdateComplete;
-            entity.PropertyChanged += LotEntity_PropertyChanged;
+            entity.PropertyChanged += PaymentEntity_PropertyChanged;
 
             Request.RegisterForDispose(entity);
             Request.RegisterForDispose((ApiEntityModel)bodyItem);
@@ -987,7 +1028,9 @@ namespace TRAVERSE.Web.API.SalesOrder.Controllers
                 && entity.PaymentMethod.PaymentType != TRAVERSE.Business.AccountsReceivable.PaymentType.Cash
                 && entity.PaymentMethod.PaymentType != TRAVERSE.Business.AccountsReceivable.PaymentType.Check
                 && entity.PaymentMethod.PaymentType != TRAVERSE.Business.AccountsReceivable.PaymentType.Other
-                && entity.PaymentMethod.PaymentType != TRAVERSE.Business.AccountsReceivable.PaymentType.WriteOff)
+                && entity.PaymentMethod.PaymentType != TRAVERSE.Business.AccountsReceivable.PaymentType.WriteOff
+                && entity.PaymentMethod.PaymentType != TRAVERSE.Business.AccountsReceivable.PaymentType.CreditCard
+                && entity.PaymentMethod.PaymentType != TRAVERSE.Business.AccountsReceivable.PaymentType.DirectDebit)
                 throw new InvalidValueException(string.Format("The selected payment method '{0}' is not supported via the API", entity.PmtMethodId));
         }
 
@@ -1044,6 +1087,7 @@ namespace TRAVERSE.Web.API.SalesOrder.Controllers
 
         #region Properties
         protected TransactionHeaderProvider Provider { get; } = new TransactionHeaderProvider();
+        protected s.FreightTermProvider FreightTermProvider { get; } = new s.FreightTermProvider();
 
         protected Dictionary<TransactionHeader, Action<TransactionHeader>> ProcessList { get; } = new Dictionary<TransactionHeader, Action<TransactionHeader>>();
 
