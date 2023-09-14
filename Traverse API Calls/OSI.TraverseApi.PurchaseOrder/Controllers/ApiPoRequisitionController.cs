@@ -223,7 +223,18 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
         #endregion Event Handler
 
         #region Properties
-        private RequisitionProvider Provider { get; } = new RequisitionProvider();
+        private RequisitionProvider Provider
+        {
+            get
+            {
+                if (_requisitionProvider == null)
+                {
+                    _requisitionProvider = new RequisitionProvider();
+                    _requisitionProvider.CompId = this.CompId;
+                }
+                return _requisitionProvider;
+            }
+        } 
 
         protected SortedDictionary<string, Action<Requisition>> PropertyDictionary { get; } = new SortedDictionary<string, Action<Requisition>>();
 
@@ -232,6 +243,7 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
 
         #region Fields
         private const string FunctionID = "F9B9EE5D-B001-468C-9C84-B13224FA4AE9";
+        RequisitionProvider _requisitionProvider;
         #endregion Fields
     }
 }
