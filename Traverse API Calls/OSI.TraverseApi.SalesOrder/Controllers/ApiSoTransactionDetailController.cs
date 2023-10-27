@@ -375,6 +375,17 @@ namespace TRAVERSE.Web.API.SalesOrder.Controllers
             if (Utility.INYN)
             {
                 if (entity.InItem == null)
+                {
+                    EntityList<Alias> listItemID =
+                        Alias.FindAlias(CompId, entity.ItemId, CurrentTransaction.CustId, ItemAliasType.Customer);
+                    listItemID.Sort(AliasBase.Columns.AliasId.ToString());
+
+                    if (listItemID.Count == 1)
+                    {
+                        entity.ItemId = listItemID[0].ItemId;
+                    }
+                }
+                if (entity.InItem == null)
                     return;
 
                 entity.Unit = null;
@@ -414,11 +425,11 @@ namespace TRAVERSE.Web.API.SalesOrder.Controllers
 
                 if (string.IsNullOrEmpty(entity.CustomerPartNumber))
                 {
-                    EntityList<Alias> entityList = Alias.FindCustomerItemByAlias(CompId, entity.ItemId, CurrentTransaction.CustId);
+                    EntityList<Alias> entityList = Alias.FindAlias(CompId, entity.ItemId, CurrentTransaction.CustId, ItemAliasType.Customer);
                     entityList.Sort(AliasBase.Columns.AliasId.ToString());
                     if (entityList.Count > 0)
                     {
-                        entity.CustomerPartNumber = entityList[0].AliasId;
+                        entity.CustomerPartNumber = entityList[0].ItemId;
                     }
                 }
                 return;

@@ -660,6 +660,18 @@ namespace TRAVERSE.Web.API.SalesOrder.Controllers
             if (Utility.INYN)
             {
                 if (entity.InItem == null)
+                {
+                    EntityList<Alias> listItemID =
+                        Alias.FindAlias(CompId, entity.ItemId, ((TransactionHeader)entity.Parent).CustId, ItemAliasType.Customer);
+                    listItemID.Sort(AliasBase.Columns.AliasId.ToString());
+
+                    if (listItemID.Count == 1)
+                    {
+                        entity.ItemId = listItemID[0].ItemId;
+                    }
+                }
+
+                if (entity.InItem == null)
                     return;
 
                 entity.Unit = null;
