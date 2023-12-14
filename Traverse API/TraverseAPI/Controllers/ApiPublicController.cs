@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -64,6 +65,11 @@ namespace TRAVERSE.Web.API
             if (string.IsNullOrWhiteSpace(query))
                 query = await Request.Content.ReadAsStringAsync();
 
+            if(TryGetBase64Encoded(query, out string decoded))
+            {
+                query = decoded;
+            }
+
             if (string.IsNullOrEmpty(companyId))
                 throw new ApiRequestException(Resources.ApiCompanyRequired);
 
@@ -73,6 +79,30 @@ namespace TRAVERSE.Web.API
             var user = Request.GetOwinContext().Get<ApiUser>(Resources.ApiUserInfoStorage);
             var response = await ApiQueryHandler.LoadQueryData(user, companyId.ToLower(), query);
             return new ApiOkResult(ApplyPaging(response), this);
+        }
+
+        [ApiRoute("data", false, null)]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public async Task<IHttpActionResult> AddQueryData()
+        {
+            return await GetQueryData();
+        }
+
+        protected virtual bool TryGetBase64Encoded(string encoded, out string decoded)
+        {
+            decoded = string.Empty;
+            if (string.IsNullOrEmpty(encoded) || encoded.Length % 4 != 0) return false;
+
+            try
+            {
+                decoded = Encoding.ASCII.GetString(Convert.FromBase64String(encoded));
+                return true;
+            }
+            catch (Exception)
+            {
+            }
+
+            return false;
         }
 
         protected override void AddPropertyDelegates() { }
