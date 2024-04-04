@@ -5,7 +5,7 @@
 // associated with an assembly.
 [assembly: AssemblyCompany("Open Systems, Inc.")]
 [assembly: AssemblyProduct("Traverse API")]
-[assembly: AssemblyCopyright("Copyright© 2023 Open Systems, Inc.")]
+[assembly: AssemblyCopyright("Copyright© 2024 Open Systems, Inc.")]
 [assembly: AssemblyTrademark("TRAVERSE® is a registered trademark of Open Systems Holdings Corp.")]
 
 // Version information for an assembly consists of the following four values:
@@ -15,5 +15,5 @@
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("2.0.23198.0")]
-[assembly: AssemblyFileVersion("11.2.23198.0")]
+[assembly: AssemblyVersion("2.0.24094.0")]
+[assembly: AssemblyFileVersion("11.2.24094.0")]
