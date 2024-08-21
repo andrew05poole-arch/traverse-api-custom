@@ -402,7 +402,7 @@ namespace TRAVERSE.Web.API.SalesOrder.Controllers
                     throw new InvalidValueException(string.Format("Item '{0}' has no locations", entity.ItemId));
 
                 entity.SetDefaults();
-
+                entity.SetItemCustomerDefault();
                 if (string.IsNullOrEmpty(entity.LocId))
                     entity.LocId = entity.InItem.AllLocations[0].LocId;
 

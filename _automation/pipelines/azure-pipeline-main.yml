@@ -1,0 +1,33 @@
+# Build pipeline for Traverse Global API
+# Defines the pipeline resources, triggers and variables used by the build process
+# Note that Artifacts from the reference pipeline are downloaded for use during the build process
+
+# branchType - identifies the default branch type (dev, work, main, build)
+# buildConfiguration - identifies the build configuration to use for compiling the projects
+# runCodeAnalysisYn - allows disabling the code analysis steps for the evaluated branches (main)
+# enableDebugArtifacts - enable for debugging, includes a copy of the transient folders in the pipeline artifacts
+
+
+resources:
+  pipelines:
+  - pipeline: 'Global-Pipeline' # internal reference to the base reference pipeline
+    source: 'Global - Main' # Name of the reference pipeline
+
+name: $(date:yyyyMMdd)$(rev:.r)
+
+variables:
+  branchType: 'main' # default branch type
+  buildConfiguration: 'release'
+  runCodeAnalysisYn: true # option to run the SonarQube static code analysis
+  enableDebugArtifacts: false #only enable for debugging, includes a copy of the transient folders in the pipeline artifacts
+
+jobs:
+- job: Build
+  displayName: Agent job 1
+  timeoutInMinutes: 180
+  cancelTimeoutInMinutes: 5
+  pool:
+    vmImage: windows-latest
+    
+  steps:
+  - template: azure-pipeline-buildprocess.yml

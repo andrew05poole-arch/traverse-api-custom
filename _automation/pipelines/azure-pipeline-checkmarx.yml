@@ -1,0 +1,26 @@
+resources:
+  repositories:
+  - repository: self
+    type: git
+    ref: refs/heads/main
+jobs:
+- job: Job_1
+  displayName: Agent job 1
+  timeoutInMinutes: 180
+  pool:
+    name: Global & Standard Pool
+#    name: TraverseERP-Security
+  steps:
+  - checkout: self
+    clean: true
+  - task: checkmarx.cxsast.cx-scan-task.Application security testing@2021
+    displayName: Application security testing
+    continueOnError: True
+    inputs:
+      projectName: TraverseERP-API
+      CheckmarxService: ffacb9aa-1853-4b34-8e2b-e428b3c5eff2
+      preset: All
+      fullTeamName: CxServer\Aptean\Traverse\TraverseERP
+      fullScansScheduled: false
+      folderExclusion: cvs, .svn, .hg , .git, .bzr, bin , obj,  backup, .idea, node_modules, Install, Install Archive, Scripts, packages
+...
