@@ -1,0 +1,230 @@
+# ---------------
+#2024-08 Initial pipeline workflow implemented to support SonarQube Analysis. It can be used as the foundation for building release artifacts.
+# todo: review the need for all base application and DevEx files in the .\core folder for building
+# todo: Generate the server tsmx
+# todo: Create the self-executing archive for install media
+# ---------------
+
+
+# Build pipeline for Traverse Global API
+# Note that triggers and variables are defined in parent/wrapper pipeline definitions to manage workflow (i.e. -build, -dev, -main, -work)
+
+# Pipeline/build information
+#   Uses the internal build number of the reference pipeline for release builds to synch branch names when triggered by other pipelines
+#   Otherwise uses the source branch for other branch types (work, dev, main)
+
+# variables:
+#   branchType - identifies the default branch type (dev, work, main, build)
+#   buildConfiguration - identifies the build configuration to use for compiling the projects
+#   runCodeAnalysisYn - allows disabling the code analysis steps for the evaluated branches (main)
+#   enableDebugArtifacts - enable for debugging, includes a copy of the transient folders in the pipeline artifacts
+
+  steps:
+# checkout the current repo/branch to establish credentials (cleans the source folder)
+  - checkout: self
+    clean: true
+    persistCredentials: true
+
+# download the artifacts from the reference pipeline and extract into the core folder
+#   overwrite and clean destination folder
+  - task: DeleteFiles@1
+    displayName: Clean the reference pipeline download folder
+    inputs:
+      SourceFolder: $(Pipeline.Workspace)/Global-Pipeline
+      Contents: '**/*'
+  - download: 'Global-Pipeline'
+    displayName: 'Download reference pipeline artifacts'
+    patterns: '**/*.zip'
+  - task: ExtractFiles@1
+    displayName: 'Extract reference artifacts'
+    inputs:
+      archiveFilePatterns: $(Pipeline.Workspace)/Global-Pipeline/Build/*.zip
+      destinationFolder: $(Pipeline.Workspace)/Global-Pipeline/Build/core
+      overwriteExistingFiles: true
+      cleanDestinationFolder: true
+
+# prep and copy only the required Core/DataProvider files
+  - task: DeleteFiles@1
+    displayName: Clean the core folder
+    inputs:
+      SourceFolder: $(System.Defaultworkingdirectory)/core
+      Contents: '**/*'
+
+# copy files needed in Core
+  - task: CopyFiles@2
+    displayName: 'Copy needed core files'
+    inputs:
+      SourceFolder: $(Pipeline.Workspace)/Global-Pipeline/Build/core
+      TargetFolder: $(System.Defaultworkingdirectory)/core
+      preserveTimestamp: true
+      overwriteExistingFiles: true
+      cleanDestinationFolder: false
+      contents: '*'
+
+# copy files needed in dataprovider
+  - task: CopyFiles@2
+    displayName: 'Copy needed dataprovider files'
+    inputs:
+      SourceFolder: $(Pipeline.Workspace)/Global-Pipeline/Build/core/dataprovider
+      TargetFolder: $(System.Defaultworkingdirectory)/core/dataprovider
+      preserveTimestamp: true
+      overwriteExistingFiles: true
+      cleanDestinationFolder: false
+      contents: '*'
+
+# extract DevEx dependencies into the core reference folder
+  - task: ExtractFiles@1
+    displayName: Extract DevEx dependencies
+    condition: succeeded()
+    inputs:
+      archiveFilePatterns: $(build.repository.localpath)/_automation/devex/*.zip
+      destinationFolder: $(System.Defaultworkingdirectory)/core
+      overwriteExistingFiles: false
+      cleanDestinationFolder: false
+
+# identify the build number assigned to the reference pipeline artifacts
+  - task: PowerShell@2
+    name: internalBuildNumber
+    displayName: Identify Build Number
+    inputs:
+      targetType: inline
+      script: "$files = Get-ChildItem -Path $(Pipeline.Workspace)\\Global-Pipeline\\Build\\core\\Server\\*.tsmx -Recurse \n$updateFile = \"\"\n\nforeach($file in $files)\n{\n  Write-Output  $file\n  if($file -like \"**ServerUpdate**\"){\n  $updateFile = $file\n  }\n}\n\nWrite-Output  $updateFile.Name.SubString(12,5)\n$updateNumber = $(\"11.2.\"+$updateFile.Name.SubString(12,5)+\".0\")\n$updateNumber2 = $updateFile.Name.SubString(12,5)\nWrite-Host \"##vso[task.setvariable variable=internalBuildNumber;]$updateNumber\"\nWrite-Host \"##vso[task.setvariable variable=internalBuildNumber2;]$updateNumber2\""
+  - task: PowerShell@2
+    displayName: 'Summarize parameter values'
+    inputs:
+      targetType: 'inline'
+      script: >-
+        write-host "Branch Type: $(branchType)";
+        write-host "Build Number: $(internalBuildNumber2)";
+        write-host "Version Info: $(internalBuildNumber)";
+        write-host "Run Code Analysis : $(runCodeAnalysisYn)";
+        write-host "Debug Artifacts : $(enableDebugArtifacts)";
+
+# conditionally checkout the respective build branch when needed
+#   otherwise use the default branch of the parent pipeline
+  - task: PowerShell@2
+    displayName: 'Checkout build branch'
+    condition: eq(variables['branchType'], 'build')
+    inputs:
+      targetType: 'inline'
+      script: >-
+        $checkoutBranch = "servicepack/build$(internalBuildNumber2)";
+        write-host "Checking out build branch: build$(internalBuildNumber2) for compatibility with reference pipeline.";
+        write-host "Path: $checkoutBranch";
+        git fetch origin $checkoutBranch;
+        git checkout "origin/$checkoutBranch";
+
+# update version information in the assembly info for all projects
+  - task: bleddynrichards.Assembly-Info-Task.Assembly-Info-Task.Assembly-Info-NetFramework@3
+    displayName: Set Build Number in Assembly Manifest Data
+    inputs:
+      FileNames: '**\AssemblyInfo.cs'
+      FileVersionNumber: $(internalBuildNumber)
+
+# prep for executing SonarQube code analysis
+  - task: SonarQubePrepare@6
+    displayName: 'SonarQube - Prepare analysis'
+    condition: and(succeeded(), eq(variables['runCodeAnalysisYn'], true))
+    inputs:
+      SonarQube: Sonarqube
+      scannerMode: CLI
+      configMode: manual
+      cliProjectKey: TraverseERP-API
+      cliProjectName: TraverseERP-API
+      cliSources: '$(build.repository.localpath)'
+      extraProperties: "sonar.exclusions=Install/**, Install Archive/**,downloads/**,Global-Pipeline/**,_automation/**,**/AssemblyInfo.cs,**/ClientReadme.html,**/Readme.html,Traverse API/TraverseAPI/Scripts/**,core/_PublishedWebsites/TraverseApi/Scripts/**"
+
+# build each of the solutions
+  - task: NuGetCommand@2
+    displayName: NuGet restore Traverse API/TraverseAPI.sln
+    inputs:
+      solution: "Traverse API/TraverseAPI.sln"
+  - task: VSBuild@1
+    displayName: Build solution Traverse API/TraverseAPI.sln
+    inputs:
+      solution: "Traverse API/TraverseAPI.sln"
+      msbuildArgs: '/p:ReferencePath="$(system.defaultworkingdirectory)\core;$(system.defaultworkingdirectory)\core\DataProvider" /t:Clean;Rebuild /p:Configuration="Release" /p:OutDir="$(system.defaultworkingdirectory)\core" /p:PostBuildEvent= '
+      configuration: $(buildConfiguration)
+  - task: NuGetCommand@2
+    displayName: NuGet restore Traverse API Calls/OSI.TraverseApi.Global.sln
+    inputs:
+      solution: "Traverse API Calls/OSI.TraverseApi.Global.sln"
+  - task: VSBuild@1
+    displayName: Build solution Traverse API Calls/OSI.TraverseApi.Global.sln
+    inputs:
+      solution: "Traverse API Calls/OSI.TraverseApi.Global.sln"
+      msbuildArgs: '/p:ReferencePath="$(system.defaultworkingdirectory)\core;$(system.defaultworkingdirectory)\core\DataProvider" /t:Clean;Rebuild /p:Configuration="Release" /p:OutDir="$(system.defaultworkingdirectory)\core" /p:PostBuildEvent= '
+      configuration: $(buildConfiguration)
+
+#todo: build server tsmx
+#todo: copy files to into the needed artifact folder structure for release/installer prep
+#todo: update secondary txt/info files
+#todo: regenerate the installer (as needed)
+#todo: add digital signing of assemblies / review needs for obfuscation
+#todo: review need to build/sign only those that have changed
+
+  - task: PowerShell@2
+    displayName: 'SonarQube - Remap Branch Name'
+    condition: and(succeeded(), eq(variables['runCodeAnalysisYn'], true))
+    inputs:
+      targetType: 'inline'
+      script: >-
+        $params = "$env:SONARQUBE_SCANNER_PARAMS" -replace '"sonar.branch.name":"[\w/,-.]*"\,?';
+
+        write-host "##vso[task.setvariable variable=SONARQUBE_SCANNER_PARAMS]$params";
+
+  - task: SonarQubeAnalyze@6
+    displayName: 'SonarQube - Run Code Analysis'
+    condition: and(succeeded(), eq(variables['runCodeAnalysisYn'], true))
+
+  - task: SonarQubePublish@6
+    displayName: 'Sonar Qube - Publish Quality Gate Result'
+    condition: and(succeeded(), eq(variables['runCodeAnalysisYn'], true))
+    inputs:
+      pollingTimeoutSec: 1200
+
+  - task: PowerShell@2
+    displayName: 'SonarQube - Check Quality Gate Status'
+    continueOnError: true
+    condition: and(succeeded(), eq(variables['runCodeAnalysisYn'], true))
+    inputs:
+      targetType: 'inline'
+      script: >-
+        $sonarToken = "sqa_79e72f854433fc2725d110a61ee9d72280dd87d8";
+        $sonarProjectKey = "TraverseERP-API";
+        $sonarServerName = "sonarqube.apteandev.com";
+
+        $token = [System.Text.Encoding]::UTF8.GetBytes("${sonarToken}:");
+        $base64 = [System.Convert]::ToBase64String(${token});
+        $basicAuth = [string]::Format("Basic {0}", ${base64});
+        $headers = @{ Authorization = ${basicAuth} };
+
+        $result = Invoke-RestMethod -Method Get -Uri https://${sonarServerName}/api/qualitygates/project_status?projectKey=${sonarProjectKey} -Headers ${headers};
+
+        $result | ConvertTo-Json | Write-Host;
+
+        if ($result.projectStatus.status -eq "OK")
+        {
+            write-host "Quality Gate Succeeded";
+        }
+        else
+        {
+            throw "Quality Gate Failed";
+        }
+
+# copy the transient folder to the build staging directory for publishing
+  - task: CopyFiles@2
+    displayName: 'Archive: Stage transient files as pipeline artifacts'
+    condition: and(succeeded(), eq(variables['enableDebugArtifacts'], true))
+    inputs:
+      SourceFolder: $(system.defaultworkingdirectory)
+      TargetFolder: $(Build.ArtifactStagingDirectory)
+      OverWrite: true
+      preserveTimestamp: true
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Archive: Publish pipeline artifacts'
+    condition: succeeded()
+    inputs:
+      PathtoPublish: $(Build.ArtifactStagingDirectory)
+      ArtifactName: Build
