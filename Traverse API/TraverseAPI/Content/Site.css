@@ -35,7 +35,7 @@ label {
 }
 
 .title {
-    font-family: "Arial";
+    font-family: "Arial", sans-serif;
     font-weight: 400;
     margin: 0 15px 30px 15px;
     color: #0067A0;
