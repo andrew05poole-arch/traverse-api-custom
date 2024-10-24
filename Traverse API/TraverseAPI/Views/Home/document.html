@@ -70,11 +70,11 @@
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle nav-link" href="#" id="dropDownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage Account</a>
                             <div class="dropdown-menu" aria-labelledby="dropDownMenuLink">
-                                <a class="dropdown-item" href="../../Home/ChangePwd" role="button">Change Password</a>
+                                <!-- Replaced <a> with <button> for accessibility -->
+                                <button class="dropdown-item" onclick="location.href='../../Home/ChangePwd';">Change Password</button>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="../../Home/Register" role="button">Regenerate Client Secret</a>
+                                <button class="dropdown-item" onclick="location.href='../../Home/Register';">Regenerate Client Secret</button>
                             </div>
-
                         </li>
                         <li class="ml-auto">
                             <a class="nav-link" href="../../Home/Logout">Logout</a>
