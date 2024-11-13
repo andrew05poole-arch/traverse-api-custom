@@ -1,0 +1,21 @@
+name: Validate PR Content
+on:
+  pull_request:
+    types: [opened, edited, reopened]
+
+jobs:
+  validate-pr-content:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Validate Azure Board workitem is listed in the body or title
+      id: validate
+      run: |
+        if ! [[ "${{ github.event.pull_request.body }}" =~ AB#[0-9]+ || "${{ github.event.pull_request.title }}" =~ AB#[0-9]+ ]]; then
+          echo "Azure Board work item is required in the body or title (e.g., AB#123)."
+          exit 1
+        fi
+
+    - name: PR content validation result
+      if: failure()
+      run: echo "Pull request validation failed. Please include an Azure Board work item number (e.g., AB#123) in the body or title."
