@@ -121,10 +121,26 @@ namespace TRAVERSE.Web.API.GeneralLedger.Controllers
             ((ApiEntityModel)bodyItem).EntityPropertyChanging += BodyItem_EntityPropertyChanging;
             entity.PropertyChanged += Entity_PropertyChanged;
             await ((ApiEntityModel)bodyItem).PopulateEntityAsync(entity);
+            foreach (Segment segment in entity.SegmentList)
+            {
+                ValidateSegments(segment, entity);
+            }
             entity.PropertyChanged -= Entity_PropertyChanged;
             ((ApiEntityModel)bodyItem).EntityPropertyChanging -= BodyItem_EntityPropertyChanging;
 
             return entity;
+        }
+
+        protected virtual void ValidateSegments (Segment segment, Account entity)
+        {
+            int segmentNumber = segment.Number;
+            if (!string.IsNullOrEmpty(segment.Id) && SegmentProvider.GetSegment(segmentNumber, segment.Id.ToString(), this.CompId) == null)
+            {
+                entity.SegmentList[segmentNumber - 1].Id = segment.Id.ToString();
+                //create the missing segment
+                AccountQuickEntry.CreateMissingSegments(entity.SegmentList[segmentNumber - 1], this.CompId, null);
+                entity.SegmentList[segmentNumber - 1].Validate();
+            }
         }
 
         protected virtual async Task MarkToDelete(string id)
