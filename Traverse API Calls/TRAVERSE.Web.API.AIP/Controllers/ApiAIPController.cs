@@ -28,7 +28,7 @@ namespace TRAVERSE.Web.API.AIP.Controllers
             activity.EntryDate = DateTime.Now;
             activity.EventName = eventname; //Convert.ToString(this.ControllerContext.RouteData.Values["eventname"]);
             activity.ActType = (byte)AIPEnum.ActType.Inbound;
-            activity.ActStatus = (byte)AIPEnum.ActStatus.Pending;
+            activity.ActStatus = (byte)AIPEnum.ActStatus.Initial;
             //activity.DocumentReference = string.Format("{0}-{1}", documentRef, Utility.GenerateUniqueId());
             activity.RequestData = JsonConvert.SerializeObject(body, new JsonSerializerSettings()
             {
