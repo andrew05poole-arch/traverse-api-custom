@@ -108,7 +108,7 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
             }
 
             await this.ValidateEntityListAsync(entityList);
-            
+
             this.Provider?.Update(this.CompId);
             this.SerialProvider?.Update(this.CompId);
 
@@ -147,7 +147,7 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
             await ((ApiEntityModel)bodyItem).PopulateEntityAsync(entity, ProcessChildObject);
             entity.PropertyChanged -= Entity_PropertyChanged;
             ((ApiEntityModel)bodyItem).EntityPropertyChanging -= BodyItem_EntityPropertyChanging;
-
+            entity.CalculateTotals();
             return entity;
         }
 
