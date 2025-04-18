@@ -205,6 +205,10 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
             {
                 throw new InvalidValueException("Transaction is linked.  Cannot change DropShip.");
             }
+            else
+            {
+                header.DropShipYn = bodyItem.DropShipYn;
+            }
         }
         /// <summary>
         /// Check to see if any transaction detail records are linked and if so return true.
