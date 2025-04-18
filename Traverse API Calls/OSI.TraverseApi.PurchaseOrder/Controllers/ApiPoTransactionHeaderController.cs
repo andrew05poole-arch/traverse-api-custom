@@ -61,6 +61,7 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
             PropertyDictionary.Add(TransactionHeaderBase.Columns.MemoTaxClassMisc.ToString(), (entity) => entity.CalculateTotals(true));
             PropertyDictionary.Add(TransactionHeaderBase.Columns.MemoFreightFgn.ToString(), (entity) => entity.CalculateTotals(true));
             PropertyDictionary.Add(TransactionHeaderBase.Columns.MemoMiscFgn.ToString(), (entity) => entity.CalculateTotals(true));
+            EntityPropertyDictionary.Add(TransactionHeaderBase.Columns.DropShipYn.ToString(), DropShipYnPropertyChanging);
 
             //Detail Property Changes
             DetailPropertyDictionary.Add(TransactionDetailBase.Columns.UnitCostFgn.ToString(), (entity) => entity.CalculateExtendedCost());
@@ -194,6 +195,34 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
             return null;
         }
         #region Header Update Methods
+        protected virtual void DropShipYnPropertyChanging(dynamic bodyItem, ApiEntityPropertyChangingArgs e)
+        {
+            TransactionHeader header = e.Entity as TransactionHeader;
+            e.Handled = true;
+            if (header == null  || ApiUserSkipped.IsApiUserSkipped(bodyItem.DropShipYn))
+                return;
+            if (!header.IsNew && header.DropShipYn != bodyItem.DropShipYn && IsLinked(header.TransactionDetailList))
+            {
+                throw new InvalidValueException("Transaction is linked.  Cannot change DropShip.");
+            }
+        }
+        /// <summary>
+        /// Check to see if any transaction detail records are linked and if so return true.
+        /// </summary>
+        public virtual bool IsLinked(EntityList<TransactionDetail> transactionDetailList)
+        {
+            if (transactionDetailList != null)
+            {
+                foreach (TransactionDetail transDetail in transactionDetailList)
+                {
+                    if (transDetail != null && transDetail.IsTransactionLinked)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
         protected virtual void VendorIdPropertyChanged(TransactionHeader entity)
         {
             entity.SetVendorDefaults();
