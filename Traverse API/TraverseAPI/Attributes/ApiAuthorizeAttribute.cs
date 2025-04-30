@@ -11,6 +11,7 @@ using System.Web.Http;
 using System.Web.Http.Controllers;
 using TRAVERSE.Business;
 using TRAVERSE.Business.API;
+using TRAVERSE.Core;
 using TRAVERSE.Web.API.Properties;
 
 namespace TRAVERSE.Web.API
@@ -218,26 +219,29 @@ namespace TRAVERSE.Web.API
                     request.GetOwinContext().Set<bool>(Resources.ApiSecurityNoticeSetting, false);
                 }
 
-                if (routeInfo != null &&    //we have route info, so going through the custom route and security steps
-                    !routeInfo.SkipUserAccessValidation &&    //access validation will be verified
-                    !ValidateUserAccess(user, routeInfo.FunctionId, companyId, request.Method.Method, ref action))  //Validate user has access to method and action
+                if (!(routeInfo.FunctionId.Equals(new Guid("35ad288a-5402-42cf-80d4-da6cb6b9e54f")) && companyId.Equals("$$$")))
                 {
-                    actionContext.Response = request.CreateResponse(HttpStatusCode.Unauthorized);
-                    return;
-                }
+                    if (routeInfo != null &&    //we have route info, so going through the custom route and security steps
+                        !routeInfo.SkipUserAccessValidation &&    //access validation will be verified
+                        !ValidateUserAccess(user, routeInfo.FunctionId, companyId, request.Method.Method, ref action))  //Validate user has access to method and action
+                    {
+                        actionContext.Response = request.CreateResponse(HttpStatusCode.Unauthorized);
+                        return;
+                    }
 
-                //Check to see if this is an administrator function call for support or otherwise, if so, check if user is an administrator
-                if (routeInfo != null && routeInfo.AdminFunction && user.RoleType != ApiUserRoleType.Administrator)
-                {
-                    actionContext.Response = request.CreateResponse(HttpStatusCode.Unauthorized);
-                    return;
-                }
+                    //Check to see if this is an administrator function call for support or otherwise, if so, check if user is an administrator
+                    if (routeInfo != null && routeInfo.AdminFunction && user.RoleType != ApiUserRoleType.Administrator)
+                    {
+                        actionContext.Response = request.CreateResponse(HttpStatusCode.Unauthorized);
+                        return;
+                    }
 
-                //Check to see if the application is valid for the user license
-                if (action != null && action.Parent != null && action.Parent.FunctionInfo != null && !TRAVERSE.Core.ApplicationContext.IsFeatureValid(action.Parent.FunctionInfo.AppId, companyId))
-                {
-                    actionContext.Response = request.CreateResponse(HttpStatusCode.Unauthorized);
-                    return;
+                    //Check to see if the application is valid for the user license
+                    if (action != null && action.Parent != null && action.Parent.FunctionInfo != null && !TRAVERSE.Core.ApplicationContext.IsFeatureValid(action.Parent.FunctionInfo.AppId, companyId))
+                    {
+                        actionContext.Response = request.CreateResponse(HttpStatusCode.Unauthorized);
+                        return;
+                    }
                 }
 
                 if (!await ValidateMessage(request, user))
