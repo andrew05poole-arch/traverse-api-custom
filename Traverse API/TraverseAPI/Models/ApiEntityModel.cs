@@ -323,8 +323,24 @@ namespace TRAVERSE.Web.API
                         CustomField field = obj.CustomFieldList.FirstOrDefault(c => c.Name.Equals(schemaField?.EntityFieldName ?? pair.Key, StringComparison.OrdinalIgnoreCase));
                         if (field == null)
                             continue;
-
-                        obj.AssignCustomValue(field, Convert.ToString(ApiUtility.ConvertToType(pair.Value, field.SystemType, null)));
+                        Type fieldtype = field.SystemType;
+                        //check if the custom field is a DateTime
+                        if (field.SystemType.ToString() == "System.DateTime")
+                        {
+                            DateTime tempdate;
+                            var customvalue = pair.Value.ToString();
+                            //check if the custom field for a DataTime is empty and if so change the type from DateTime to string
+                            //this is needed since JSON DateTime doesn't allow empty dates and is setting it to 01/01/0001
+                            if (string.IsNullOrEmpty(customvalue))
+                            {
+                                fieldtype = typeof(string);
+                            }
+                            else if (!DateTime.TryParse(customvalue, out tempdate)) //if it's not an empty string valid that the date is a good date and if not throw an exception
+                            {
+                                throw new ApplicationException(string.Format(" String was not recognized as a valid DateTime"));
+                            }
+                        }
+                        obj.AssignCustomValue(field, Convert.ToString(ApiUtility.ConvertToType(pair.Value, fieldtype, null)));
                     }
                     catch (Exception ex)
                     {
