@@ -328,7 +328,7 @@ namespace TRAVERSE.Web.API
                         if (field.SystemType.ToString() == "System.DateTime")
                         {
                             DateTime tempdate;
-                            var customvalue = pair.Value.ToString();
+                            var customvalue = string.IsNullOrEmpty((string)pair.Value) ? "" : pair.Value.ToString();
                             //check if the custom field for a DataTime is empty and if so change the type from DateTime to string
                             //this is needed since JSON DateTime doesn't allow empty dates and is setting it to 01/01/0001
                             if (string.IsNullOrEmpty(customvalue))
