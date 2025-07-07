@@ -28,13 +28,13 @@ namespace TRAVERSE.Web.API.AccountsReceivable
             string statusList = string.Empty;
             if ((status & OpenInvoice.OIStatus.Hold) == OpenInvoice.OIStatus.Hold)
                 statusList += (string.IsNullOrEmpty(statusList) ? "" : ", ") + string.Format("{0}", (byte)OpenInvoice.OIStatus.Hold);
-            if ((status & OpenInvoice.OIStatus.Released) == OpenInvoice.OIStatus.Hold)
+            if ((byte)status == 5 || (byte)status == 1) // changed so released is only included in GetOpen and GetAll.  Released having a status of 0 was causing issue with & operator for bitwise when using (status & OpenInvoice.OIStatus.Released) == OpenInvoice.OIStatus.Released
                 statusList += (string.IsNullOrEmpty(statusList) ? "" : ", ") + string.Format("{0}", (byte)OpenInvoice.OIStatus.Released);
-            if ((status & OpenInvoice.OIStatus.Paid) == OpenInvoice.OIStatus.Hold)
+            if ((status & OpenInvoice.OIStatus.Paid) == OpenInvoice.OIStatus.Paid)
                 statusList += (string.IsNullOrEmpty(statusList) ? "" : ", ") + string.Format("{0}", (byte)OpenInvoice.OIStatus.Paid);
 
             if (!string.IsNullOrWhiteSpace(statusList))
-                builder.AppendIn(OpenInvoiceBase.Columns.RecType, string.Format("{0}", statusList),true);
+                builder.AppendIn(OpenInvoiceBase.Columns.Status, string.Format("{0}", statusList),true);
 
             provider.Load(compId, new FilterCriteria(builder.ToString(), ""));
 
