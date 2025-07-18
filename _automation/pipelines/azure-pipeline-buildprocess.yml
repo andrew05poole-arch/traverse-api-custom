@@ -122,7 +122,7 @@
       FileVersionNumber: $(internalBuildNumber)
 
 # prep for executing SonarQube code analysis
-  - task: SonarQubePrepare@6
+  - task: SonarQubePrepare@7
     displayName: 'SonarQube - Prepare analysis'
     condition: and(succeeded(), eq(variables['runCodeAnalysisYn'], true))
     inputs:
@@ -173,11 +173,11 @@
 
         write-host "##vso[task.setvariable variable=SONARQUBE_SCANNER_PARAMS]$params";
 
-  - task: SonarQubeAnalyze@6
+  - task: SonarQubeAnalyze@7
     displayName: 'SonarQube - Run Code Analysis'
     condition: and(succeeded(), eq(variables['runCodeAnalysisYn'], true))
 
-  - task: SonarQubePublish@6
+  - task: SonarQubePublish@7
     displayName: 'Sonar Qube - Publish Quality Gate Result'
     condition: and(succeeded(), eq(variables['runCodeAnalysisYn'], true))
     inputs:

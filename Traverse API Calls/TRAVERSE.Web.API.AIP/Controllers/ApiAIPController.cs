@@ -1,5 +1,6 @@
 ﻿using Azure.Messaging.EventGrid;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
@@ -19,22 +20,24 @@ namespace TRAVERSE.Web.API.AIP.Controllers
     {
         #region Web Methods
         [ApiRoute(FunctionID, 2f, "aip/{eventname}", typeof(EventGridEvent))]
-        public async Task<IHttpActionResult> Add([FromBody] dynamic body, string eventname)
+        public async Task<IHttpActionResult> Add([FromBody] JObject body, string eventname)
         {
             List<AIPActivity> aipActivityList = new List<AIPActivity>();
 
-            AIPActivity activity = new AIPActivity(this.CompId);
+            string compId = this.CompId;
+            if (StringHelper.AreEqual(this.CompId, "$$$"))
+            {
+                compId = Core.ApplicationContext.CompId;
+            }
+            AIPActivity activity = new AIPActivity(compId);
             activity.EventId = Guid.NewGuid();
             activity.EntryDate = DateTime.Now;
             activity.EventName = eventname; //Convert.ToString(this.ControllerContext.RouteData.Values["eventname"]);
             activity.ActType = (byte)AIPEnum.ActType.Inbound;
             activity.ActStatus = (byte)AIPEnum.ActStatus.Initial;
             //activity.DocumentReference = string.Format("{0}-{1}", documentRef, Utility.GenerateUniqueId());
-            activity.RequestData = JsonConvert.SerializeObject(body, new JsonSerializerSettings()
-            {
-                ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                NullValueHandling = NullValueHandling.Ignore
-            });
+            activity.RequestData = body.ToString();
+
             activity.UserId = Core.ApplicationContext.CurrentUser;
             activity.WrkStnId = Core.ApplicationContext.SessionId;
 
@@ -45,8 +48,11 @@ namespace TRAVERSE.Web.API.AIP.Controllers
 
             await Task.Run(() =>
             {
-                this.ValidateEntityList(aipActivityList);
-                this.Provider.Update(this.CompId);
+                if (!StringHelper.AreEqual(this.CompId, "$$$"))
+                {
+                    this.ValidateEntityList(aipActivityList);
+                }
+                this.Provider.Update(compId);
             });
 
             return Ok(aipActivityList);
