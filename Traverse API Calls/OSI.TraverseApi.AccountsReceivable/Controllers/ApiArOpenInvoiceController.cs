@@ -24,14 +24,14 @@ namespace TRAVERSE.Web.API.AccountsReceivable.Controllers
 
         [ApiRoute(FunctionID, 2f, "openinvoice/paid", typeof(OpenInvoice))]
         [ApiRoute(FunctionID, 2f, "openinvoice/paid/customer/{customerid}", typeof(OpenInvoice))]
-        [ApiRoute(FunctionID, 2f, "openinvoice/paid/customer/{customerid}/invoice/{invcNum}", typeof(OpenInvoice))]
+        [ApiRoute(FunctionID, 2f, "openinvoice/paid/customer/{customerid}/invoice/{invoicenum}", typeof(OpenInvoice))]
         public async Task<IHttpActionResult> GetPaid(string customerId = null, string invoiceNum = null)
         {
             return Ok(await this.Load(customerId, invoiceNum, OpenInvoice.OIStatus.Paid));
         }
 
-        [ApiRoute(FunctionID, 2f, "openinvoice/all/customer/{custId}", typeof(OpenInvoice))]
-        [ApiRoute(FunctionID, 2f, "openinvoice/all/customer/{custId}/invoice/{invcNum}", typeof(OpenInvoice))]
+        [ApiRoute(FunctionID, 2f, "openinvoice/all/customer/{customerid}", typeof(OpenInvoice))]
+        [ApiRoute(FunctionID, 2f, "openinvoice/all/customer/{customerid}/invoice/{invoicenum}", typeof(OpenInvoice))]
         public async Task<IHttpActionResult> GetAll(string customerId = null, string invoiceNum = null)
         {
             return Ok(await this.Load(customerId, invoiceNum, OpenInvoice.OIStatus.Released | OpenInvoice.OIStatus.Hold | OpenInvoice.OIStatus.Paid));
