@@ -97,6 +97,13 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
                     builder.AppendEquals(TransactionHeaderBase.Columns.TransId, id);
                     var list = new TransactionHeaderProvider().Load(this.CompId, new FilterCriteria(builder.ToString(), string.Empty));
                     Provider.Items.AddRange(list);
+                    if (Provider.Items.Count > 0)
+                    {
+                        foreach (TransactionDetail transDetail in Provider.Items[0].DetailList)
+                        {
+                            transDetail.SetReceivedInvoiced();
+                        }
+                    }
                 }
 
                 await this.FilterEntityListAsync(Provider.Items);
