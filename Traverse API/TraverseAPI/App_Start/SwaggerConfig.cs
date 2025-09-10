@@ -19,6 +19,7 @@ namespace TRAVERSE.Web.API
         #region Public
         public static void Register()
         {
+            try{
             var thisAssembly = typeof(SwaggerConfig).Assembly;
 
             WebApiApplication.Configuration
@@ -306,6 +307,11 @@ namespace TRAVERSE.Web.API
                         //additionalQueryStringParams: new Dictionary<string, string>() { { "foo", "bar" } }
                         );
                     });
+            }
+            catch (Exception ex)
+            {
+                                
+            }
         }
 
         public static bool ResolveVersionSupportByRouteConstraint(ApiDescription apiDesc, string targetApiVersion)
