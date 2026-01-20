@@ -139,21 +139,31 @@
     displayName: NuGet restore Traverse API/TraverseAPI.sln
     inputs:
       solution: "Traverse API/TraverseAPI.sln"
+      restoreMode: "restore"
+      feedsToUse: "config"
+      nugetConfigPath: "nuget.config"
+      externalFeedCredentials: ""
+      restoreArguments: "-UseLockFile -LockedMode"
   - task: VSBuild@1
     displayName: Build solution Traverse API/TraverseAPI.sln
     inputs:
       solution: "Traverse API/TraverseAPI.sln"
-      msbuildArgs: '/p:ReferencePath="$(system.defaultworkingdirectory)\core;$(system.defaultworkingdirectory)\core\DataProvider" /t:Clean;Rebuild /p:Configuration="Release" /p:OutDir="$(system.defaultworkingdirectory)\core" /p:PostBuildEvent= '
+      msbuildArgs: '/p:ReferencePath="$(system.defaultworkingdirectory)\core;$(system.defaultworkingdirectory)\core\DataProvider" /t:Clean;Rebuild /p:Configuration="Release" /p:OutDir="$(system.defaultworkingdirectory)\core" /p:PostBuildEvent= /p:RestoreLockedMode=true'
       configuration: $(buildConfiguration)
   - task: NuGetCommand@2
     displayName: NuGet restore Traverse API Calls/OSI.TraverseApi.Global.sln
     inputs:
       solution: "Traverse API Calls/OSI.TraverseApi.Global.sln"
+      restoreMode: "restore"
+      feedsToUse: "config"
+      nugetConfigPath: "nuget.config"
+      externalFeedCredentials: ""
+      restoreArguments: "-UseLockFile -LockedMode"
   - task: VSBuild@1
     displayName: Build solution Traverse API Calls/OSI.TraverseApi.Global.sln
     inputs:
       solution: "Traverse API Calls/OSI.TraverseApi.Global.sln"
-      msbuildArgs: '/p:ReferencePath="$(system.defaultworkingdirectory)\core;$(system.defaultworkingdirectory)\core\DataProvider" /t:Clean;Rebuild /p:Configuration="Release" /p:OutDir="$(system.defaultworkingdirectory)\core" /p:PostBuildEvent= '
+      msbuildArgs: '/p:ReferencePath="$(system.defaultworkingdirectory)\core;$(system.defaultworkingdirectory)\core\DataProvider" /t:Clean;Rebuild /p:Configuration="Release" /p:OutDir="$(system.defaultworkingdirectory)\core" /p:PostBuildEvent= /p:RestoreLockedMode=true'
       configuration: $(buildConfiguration)
 
 #todo: build server tsmx
