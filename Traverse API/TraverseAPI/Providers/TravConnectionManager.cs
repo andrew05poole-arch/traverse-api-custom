@@ -56,10 +56,11 @@ namespace TRAVERSE.Web.API
             {
                 if (!Connected)
                 {
+                    ApplicationContext.RootPath = Path.Combine(HttpRuntime.BinDirectory, Resources.ApiClientFolder);
+                    
                     string username = TravApiConfig.ApiTravUsername;
                     string password = TravApiConfig.ApiTravPassword;
 
-                    ApplicationContext.RootPath = Path.Combine(HttpRuntime.BinDirectory, Resources.ApiClientFolder);
                     ApplicationContext.ConfigFileName = Path.Combine(HttpRuntime.AppDomainAppPath, "web.config");
 
                     Connected = WebEnvironment.Setup(username, password, new LoadAppSettings(LoadTraverseSettings));
