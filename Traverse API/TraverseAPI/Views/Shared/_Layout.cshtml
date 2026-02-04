@@ -26,25 +26,25 @@
                         <li class="nav-item">
                             @if (Request.IsAuthenticated && ViewBag.UserStatus == "Active")
                             {
-                @Html.ActionLink("Documentation", "Document", null, new { @class = "nav-link" })}
+                                @Html.ActionLink("Documentation", "Document", null, new { @class = "nav-link" })}
                         </li>
                         <li class="nav-item dropdown">
                             @if (Request.IsAuthenticated)
                             {
-                <button class="btn nav-link dropdown-toggle" id="dropDownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage Account</button>
+                                <button class="btn nav-link dropdown-toggle" id="dropDownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage Account</button>
                                 <div class="dropdown-menu" aria-labelledby="dropDownMenuLink">
                                     <button class="dropdown-item" onclick="location.href='@Url.Action("ChangePwd", "Home")'">Change Password</button>
 
                                     @if (ViewBag.UserStatus == "Active")
                                     {
-                    <div class="dropdown-divider"></div>
+                                        <div class="dropdown-divider"></div>
                                         <button class="dropdown-item" onclick="location.href='@Url.Action("Register", "Home")'">Regenerate Client Secret</button>}
                                 </div>}
                         </li>
                         <li class="ml-auto">
                             @if (Request.IsAuthenticated)
                             {
-                @Html.ActionLink("Logout", "Logout", null, new { @class = "nav-link" })}
+                                @Html.ActionLink("Logout", "Logout", null, new { @class = "nav-link" })}
                         </li>
                     </ul>
                 </div>
