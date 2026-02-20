@@ -296,8 +296,8 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
             if (ApiUserSkipped.IsApiUserSkipped(bodyItem.EntryNum))
                 throw new InvalidValueException("Entry Number is required.");
 
-            if (parent.LotReceiptList.Any(x => x.EntryNum == Convert.ToInt32(bodyItem.EntryNum)))
-                throw new InvalidValueException(string.Format("Entry Number '{0}' already exists.", bodyItem.EntryNum));
+            if (parent.LotReceiptList.Any(x => x.EntryNum == Convert.ToInt32(bodyItem.EntryNum) && x.LotNum == bodyItem.LotNum))
+                throw new InvalidValueException(string.Format("Lot Number '{0}' already exists for Entry Number '{1}.'", bodyItem.LotNum, bodyItem.EntryNum));
 
             TransactionLotReceipt entity = parent.LotReceiptList.AddNew();
             entity.ReceiptId = Guid.NewGuid();
