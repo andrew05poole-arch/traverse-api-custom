@@ -218,7 +218,7 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
             short period = (short)((DateTime)entity.InvcDate).Month;
             short year = (short)((DateTime)entity.InvcDate).Year;
 
-            PeriodConversion fiscalPeriod = PeriodConversion.GetFiscalPeriod(period, year);
+            PeriodConversion fiscalPeriod = PeriodConversion.GetFiscalPeriod(period, year, this.CompId);
             if (fiscalPeriod != null && fiscalPeriod.ClosedPO.Value)
             {
                 if (fiscalPeriod.ClosedGL.Value)
@@ -471,21 +471,46 @@ namespace TRAVERSE.Web.API.PurchaseOrder.Controllers
             if (ApiUserSkipped.IsApiUserSkipped(bodyItem.ReceiptId))
                 throw new InvalidValueException("Receipt number is required.");
 
-            TransactionInvoiceReceipt entity = parent.InvoiceReceiptList?.Find(x => StringHelper.AreEqual(x.TransactionLotReceipt.RcptNum.ToString(), bodyItem.ReceiptId, false));
-            if (entity != null)
-                throw new InvalidValueException(string.Format("Receipt number '{0}' already exists.", bodyItem.ReceiptId));
+            bool isLotted = parent.TransactionDetail.INItemInfo != null & parent.TransactionDetail.INItemInfo.IsLotted;
+            TransactionInvoiceReceipt entity = null;
+
+            if (isLotted)
+            {
+                entity = parent.InvoiceReceiptList?.Find(x => StringHelper.AreEqual(x.TransactionLotReceipt.RcptNum.ToString(), bodyItem.ReceiptId, false) && StringHelper.AreEqual(x.TransactionLotReceipt.LotNum.ToString(), bodyItem.lot_no, false));
+                if (entity != null)
+                    throw new InvalidValueException(string.Format("Receipt number/Lot number '{0}/{1}' already exists.", bodyItem.ReceiptId, bodyItem.lot_no));
+            }
+            else
+            {
+                entity = parent.InvoiceReceiptList?.Find(x => StringHelper.AreEqual(x.TransactionLotReceipt.RcptNum.ToString(), bodyItem.ReceiptId));
+                if (entity != null)
+                    throw new InvalidValueException(string.Format("Receipt number '{0}' already exists.", bodyItem.ReceiptId));
+            }
 
             entity = parent.InvoiceReceiptList.AddNew();
 
             var list = TransactionReceiptProvider.GetEntityList(parent.TransId, parent.CompId);
-            var receipt = list.Find(rcpt => 
+
+            if (isLotted)
+            {
+                var receipt = list.Find(rcpt =>
+                    rcpt.ReceiptNum.Equals(bodyItem.ReceiptId as string, StringComparison.OrdinalIgnoreCase) &&
+                    rcpt.LotReceiptList != null &&
+                    rcpt.LotReceiptList.Exists(n => n.EntryNum == parent.EntryNum && StringHelper.AreEqual(n.LotNum.ToString(), bodyItem.lot_no, false)));
+                if (receipt == null)
+                    throw new InvalidValueException(string.Format("Receipt number/Lot number '{0}/{1}' cannot be found.", bodyItem.ReceiptId, bodyItem.lot_no));
+                entity.ReceiptId = receipt.LotReceiptList.Find(n => n.EntryNum == parent.EntryNum && StringHelper.AreEqual(n.LotNum.ToString(), bodyItem.lot_no, false)).ReceiptId;
+            }
+            else
+            {
+                var receipt = list.Find(rcpt =>
                     rcpt.ReceiptNum.Equals(bodyItem.ReceiptId as string, StringComparison.OrdinalIgnoreCase) &&
                     rcpt.LotReceiptList != null &&
                     rcpt.LotReceiptList.Exists(n => n.EntryNum == parent.EntryNum));
-            if (receipt == null)
-                throw new InvalidValueException(string.Format("Receipt number '{0}' cannot be found.", bodyItem.ReceiptId));
-
-            entity.ReceiptId = receipt.LotReceiptList.Find(n => n.EntryNum == parent.EntryNum).ReceiptId;
+                if (receipt == null)
+                    throw new InvalidValueException(string.Format("Receipt number '{0}' cannot be found.", bodyItem.ReceiptId));
+                entity.ReceiptId = receipt.LotReceiptList.Find(n => n.EntryNum == parent.EntryNum).ReceiptId;
+            }
 
             ((ApiEntityModel)bodyItem).EntityPropertyChanging += BodyItem_EntityPropertyChanging;
             entity.Qty = (ApiUserSkipped.IsApiUserSkipped(bodyItem.Qty)) ? entity.TransactionLotReceipt.QtyFilled : (Convert.ToDecimal(bodyItem.Qty) ?? 0m);
