@@ -5,38 +5,47 @@
 -- Run against the TRAVERSE SYS database before deploying
 -- OSI.TraverseApi.PurchaseApproval.dll.
 --
--- Idempotent: safe to re-run (IF NOT EXISTS guards on all steps).
+-- Idempotent: safe to re-run (IF NOT EXISTS / SCOPE guards).
 --
--- Before running:
---   Replace 'tradmin' with your API service account username.
---   Replace 'CPU'     with your TRAVERSE company ID.
---   Repeat step 1c for every additional company as needed.
+-- Before running, update the two placeholders:
+--   'tradmin'  → your API service account (from tblSmApiUser.UserId)
+--   'CPU'      → your TRAVERSE company ID
+-- Repeat Step 1c for each additional company as needed.
+--
+-- Scope bitfield (tblSmApiFunctionHeader.Scope and
+--                 tblSmApiUserFunctionComp.Scope):
+--   1 = GET    (AllowRead)
+--   2 = PUT    (AllowEdit)
+--   4 = POST   (AllowNew)
+--   8 = DELETE (AllowDelete)
+--   Values are combined with bitwise OR.
+--   This endpoint uses 5 = GET(1) + POST(4).
 -- ============================================================
 
 USE [SYS];
 GO
 
 -- ── Step 1a: Register the API function ───────────────────────────────────────
+-- Inserts into tblSmApiFunctionHeader — the master function registry.
 IF NOT EXISTS (
-    SELECT 1 FROM [dbo].[tblSmApiFunction]
-    WHERE  [FunctionId] = '5A7D3C4E-8B9F-4C2D-9E3F-1A2B3C4D5E6F'
+    SELECT 1 FROM [dbo].[tblSmApiFunctionHeader]
+    WHERE  [ID] = '5A7D3C4E-8B9F-4C2D-9E3F-1A2B3C4D5E6F'
 )
 BEGIN
-    INSERT INTO [dbo].[tblSmApiFunction]
-        ([FunctionId], [FunctionName], [Description],
-         [AllowRead], [AllowNew], [AllowEdit], [AllowDelete])
+    INSERT INTO [dbo].[tblSmApiFunctionHeader]
+        ([ID], [Name], [AppId], [Type], [Notes], [Scope], [OverrideID])
     VALUES
         ('5A7D3C4E-8B9F-4C2D-9E3F-1A2B3C4D5E6F',
-         'po/approval',
+         'po/approval',              -- display name; matches route prefix
+         'PO',                       -- TRAVERSE application code
+         2,                          -- Type: 1=Setup, 2=Transactions, 3=Other
          'PO Approval — approve or decline a Purchase Order Request via the TRAVERSE Engage workflow',
-         1,   -- AllowRead  (GET  /api/v2/po/approval/{transId})
-         1,   -- AllowNew   (POST /api/v2/po/approval/{transId})
-         0,   -- AllowEdit  (PUT  — not used)
-         0);  -- AllowDelete (DELETE — not used)
-    PRINT 'Step 1a: Registered tblSmApiFunction for PO Approval.';
+         5,                          -- Scope: 1(GET) + 4(POST) = 5
+         NULL);                      -- OverrideID: NULL = new function
+    PRINT 'Step 1a: Registered tblSmApiFunctionHeader for PO Approval.';
 END
 ELSE
-    PRINT 'Step 1a: tblSmApiFunction entry already exists — skipped.';
+    PRINT 'Step 1a: tblSmApiFunctionHeader entry already exists — skipped.';
 GO
 
 -- ── Step 1b: Grant to the API user ───────────────────────────────────────────
@@ -54,14 +63,18 @@ END
 
 IF NOT EXISTS (
     SELECT 1 FROM [dbo].[tblSmApiUserFunction]
-    WHERE  [UserId]     = @UserId
-      AND  [FunctionId] = '5A7D3C4E-8B9F-4C2D-9E3F-1A2B3C4D5E6F'
+    WHERE  [UserID]     = @UserId
+      AND  [FunctionID] = '5A7D3C4E-8B9F-4C2D-9E3F-1A2B3C4D5E6F'
 )
 BEGIN
     INSERT INTO [dbo].[tblSmApiUserFunction]
-        ([UserId], [FunctionId], [AllowRead], [AllowNew], [AllowEdit], [AllowDelete])
+        ([UserID], [FunctionID], [AccessExpireDate],
+         [DateCreated], [DateModified], [ModifiedBy])
     VALUES
-        (@UserId, '5A7D3C4E-8B9F-4C2D-9E3F-1A2B3C4D5E6F', 1, 1, 0, 0);
+        (@UserId,
+         '5A7D3C4E-8B9F-4C2D-9E3F-1A2B3C4D5E6F',
+         NULL,                       -- AccessExpireDate: NULL = never expires
+         GETDATE(), GETDATE(), SYSTEM_USER);
     PRINT 'Step 1b: Granted tblSmApiUserFunction.';
 END
 ELSE
@@ -69,8 +82,10 @@ ELSE
 GO
 
 -- ── Step 1c: Grant per company ────────────────────────────────────────────────
+-- tblSmApiUserFunctionComp is keyed by UserFunctionID (FK to tblSmApiUserFunction.ID),
+-- not by UserID + FunctionID directly.
 -- !! Change 'tradmin' and 'CPU' to match your environment !!
--- Repeat this block for every additional company that needs access.
+-- Repeat this entire block for every additional company.
 DECLARE @UserId BIGINT = (
     SELECT [ID] FROM [dbo].[tblSmApiUser]
     WHERE  [UserId] = 'tradmin'    -- <-- UPDATE THIS
@@ -82,19 +97,35 @@ BEGIN
     RETURN;
 END
 
+DECLARE @UserFunctionId BIGINT = (
+    SELECT [ID] FROM [dbo].[tblSmApiUserFunction]
+    WHERE  [UserID]     = @UserId
+      AND  [FunctionID] = '5A7D3C4E-8B9F-4C2D-9E3F-1A2B3C4D5E6F'
+);
+
+IF @UserFunctionId IS NULL
+BEGIN
+    RAISERROR('Step 1c ERROR: tblSmApiUserFunction row not found. Ensure Step 1b completed successfully.', 16, 1);
+    RETURN;
+END
+
 IF NOT EXISTS (
     SELECT 1 FROM [dbo].[tblSmApiUserFunctionComp]
-    WHERE  [UserId]     = @UserId
-      AND  [FunctionId] = '5A7D3C4E-8B9F-4C2D-9E3F-1A2B3C4D5E6F'
-      AND  [CompId]     = 'CPU'    -- <-- UPDATE THIS
+    WHERE  [UserFunctionID] = @UserFunctionId
+      AND  [CompID]         = 'CPU'    -- <-- UPDATE THIS
 )
 BEGIN
     INSERT INTO [dbo].[tblSmApiUserFunctionComp]
-        ([UserId], [FunctionId], [CompId], [AllowRead], [AllowNew], [AllowEdit], [AllowDelete])
+        ([UserFunctionID], [CompID], [Scope],
+         [Filter], [DisplayFilter],
+         [DateCreated], [DateModified], [ModifiedBy])
     VALUES
-        (@UserId, '5A7D3C4E-8B9F-4C2D-9E3F-1A2B3C4D5E6F',
-         'CPU',   -- <-- UPDATE THIS
-         1, 1, 0, 0);
+        (@UserFunctionId,
+         'CPU',                      -- <-- UPDATE THIS (company ID)
+         5,                          -- Scope: 1(GET) + 4(POST)
+         NULL,                       -- Filter: NULL = no row-level restriction
+         NULL,                       -- DisplayFilter: human-readable version of Filter
+         GETDATE(), GETDATE(), SYSTEM_USER);
     PRINT 'Step 1c: Granted tblSmApiUserFunctionComp for company CPU.';
 END
 ELSE
@@ -102,5 +133,6 @@ ELSE
 GO
 
 PRINT '';
-PRINT 'Registration complete. Proceed to Step 2 — copy DLL to ApiPlugins\.';
+PRINT 'Registration complete.';
+PRINT 'Proceed to Step 2 — copy OSI.TraverseApi.PurchaseApproval.dll to bin\ApiPlugins\.';
 GO
