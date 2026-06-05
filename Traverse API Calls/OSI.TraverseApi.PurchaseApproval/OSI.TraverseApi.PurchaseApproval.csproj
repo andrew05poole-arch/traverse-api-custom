@@ -89,17 +89,11 @@
       <HintPath>..\..\Core\TRAVERSE.Business.PurchaseOrder.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <!--
-      TRAVERSE.Business.PurchaseApproval — needed for RequestResponseProcess (multi-level routing).
-      Phase 1 of this controller uses TransactionRequest.Approve/Decline from PurchaseOrder (above).
-      Phase 2 (full routing support) will uncomment this reference.
-    -->
-    <!--
+    <!-- TRAVERSE.Business.PurchaseApproval — RequestResponseProcess (multi-level routing, Phase 2) -->
     <Reference Include="TRAVERSE.Business.PurchaseApproval">
       <HintPath>..\..\Core\TRAVERSE.Business.PurchaseApproval.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    -->
     <Reference Include="TRAVERSE.Web.API">
       <HintPath>..\..\Core\TRAVERSE.Web.API.dll</HintPath>
       <Private>False</Private>
