@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Web.Http;
 using TRAVERSE.Business;
-using TRAVERSE.Business.API;
 using TRAVERSE.Business.PurchaseOrder;
 using TRAVERSE.Core;
 using TRAVERSE.Web.API;
@@ -128,15 +127,11 @@ namespace TRAVERSE.Web.API.PurchaseApproval.Controllers
             }
 
             // ── 3. Resolve the acting user ─────────────────────────────────────
-            // User.Identity.Name carries the TRAVERSE API user ID from the bearer token.
-            // For Engage service-account calls, this is the API service account; the
-            // Entra approver identity arrives via the 'comments' field.
-            var apiUser = Request.GetOwinContext().Get<ApiUser>(
-                TRAVERSE.Web.API.Properties.Resources.ApiUserInfoStorage);
-
-            string actingUserId = apiUser?.ClientId?.ToString()
-                                ?? User?.Identity?.Name
-                                ?? string.Empty;
+            // User.Identity.Name carries the TRAVERSE username from the bearer token
+            // (set by OAuthBearerAuthenticationProvider in the host's OWIN pipeline).
+            // For Engage service-account calls this is the API service account;
+            // the Entra approver identity arrives separately via 'comments'.
+            string actingUserId = User?.Identity?.Name ?? string.Empty;
 
             if (string.IsNullOrWhiteSpace(actingUserId))
                 throw new PermissionDeniedException("Could not resolve the authenticated user identity.");
