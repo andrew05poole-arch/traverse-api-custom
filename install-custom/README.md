@@ -39,62 +39,28 @@ This is a drop-in TRAVERSE API plugin. Copy the DLL, run the database script, re
 
 ## Step 1 — Register the Function in the SYS Database
 
-Run this against the **SYS** database. Safe to re-run (guards included).
+The script **`Register-PoApproval.sql`** is included inside `tier4.zip`. Extract the zip and run it against the **SYS** database.
 
-```sql
--- 1a. Register the API function
-IF NOT EXISTS (
-    SELECT 1 FROM [dbo].[tblSmApiFunction]
-    WHERE [FunctionId] = '5A7D3C4E-8B9F-4C2D-9E3F-1A2B3C4D5E6F'
-)
-BEGIN
-    INSERT INTO [dbo].[tblSmApiFunction]
-        ([FunctionId], [FunctionName], [Description], [AllowRead], [AllowNew], [AllowEdit], [AllowDelete])
-    VALUES
-        ('5A7D3C4E-8B9F-4C2D-9E3F-1A2B3C4D5E6F',
-         'po/approval',
-         'PO Approval — approve or decline a Purchase Order Request',
-         1, 1, 0, 0);
-    PRINT 'Registered tblSmApiFunction';
-END
-GO
+```powershell
+# Option A — SQLCMD (adjust server name as needed)
+sqlcmd -S localhost\GLOBAL -d SYS -i Register-PoApproval.sql
 
--- 1b. Grant to the API user
--- !! Change 'tradmin' to your API service account username !!
-DECLARE @UserId BIGINT = (
-    SELECT [ID] FROM [dbo].[tblSmApiUser] WHERE [UserId] = 'tradmin'
-);
-
-IF @UserId IS NULL
-    RAISERROR('API user not found — update the WHERE clause.', 16, 1);
-
-IF NOT EXISTS (
-    SELECT 1 FROM [dbo].[tblSmApiUserFunction]
-    WHERE [UserId] = @UserId
-      AND [FunctionId] = '5A7D3C4E-8B9F-4C2D-9E3F-1A2B3C4D5E6F'
-)
-    INSERT INTO [dbo].[tblSmApiUserFunction]
-        ([UserId], [FunctionId], [AllowRead], [AllowNew], [AllowEdit], [AllowDelete])
-    VALUES (@UserId, '5A7D3C4E-8B9F-4C2D-9E3F-1A2B3C4D5E6F', 1, 1, 0, 0);
-GO
-
--- 1c. Grant per company
--- !! Change 'tradmin' and 'CPU' to match your environment !!
-DECLARE @UserId BIGINT = (
-    SELECT [ID] FROM [dbo].[tblSmApiUser] WHERE [UserId] = 'tradmin'
-);
-
-IF NOT EXISTS (
-    SELECT 1 FROM [dbo].[tblSmApiUserFunctionComp]
-    WHERE [UserId] = @UserId
-      AND [FunctionId] = '5A7D3C4E-8B9F-4C2D-9E3F-1A2B3C4D5E6F'
-      AND [CompId] = 'CPU'
-)
-    INSERT INTO [dbo].[tblSmApiUserFunctionComp]
-        ([UserId], [FunctionId], [CompId], [AllowRead], [AllowNew], [AllowEdit], [AllowDelete])
-    VALUES (@UserId, '5A7D3C4E-8B9F-4C2D-9E3F-1A2B3C4D5E6F', 'CPU', 1, 1, 0, 0);
-GO
+# Option B — open in SSMS and execute against SYS
 ```
+
+**Before running, edit the two placeholders at the top of each block:**
+
+| Placeholder | Replace with |
+|---|---|
+| `'tradmin'` | Your API service account username (from `tblSmApiUser.UserId`) |
+| `'CPU'` | Your TRAVERSE company ID |
+
+The script is idempotent — safe to re-run on upgrades. It registers three rows:
+- `tblSmApiFunction` — the function record
+- `tblSmApiUserFunction` — grants the user read + new access
+- `tblSmApiUserFunctionComp` — grants access per company
+
+> **Multiple companies?** Repeat the Step 1c block in the script for each additional `CompId`.
 
 ---
 
